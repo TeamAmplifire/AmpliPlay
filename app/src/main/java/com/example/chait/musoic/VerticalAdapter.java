@@ -105,6 +105,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                 case R.id.add_to_playlist:
                                     Toast.makeText(v.getContext(), "ADD TO PLAYLIST MENU OPEN", Toast.LENGTH_SHORT).show();
                                     break;
+                                case R.id.enqueue:
+                                    Toast.makeText(v.getContext(), "ENQUEUE", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case R.id.apply_ringtone:
+                                    Toast.makeText(v.getContext(), "APPLY RINGTONE", Toast.LENGTH_SHORT).show();
+                                    break;
                             }
                             return false;
                         }

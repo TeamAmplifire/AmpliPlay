@@ -5,4 +5,6 @@
     <string name="play">Play</string>
     <string name="delete">Delete</string>
     <string name="add_to_playlist">Add To Playlist</string>
+    <string name="enqueue">Enqueue</string>
+    <string name="apply_ringtone">Apply Ringtone</string>
 </resources>
