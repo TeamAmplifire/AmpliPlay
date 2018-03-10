@@ -11,9 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.SearchView;
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -95,14 +94,15 @@ public class MainActivity extends AppCompatActivity {
                 int artistColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
                 int albumColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);
                 int durationColumn  = musicCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
-
+                int fullPathColumn = (musicCursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                 do{
                     long thisID = musicCursor.getLong(idColumn);
                     String thisTitle = musicCursor.getString(titleColumn);
                     String thisArtist = musicCursor.getString(artistColumn);
                     String thisAlbum = musicCursor.getString(albumColumn);
                     String thisDuration = musicCursor.getString(durationColumn);
-                    mSongArrayList.add(new Song(thisID, thisTitle, thisArtist, thisAlbum, thisDuration));
+                    String thisFullPath = musicCursor.getString(fullPathColumn);
+                    mSongArrayList.add(new Song(thisID, thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
                 }while(musicCursor.moveToNext());
             }
         }catch(Exception exception){

@@ -10,14 +10,16 @@ public class Song {
     private String mArtist;
     private String mDuration;
     private String mAlbum;
+    private String mFullPath;
 
-    public Song(long songId, String songTitle, String songArtist, String songAlbum, String songDuration){
+    public Song(long songId, String songTitle, String songArtist, String songAlbum, String songDuration, String songFullPath){
 
         mId = songId;
         mTitle = songTitle;
         mArtist = songArtist;
         mDuration = songDuration;
         mAlbum = songAlbum;
+        mFullPath = songFullPath;
     }
 
     public long getMId() {
@@ -38,5 +40,9 @@ public class Song {
     public String getMArtist() {
 
         return mArtist;
+    }
+
+    public String getMFullPath() {
+        return mFullPath;
     }
 }

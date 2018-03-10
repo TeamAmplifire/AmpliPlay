@@ -97,9 +97,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     Toast.makeText(v.getContext(), "PLAY SONG", Toast.LENGTH_SHORT).show();
                                     break;
                                 case R.id.delete:
-                                    Uri trackUri = ContentUris.withAppendedId(
-                                            android.provider.MediaStore.Audio.Media.INTERNAL_CONTENT_URI, currentSong.getMId());
-                                    Toast.makeText(v.getContext(), trackUri.getPath(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(v.getContext(), currentSong.getMFullPath(), Toast.LENGTH_SHORT).show();
+                                    deleteFiles(currentSong.getMFullPath());
                                     Toast.makeText(v.getContext(), "DELETE SONG", Toast.LENGTH_SHORT).show();
                                     break;
                                 case R.id.add_to_playlist:
@@ -128,5 +127,17 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     public void updateList(ArrayList<Song> list){
         mSongs = list;
         notifyDataSetChanged();
+    }
+    public static void deleteFiles(String path) {
+
+        File file = new File(path);
+
+        if (file.exists()) {
+            String deleteCmd = "rm -r " + path;
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                runtime.exec(deleteCmd);
+            } catch (IOException e) { }
+        }
     }
 }
