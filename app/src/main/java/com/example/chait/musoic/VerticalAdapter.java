@@ -1,5 +1,7 @@
 package com.example.chait.musoic;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -94,8 +96,21 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     break;
                                 case R.id.delete:
                                     Toast.makeText(v.getContext(), currentSong.getMFullPath(), Toast.LENGTH_SHORT).show();
-                                    deleteFiles(currentSong.getMFullPath());
-                                    Toast.makeText(v.getContext(), "DELETE SONG", Toast.LENGTH_SHORT).show();
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                                    builder.setMessage("Are you sure you want to delete "+ currentSong.getMTitle() + " ?")
+                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    deleteFiles(currentSong.getMFullPath());
+                                                    Toast.makeText(v.getContext(), "DELETE SONG", Toast.LENGTH_SHORT).show();
+                                                }
+                                            })
+                                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    Toast.makeText(v.getContext(), "Canceled", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                    builder.create();
+                                    builder.show();
                                     break;
                                 case R.id.add_to_playlist:
                                     Toast.makeText(v.getContext(), "ADD TO PLAYLIST MENU OPEN", Toast.LENGTH_SHORT).show();
