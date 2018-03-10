@@ -33,7 +33,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         TextView artistView;
         TextView albumView;
         TextView durationView;
-        ImageButton imageButton;
+        ImageButton songOverflowButton;
 
         public MyViewHolder(View view) {
             super(view);
@@ -41,7 +41,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             artistView = itemView.findViewById(R.id.song_artist);
             albumView = itemView.findViewById(R.id.song_album);
             durationView = itemView.findViewById(R.id.song_duration);
-            imageButton = itemView.findViewById(R.id.imageButton);
+            songOverflowButton = itemView.findViewById(R.id.songOverflowButton);
         }
     }
 
@@ -82,7 +82,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         holder.durationView.setText(songDurationString);
         holder.itemView.setTag(position);
 
-            holder.imageButton.setOnClickListener(new View.OnClickListener() {
+            holder.songOverflowButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
                     mPopupMenu = new PopupMenu(v.getContext(), v);

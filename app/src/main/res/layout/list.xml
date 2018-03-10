@@ -67,7 +67,7 @@
             android:maxLength="20"
             android:ellipsize="end"
 
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/songOverflowButton"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/song_title"
             app:layout_constraintTop_toTopOf="parent" />
@@ -88,18 +88,17 @@
             android:ellipsize="end"
 
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/songOverflowButton"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/song_artist"
             app:layout_constraintTop_toBottomOf="@+id/song_duration" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/songOverflowButton"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="29dp"
-            android:layout_height="42dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:layout_weight="1"
             android:contentDescription="@string/more_menu"
             android:minHeight="0dp"
