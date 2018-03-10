@@ -93,20 +93,20 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                 case R.id.play:
                                     Toast.makeText(v.getContext(), "PLAY SONG", Toast.LENGTH_SHORT).show();
                                     break;
+                                case R.id.enqueue:
+                                    Toast.makeText(v.getContext(), "ENQUEUE", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case R.id.add_to_playlist:
+                                    Toast.makeText(v.getContext(), "ADD TO PLAYLIST MENU OPEN", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case R.id.apply_ringtone:
+                                    Toast.makeText(v.getContext(), "APPLY RINGTONE", Toast.LENGTH_SHORT).show();
+                                    break;
                                 case R.id.delete:
                                     Uri trackUri = ContentUris.withAppendedId(
                                             android.provider.MediaStore.Audio.Media.INTERNAL_CONTENT_URI, currentSong.getMId());
                                     Toast.makeText(v.getContext(), trackUri.getPath(), Toast.LENGTH_SHORT).show();
                                     Toast.makeText(v.getContext(), "DELETE SONG", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case R.id.add_to_playlist:
-                                    Toast.makeText(v.getContext(), "ADD TO PLAYLIST MENU OPEN", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case R.id.enqueue:
-                                    Toast.makeText(v.getContext(), "ENQUEUE", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case R.id.apply_ringtone:
-                                    Toast.makeText(v.getContext(), "APPLY RINGTONE", Toast.LENGTH_SHORT).show();
                                     break;
                             }
                             return false;
