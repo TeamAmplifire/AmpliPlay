@@ -24,13 +24,15 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 100;
     private ArrayList<Song> mSongArrayList;
-    private RecyclerView mSongView;
-    private SearchView mSearchView;
     private VerticalAdapter songAdt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RecyclerView mSongView;
+        SearchView mSearchView;
 
         mSongView = findViewById(R.id.song_list);
         mSongArrayList = new ArrayList<Song>();
@@ -44,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayoutManager mlinearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
-        mSongView.setLayoutManager(mlinearLayoutManager);
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
+        mSongView.setLayoutManager(mLinearLayoutManager);
         songAdt = new VerticalAdapter(mSongArrayList);
         mSongView.setAdapter(songAdt);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
