@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.SearchView;
-import android.widget.Toolbar;
 
 
 import java.util.ArrayList;

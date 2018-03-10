@@ -56,9 +56,17 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         String songDurationString;
         songDurationInt /= 1000;
         if (songDurationInt >= 3600 && songDurationInt <= 86400) {
-            songDurationString = songDurationInt / 3600 + ":" + songDurationInt / 60 + ":" + songDurationInt % 60;
-        } else {
-            songDurationString = songDurationInt / 60 + ":" + songDurationInt % 60;
+            if (songDurationInt%60 < 10) {
+                songDurationString = songDurationInt / 3600 + ":0" + songDurationInt / 60 + ":" + songDurationInt % 60;
+            }else{
+                songDurationString = songDurationInt / 3600 + ":" + songDurationInt / 60 + ":" + songDurationInt % 60;
+            }
+        }else {
+            if(songDurationInt%60 < 10){
+            songDurationString = songDurationInt / 60 + ":0" + songDurationInt % 60;
+            }else{
+                songDurationString = songDurationInt / 60 + ":" + songDurationInt % 60;
+            }
         }
         holder.titleView.setText(currentSong.getMTitle());
         holder.artistView.setText(currentSong.getMArtist());
