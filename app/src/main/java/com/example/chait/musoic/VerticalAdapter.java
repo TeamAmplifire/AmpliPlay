@@ -1,12 +1,22 @@
 package com.example.chait.musoic;
 
 
+import android.content.ContentUris;
+import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -16,12 +26,14 @@ import java.util.ArrayList;
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder> {
 
     private ArrayList<Song> mSongs;
+    private PopupMenu mPopupMenu;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
         TextView artistView;
         TextView albumView;
         TextView durationView;
+        ImageButton imageButton;
 
         public MyViewHolder(View view) {
             super(view);
@@ -29,6 +41,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             artistView = itemView.findViewById(R.id.song_artist);
             albumView = itemView.findViewById(R.id.song_album);
             durationView = itemView.findViewById(R.id.song_duration);
+            imageButton = itemView.findViewById(R.id.imageButton);
         }
     }
 
@@ -44,9 +57,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(VerticalAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(VerticalAdapter.MyViewHolder holder, final int position) {
 
-        Song currentSong = mSongs.get(position);
+        final Song currentSong = mSongs.get(position);
         int songDurationInt = Integer.parseInt(currentSong.getMDuration());
         String songDurationString;
         songDurationInt /= 1000;
@@ -68,6 +81,36 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         holder.albumView.setText(currentSong.getMAlbum());
         holder.durationView.setText(songDurationString);
         holder.itemView.setTag(position);
+
+            holder.imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    mPopupMenu = new PopupMenu(v.getContext(), v);
+                    MenuInflater menuInflater = mPopupMenu.getMenuInflater();
+                    menuInflater.inflate(R.menu.mymenu, mPopupMenu.getMenu());
+                    mPopupMenu.show();
+                    mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch(item.getItemId()) {
+                                case R.id.play:
+                                    Toast.makeText(v.getContext(), "PLAY SONG", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case R.id.delete:
+                                    Uri trackUri = ContentUris.withAppendedId(
+                                            android.provider.MediaStore.Audio.Media.INTERNAL_CONTENT_URI, currentSong.getMId());
+                                    Toast.makeText(v.getContext(), trackUri.getPath(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(v.getContext(), "DELETE SONG", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case R.id.add_to_playlist:
+                                    Toast.makeText(v.getContext(), "ADD TO PLAYLIST MENU OPEN", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                }
+            });
 
     }
 

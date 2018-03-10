@@ -2,4 +2,7 @@
     <string name="app_name">Musoic</string>
     <string name="more_menu">more menu</string>
     <string name="search_bar">Search bar</string>
+    <string name="play">Play</string>
+    <string name="delete">Delete</string>
+    <string name="add_to_playlist">Add To Playlist</string>
 </resources>

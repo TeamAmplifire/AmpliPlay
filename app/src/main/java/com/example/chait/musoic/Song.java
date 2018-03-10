@@ -27,7 +27,6 @@ public class Song {
     public String getMTitle() {
         return mTitle;
     }
-
     public String getMDuration() {
         return mDuration;
     }
