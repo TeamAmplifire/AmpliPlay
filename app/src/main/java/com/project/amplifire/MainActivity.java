@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar libraryToolbar = findViewById(R.id.libraryToolbar);
         setSupportActionBar(libraryToolbar);
 
-        String title = "Ampliplay";
+        String title = "AmpliPlay";
         SpannableString s = new SpannableString(title);
         s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(s);
