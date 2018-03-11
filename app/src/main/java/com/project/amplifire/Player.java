@@ -5,6 +5,7 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -59,8 +60,8 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private TrackSelection.Factory trackSelectionFactory;
     private SimpleExoPlayer player;
     private Uri trackUri;
-    private ImageButton next;
-    private ImageButton previous;
+    private ImageButton btnNext;
+    private ImageButton btnPrev;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,12 +79,18 @@ public class Player extends Activity implements ExoPlayer.EventListener {
        //
        // Toast.makeText(this, "" + trackUri, Toast.LENGTH_LONG).show();
 
-        albumN =findViewById(R.id.albumName);
+        albumN = findViewById(R.id.albumName);
         albumN.setText(album);
+        albumN.setSelected(true);
+
         trackN = findViewById(R.id.trackName);
         trackN.setText(track);
-        artistN= findViewById(R.id.artistName);
+        trackN.setSelected(true);
+
+        artistN = findViewById(R.id.artistName);
         artistN.setText(artist);
+        Log.d("Amplifire", "onCreate: " + artist);
+        artistN.setSelected(true);
 
         renderersFactory = new DefaultRenderersFactory(getApplicationContext());
         bandwidthMeter = new DefaultBandwidthMeter();
@@ -123,8 +130,10 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     }
 
     private void previous() {
-        previous = findViewById(R.id.btnPrev);
-        previous.setOnClickListener(new View.OnClickListener() {
+        btnPrev = findViewById(R.id.btnPrev);
+        btnPrev.requestFocus();
+        btnPrev.setImageResource(R.drawable.ic_skip_previous_dark);
+        btnPrev.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             Toast.makeText(Player.this, "PREVIOUS SONG", Toast.LENGTH_SHORT).show();
@@ -134,8 +143,10 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     }
 
     private void next() {
-        next = findViewById(R.id.btnNext);
-        next.setOnClickListener(new View.OnClickListener() {
+        btnNext = findViewById(R.id.btnNext);
+        btnNext.requestFocus();
+        btnNext.setImageResource(R.drawable.ic_skip_next_dark);
+        btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(Player.this, "Next Song", Toast.LENGTH_SHORT).show();
