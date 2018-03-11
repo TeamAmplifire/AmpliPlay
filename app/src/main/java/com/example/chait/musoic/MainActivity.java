@@ -11,6 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.SearchView;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
     private SearchView mSearchView;
+    private PopupMenu mPopupMenu;
+    private ImageButton libraryOverflowButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mSongView = findViewById(R.id.song_list);
         mSongArrayList = new ArrayList<Song>();
         mSearchView = findViewById(R.id.searchView);
+        libraryOverflowButton = findViewById(R.id.libraryOverflowButton);
 
     }
 
@@ -47,10 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
-        songAdt = new VerticalAdapter(mSongArrayList);
-        mSongView.setLayoutManager(mLinearLayoutManager);
-        mSongView.setAdapter(songAdt);
+        setList();
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -61,6 +66,29 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 filter(newText);
                 return false;
+            }
+        });
+        libraryOverflowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPopupMenu = new PopupMenu(v.getContext(), v);
+                MenuInflater menuInflater = mPopupMenu.getMenuInflater();
+                menuInflater.inflate(R.menu.library_overflow_menu, mPopupMenu.getMenu());
+                mPopupMenu.show();
+                mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch(item.getItemId()){
+                            case R.id.rescan_library:
+                                getSongList();
+                                setList();
+                                break;
+                            case R.id.settings:
+                                break;
+                        }
+                        return false;
+                    }
+                });
             }
         });
     }
@@ -120,5 +148,11 @@ public class MainActivity extends AppCompatActivity {
                 musicCursor.close();
             }
         }
+    }
+    public void setList(){
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
+        songAdt = new VerticalAdapter(mSongArrayList);
+        mSongView.setLayoutManager(mLinearLayoutManager);
+        mSongView.setAdapter(songAdt);
     }
 }

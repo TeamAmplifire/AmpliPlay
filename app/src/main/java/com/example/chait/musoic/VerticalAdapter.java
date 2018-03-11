@@ -152,8 +152,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     }
 
     public void updateList(ArrayList<Song> list){
-        mSongs.clear();
-        mSongs.addAll(list);
+        mSongs = list;
         notifyDataSetChanged();
     }
 
