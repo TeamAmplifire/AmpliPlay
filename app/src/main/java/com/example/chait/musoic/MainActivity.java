@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.SearchView;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,19 +22,23 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 100;
     private ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
+    private RecyclerView mSongView;
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView mSongView;
-        SearchView mSearchView;
-
         mSongView = findViewById(R.id.song_list);
         mSongArrayList = new ArrayList<Song>();
         mSearchView = findViewById(R.id.searchView);
 
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         getSongList();
         Collections.sort(mSongArrayList, new Comparator<Song>() {
             @Override
@@ -45,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
-        mSongView.setLayoutManager(mLinearLayoutManager);
         songAdt = new VerticalAdapter(mSongArrayList);
+        mSongView.setLayoutManager(mLinearLayoutManager);
         mSongView.setAdapter(songAdt);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -61,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public void filter(String text){
         ArrayList<Song> temp = new ArrayList<Song>();
         for(Song d : mSongArrayList){
@@ -71,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
         }
         songAdt.updateList(temp);
     }
-
     public void getSongList(){
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(this ,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+            ActivityCompat.requestPermissions(this ,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
             return;
         }

@@ -1,5 +1,6 @@
 package com.example.chait.musoic;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -95,19 +95,19 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     Toast.makeText(v.getContext(), "PLAY SONG", Toast.LENGTH_SHORT).show();
                                     break;
                                 case R.id.delete:
-                                    Toast.makeText(v.getContext(), currentSong.getMFullPath(), Toast.LENGTH_SHORT).show();
                                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                                    builder.setMessage("Are you sure you want to delete "+ currentSong.getMTitle() + " ?")
+                                    builder.setTitle("Delete");
+                                    builder.setMessage("Are you sure you want to delete this song?")
                                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    deleteFiles(currentSong.getMFullPath());
-                                                    Toast.makeText(v.getContext(), "DELETE SONG", Toast.LENGTH_SHORT).show();
+                                                    if (deleteTarget(currentSong.getMFullPath()) != 0){
+                                                        mSongs.remove(position);
+                                                        Toast.makeText(v.getContext(), "Song Deleted", Toast.LENGTH_SHORT).show();
+                                                    }
                                                 }
                                             })
                                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    Toast.makeText(v.getContext(), "Canceled", Toast.LENGTH_SHORT).show();
-                                                }
+                                                public void onClick(DialogInterface dialog, int id) {}
                                             });
                                     builder.create();
                                     builder.show();
@@ -136,19 +136,46 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     }
 
     public void updateList(ArrayList<Song> list){
-        mSongs = list;
+        mSongs.clear();
+        mSongs.addAll(list);
         notifyDataSetChanged();
     }
-    public static void deleteFiles(String path) {
 
-        File file = new File(path);
+    public int deleteTarget(String path) {
+        File target = new File(path);
 
-        if (file.exists()) {
-            String deleteCmd = "rm -r " + path;
-            Runtime runtime = Runtime.getRuntime();
-            try {
-                runtime.exec(deleteCmd);
-            } catch (IOException e) { }
+        if(target.exists() && target.isFile() && target.canWrite()) {
+            target.delete();
+            notifyDataSetChanged();
+            return 0;
         }
+
+        else if(target.exists() && target.isDirectory() && target.canRead()) {
+            String[] file_list = target.list();
+
+            if(file_list != null && file_list.length == 0) {
+                target.delete();
+                notifyDataSetChanged();
+                return 0;
+
+            } else if(file_list != null && file_list.length > 0) {
+
+                for(int i = 0; i < file_list.length; i++) {
+                    File temp_f = new File(target.getAbsolutePath() + "/" + file_list[i]);
+
+                    if(temp_f.isDirectory())
+                        deleteTarget(temp_f.getAbsolutePath());
+                    else if(temp_f.isFile())
+                        temp_f.delete();
+                    notifyDataSetChanged();
+                }
+            }
+            if(target.exists())
+                if(target.delete()) {
+                    notifyDataSetChanged();
+                    return 0;
+                }
+        }
+        return -1;
     }
 }
