@@ -5,6 +5,9 @@ import android.app.SearchManager;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.ColorSpace;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -13,14 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
-import android.widget.SearchView;
+
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -44,9 +52,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar libraryToolbar = findViewById(R.id.libraryToolbar);
         setSupportActionBar(libraryToolbar);
 
+        String title = "Ampliplay";
+        SpannableString s = new SpannableString(title);
+        s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        getSupportActionBar().setTitle(s);
+
         mSongView = findViewById(R.id.song_list);
         mSongArrayList = new ArrayList<Song>();
-        mSearchView = findViewById(R.id.searchView);
+//        mSearchView = findViewById(R.id.searchView);
         //libraryOverflowButton = findViewById(R.id.libraryOverflowButton);
 
     }
@@ -63,7 +76,44 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setList();
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//        libraryOverflowButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mPopupMenu = new PopupMenu(v.getContext(), v);
+//                MenuInflater menuInflater = mPopupMenu.getMenuInflater();
+//                menuInflater.inflate(R.menu.library_overflow_menu, mPopupMenu.getMenu());
+//                mPopupMenu.show();
+//                mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    @Override
+//                    public boolean onMenuItemClick(MenuItem item) {
+//                        switch(item.getItemId()){
+//                            case R.id.rescan_library:
+//                                getSongList();
+//                                setList();
+//                                break;
+//                            case R.id.settings:
+//                                break;
+//                        }
+//                        return false;
+//                    }
+//                });
+//            }
+//        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuItem searchItem = menu.findItem(R.id.action_search);
+//        mSearchView = (SearchView) searchItem.getActionView();
+//        PopupMenu mMenu = new PopupMenu(this.getApplication(), mSearchView);
+//        MenuInflater menuInflater = mMenu.getMenuInflater();
+//        menuInflater.inflate(R.menu.search_menu, menu);
+//
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -75,44 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        /*libraryOverflowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPopupMenu = new PopupMenu(v.getContext(), v);
-                MenuInflater menuInflater = mPopupMenu.getMenuInflater();
-                menuInflater.inflate(R.menu.library_overflow_menu, mPopupMenu.getMenu());
-                mPopupMenu.show();
-                mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch(item.getItemId()){
-                            case R.id.rescan_library:
-                                getSongList();
-                                setList();
-                                break;
-                            case R.id.settings:
-                                break;
-                        }
-                        return false;
-                    }
-                });
-            }
-        });*/
-    }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView =
-                (SearchView) searchItem.getActionView();
-
-        // Configure the search info and add any event listeners...
-
         return super.onCreateOptionsMenu(menu);
-    }*/
+    }
 
     @Override
     protected void onPause(){

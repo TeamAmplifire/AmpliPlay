@@ -8,7 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AmpliFire_Light" parent="AppTheme" />
+    <style name="AmpliFire_Light" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColor</item>
+        <item name="android:textColorPrimaryInverse">@color/colorLight</item>
+    </style>
+
+    <style name="appBarTheme" parent="AmpliFire_Light">
+        <item name="android:textColorPrimary">@color/colorLight</item>
+    </style>
 
     <style name="AmplifFire_Light" parent="AppTheme" />
 

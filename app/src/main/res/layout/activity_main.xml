@@ -14,24 +14,11 @@
         android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
 
-        android:theme="?attr/actionBarTheme"
+        android:theme="@style/appBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorLight"
-        android:contentDescription="@string/search_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/libraryToolbar">
-
-    </SearchView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/song_list"
@@ -40,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintTop_toBottomOf="@id/libraryToolbar"
         app:layout_constraintVertical_bias="1.0" >
 
     </android.support.v7.widget.RecyclerView>
