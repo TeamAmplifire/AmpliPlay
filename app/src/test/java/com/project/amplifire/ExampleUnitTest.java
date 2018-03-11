@@ -1,4 +1,4 @@
-package com.example.chait.musoic;
+package com.project.amplifire;
 
 import org.junit.Test;
 

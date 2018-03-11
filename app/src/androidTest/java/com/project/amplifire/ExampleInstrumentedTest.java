@@ -1,4 +1,4 @@
-package com.example.chait.musoic;
+package com.project.amplifire;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

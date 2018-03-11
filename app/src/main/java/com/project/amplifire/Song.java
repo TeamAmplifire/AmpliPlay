@@ -1,4 +1,4 @@
-package com.example.chait.musoic;
+package com.project.amplifire;
 
 /**
  * Created by chait on 07-03-2018.
