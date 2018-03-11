@@ -8,4 +8,6 @@
     <string name="add_to_playlist">Add To Playlist</string>
     <string name="enqueue">Enqueue</string>
     <string name="apply_ringtone">Apply Ringtone</string>
+    <string name="rescan_library">Rescan Library</string>
+    <string name="settings">Settings</string>
 </resources>
