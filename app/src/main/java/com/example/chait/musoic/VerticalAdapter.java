@@ -1,8 +1,11 @@
 package com.example.chait.musoic;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -114,6 +117,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                                 public void onClick(DialogInterface dialog, int id) {
                                                     if (deleteTarget(currentSong.getMFullPath()) != 0){
                                                         mSongs.remove(position);
+                                                        deleteFromContentProvider(currentSong.getMId());
                                                         Toast.makeText(v.getContext(), "Song Deleted", Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
@@ -151,6 +155,14 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         mSongs.clear();
         mSongs.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public void deleteFromContentProvider(Long id){
+        ContentResolver musicResolver = mContext.getContentResolver();
+        Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        String where = "_ID=?";
+        String[] args = {Long.toString(id)};
+        musicResolver.delete(musicUri, where, args);
     }
 
     public int deleteTarget(String path) {
