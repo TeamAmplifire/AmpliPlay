@@ -113,6 +113,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                             intent.putExtra("songID", currentSong.getMId());
                                             intent.putExtra("Track",currentSong.getMTitle());
                                             intent.putExtra("Album",currentSong.getMAlbum());
+                                            intent.putExtra("Artist",currentSong.getMArtist());
 
                                             mContext.startActivity(intent);
                                     Toast.makeText(v.getContext(), "PLAY SONG", Toast.LENGTH_SHORT).show();

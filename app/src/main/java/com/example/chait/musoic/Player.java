@@ -47,7 +47,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private SeekBar seekPlayerProgress;
     private Handler handler;
     private ImageButton btnPlay;
-    private TextView txtCurrentTime, txtEndTime, albumN, trackN;
+    private TextView txtCurrentTime, txtEndTime, albumN, trackN, artistN;
     private boolean isPlaying = true;
     private Handler mainHandler;
     private RenderersFactory renderersFactory;
@@ -71,6 +71,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         long currSong = (Long) message.get("songID");
         String track = (String)message.get("Track");
         String album = (String) message.get("Album");
+        String artist = (String) message.get("Artist");
 
         trackUri = ContentUris.withAppendedId(
                 android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, currSong);
@@ -81,6 +82,8 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         albumN.setText(album);
         trackN = findViewById(R.id.trackName);
         trackN.setText(track);
+        artistN= findViewById(R.id.artist);
+        artistN.setText(artist);
 
         renderersFactory = new DefaultRenderersFactory(getApplicationContext());
         bandwidthMeter = new DefaultBandwidthMeter();
