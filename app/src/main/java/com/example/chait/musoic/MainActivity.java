@@ -68,9 +68,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause(){
         super.onPause();
 
-        if(mSongArrayList != null){
+        if(!mSongArrayList.isEmpty()){
             mSongArrayList.clear();
-            mSongArrayList = null;
         }
     }
     public void filter(String text){
