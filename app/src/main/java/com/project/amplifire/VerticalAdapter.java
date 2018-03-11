@@ -1,4 +1,4 @@
-package com.example.chait.musoic;
+package com.project.amplifire;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder> {
 
-    private ArrayList<Song> mSongs;
+    private ArrayList<com.project.amplifire.Song> mSongs;
     private PopupMenu mPopupMenu;
     Context mContext;
 
@@ -50,7 +50,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         }
     }
 
-    public VerticalAdapter(ArrayList<Song> theSongs) {
+    public VerticalAdapter(ArrayList<com.project.amplifire.Song> theSongs) {
         mSongs = theSongs;
     }
 
