@@ -25,7 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -47,6 +48,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:text="Title"
+            android:textColor="@color/textColor"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,6 +62,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="Artist - Album"
+            android:textColor="@color/textColor"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/playButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +77,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="0:00"
+            android:textColor="@color/textColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
@@ -84,8 +88,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:text="4:20"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seekBar"/>
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <ImageButton
             android:id="@+id/playButton"
@@ -101,7 +106,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintEnd_toStartOf="@+id/nextButton"
             app:layout_constraintStart_toEndOf="@+id/prevButton"
-            app:srcCompat="@drawable/ic_play_arrow" />
+            app:srcCompat="@drawable/ic_play_arrow_dark" />
 
         <ImageButton
             android:id="@+id/nextButton"
@@ -117,7 +122,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/playButton"
-            app:srcCompat="@drawable/ic_skip_next" />
+            app:srcCompat="@drawable/ic_skip_next_dark" />
 
         <ImageButton
             android:id="@+id/prevButton"
@@ -134,7 +139,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/playButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_skip_previous" />
+            app:srcCompat="@drawable/ic_skip_previous_dark" />
 
         <SeekBar
             android:id="@+id/seekBar"
