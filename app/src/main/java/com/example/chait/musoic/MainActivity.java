@@ -64,6 +64,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        if(mSongArrayList != null){
+            mSongArrayList.clear();
+            mSongArrayList = null;
+        }
+    }
     public void filter(String text){
         ArrayList<Song> temp = new ArrayList<Song>();
         for(Song d : mSongArrayList){
