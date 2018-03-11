@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Musioc.iml" filepath="$PROJECT_DIR$/Musioc.iml" />
+      <module fileurl="file://C:\androidProjects\Musoic\Musioc.iml" filepath="C:\androidProjects\Musoic\Musioc.iml" />
       <module fileurl="file://E:\AMPLIFIRE\Musioc-New\Musioc.iml" filepath="E:\AMPLIFIRE\Musioc-New\Musioc.iml" />
       <module fileurl="file://C:\Android Projects\Musioc\Musioc-New.iml" filepath="C:\Android Projects\Musioc\Musioc-New.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Musoic.iml" filepath="$PROJECT_DIR$/Musoic.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://E:\AMPLIFIRE\Musioc-New\app\app.iml" filepath="E:\AMPLIFIRE\Musioc-New\app\app.iml" />
     </modules>
