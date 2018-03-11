@@ -47,7 +47,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private SeekBar seekPlayerProgress;
     private Handler handler;
     private ImageButton btnPlay;
-    private TextView txtCurrentTime, txtEndTime;
+    private TextView txtCurrentTime, txtEndTime, albumN, trackN;
     private boolean isPlaying = true;
     private Handler mainHandler;
     private RenderersFactory renderersFactory;
@@ -64,16 +64,23 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.player_interface);
+        setContentView(R.layout.player);
 
+        //player.getCurrentTrackSelections();
         Bundle message = getIntent().getExtras();
         long currSong = (Long) message.get("songID");
+        String track = (String)message.get("Track");
+        String album = (String) message.get("Album");
 
         trackUri = ContentUris.withAppendedId(
                 android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, currSong);
        //
-        Toast.makeText(this, "" + trackUri, Toast.LENGTH_LONG).show();
+       // Toast.makeText(this, "" + trackUri, Toast.LENGTH_LONG).show();
 
+        albumN =findViewById(R.id.albumName);
+        albumN.setText(album);
+        trackN = findViewById(R.id.trackName);
+        trackN.setText(track);
 
         renderersFactory = new DefaultRenderersFactory(getApplicationContext());
         bandwidthMeter = new DefaultBandwidthMeter();
@@ -95,30 +102,36 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                         null);
 
         player.prepare(mediaSource);
+        if(player.getVolume()==0)
+        {
+            Toast.makeText(this, "TURN ON VOLUME", Toast.LENGTH_SHORT).show();
+        }
         controls();
+
     }
 
     private void controls() {
-        play();
-        seekBar();
         time();
+        seekBar();
+        play();
         next();
+        setProgress();
         previous();
     }
 
     private void previous() {
-        previous = findViewById(R.id.prevButton);
+        previous = findViewById(R.id.btnPrev);
         previous.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            Toast.makeText(Player.this, "NEXT SONG", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Player.this, "PREVIOUS SONG", Toast.LENGTH_SHORT).show();
                                         }
                                     }
         );
     }
 
     private void next() {
-        next = findViewById(R.id.nextButton);
+        next = findViewById(R.id.btnNext);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,8 +142,9 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     }
 
     private void play() {
-        btnPlay = (ImageButton) findViewById(R.id.playButton);
+        btnPlay = findViewById(R.id.btnPlay);
         btnPlay.requestFocus();
+        btnPlay.setImageResource(R.drawable.ic_play_arrow);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,20 +153,20 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         });
     }
 
+
     private void setPlayPause(boolean play){
         isPlaying = play;
         player.setPlayWhenReady(play);
         if(!isPlaying){
-            btnPlay.setImageResource(android.R.drawable.ic_media_pause);
+            btnPlay.setImageResource(R.drawable.ic_pause);
         }else{
-            setProgress();
-            btnPlay.setImageResource(android.R.drawable.ic_media_play);
+            btnPlay.setImageResource(R.drawable.ic_play_arrow);
         }
     }
 
     private void time() {
-        txtCurrentTime = (TextView) findViewById(R.id.current_song_time);
-        txtEndTime = (TextView) findViewById(R.id.total_time);
+        txtCurrentTime = findViewById(R.id.time_current);
+        txtEndTime = findViewById(R.id.player_end_time);
     }
 
     private String stringForTime(int timeMs) {
@@ -172,7 +186,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     }
 
     private void setProgress() {
-        seekPlayerProgress.setProgress(0);
+       // seekPlayerProgress.setProgress(0);
         seekPlayerProgress.setMax((int) player.getDuration()/1000);
         txtCurrentTime.setText(stringForTime((int)player.getCurrentPosition()));
         txtEndTime.setText(stringForTime((int)player.getDuration()));
@@ -195,7 +209,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     }
 
     private void seekBar() {
-        seekPlayerProgress = (SeekBar) findViewById(R.id.seekBar);
+        seekPlayerProgress = findViewById(R.id.media_progress);
         seekPlayerProgress.requestFocus();
 
         seekPlayerProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -234,7 +248,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     @Override
     protected void onPause() {
         super.onPause();
-        trackUri=null;
+        player.release();
         player.setPlayWhenReady(true);
     }
 

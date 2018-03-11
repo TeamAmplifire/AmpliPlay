@@ -92,10 +92,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
 
                                                    Intent intent = new Intent(mContext, Player.class);
                                                    intent.putExtra("songID", currentSong.getMId());
+                                                   intent.putExtra("Track",currentSong.getMTitle());
+                                                   intent.putExtra("Album",currentSong.getMAlbum());
                                                    mContext.startActivity(intent);
                                                }
                                            });
-            holder.songOverflowButton.setOnClickListener(new View.OnClickListener() {
+        holder.songOverflowButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
                     mPopupMenu = new PopupMenu(v.getContext(), v);
@@ -107,6 +109,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                         public boolean onMenuItemClick(MenuItem item) {
                             switch(item.getItemId()) {
                                 case R.id.play:
+                                            Intent intent = new Intent(mContext, Player.class);
+                                            intent.putExtra("songID", currentSong.getMId());
+                                            intent.putExtra("Track",currentSong.getMTitle());
+                                            intent.putExtra("Album",currentSong.getMAlbum());
+
+                                            mContext.startActivity(intent);
                                     Toast.makeText(v.getContext(), "PLAY SONG", Toast.LENGTH_SHORT).show();
                                     break;
                                 case R.id.delete:
