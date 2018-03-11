@@ -2,6 +2,7 @@ package com.example.chait.musoic;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
 
     private ArrayList<Song> mSongs;
     private PopupMenu mPopupMenu;
+    Context mContext;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
@@ -40,6 +42,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             albumView = itemView.findViewById(R.id.song_album);
             durationView = itemView.findViewById(R.id.song_duration);
             songOverflowButton = itemView.findViewById(R.id.songOverflowButton);
+            mContext = itemView.getContext();
+
         }
     }
 
@@ -79,7 +83,15 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         holder.albumView.setText(currentSong.getMAlbum());
         holder.durationView.setText(songDurationString);
         holder.itemView.setTag(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View view) {
 
+                                                   Intent intent = new Intent(mContext, Player.class);
+                                                   intent.putExtra("songID", currentSong.getMId());
+                                                   mContext.startActivity(intent);
+                                               }
+                                           });
             holder.songOverflowButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
