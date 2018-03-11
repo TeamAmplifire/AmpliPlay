@@ -1,16 +1,20 @@
 package com.example.chait.musoic;
 
 import android.Manifest;
+import android.app.SearchManager;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,17 +34,20 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mSongView;
     private SearchView mSearchView;
     private PopupMenu mPopupMenu;
-    private ImageButton libraryOverflowButton;
+    //private ImageButton libraryOverflowButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar libraryToolbar = findViewById(R.id.libraryToolbar);
+        setSupportActionBar(libraryToolbar);
+
         mSongView = findViewById(R.id.song_list);
         mSongArrayList = new ArrayList<Song>();
         mSearchView = findViewById(R.id.searchView);
-        libraryOverflowButton = findViewById(R.id.libraryOverflowButton);
+        //libraryOverflowButton = findViewById(R.id.libraryOverflowButton);
 
     }
 
@@ -68,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        libraryOverflowButton.setOnClickListener(new View.OnClickListener() {
+
+        /*libraryOverflowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPopupMenu = new PopupMenu(v.getContext(), v);
@@ -90,8 +98,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
     }
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView =
+                (SearchView) searchItem.getActionView();
+
+        // Configure the search info and add any event listeners...
+
+        return super.onCreateOptionsMenu(menu);
+    }*/
+
     @Override
     protected void onPause(){
         super.onPause();

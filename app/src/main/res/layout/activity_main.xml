@@ -7,47 +7,18 @@
     tools:context="com.example.chait.musoic.MainActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/ActionBarLibrary"
+        android:id="@+id/libraryToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
+
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text_library_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/library_header"
-        android:textColor="@color/colorLight"
-        android:textColorLink="@color/colorPrimary"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ActionBarLibrary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ActionBarLibrary"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageButton
-        android:id="@+id/libraryOverflowButton"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-
-        android:layout_weight="1"
-        android:minHeight="0dp"
-
-        android:minWidth="0dp"
-        android:padding="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/searchView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ActionBarLibrary"
-        app:srcCompat="@drawable/ic_more_vert_white_40dp_10pad" />
 
     <SearchView
         android:id="@+id/searchView"
@@ -58,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ActionBarLibrary">
+        app:layout_constraintTop_toBottomOf="@+id/libraryToolbar">
 
     </SearchView>
 
