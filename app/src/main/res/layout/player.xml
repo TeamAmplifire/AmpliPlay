@@ -26,6 +26,7 @@
             android:orientation="horizontal"
             android:paddingTop="4dip">
 
+
             <ImageButton
                 android:id="@+id/btnPrev"
                 style="@android:style/MediaButton.Previous"
