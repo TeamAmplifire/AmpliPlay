@@ -240,7 +240,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
 
     @Override
-    public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
+    public void onTimelineChanged(Timeline timeline, Object manifest) {
 
     }
 
@@ -259,15 +259,6 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
     }
 
-    @Override
-    public void onRepeatModeChanged(int repeatMode) {
-
-    }
-
-    @Override
-    public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
-
-    }
 
     @Override
     public void onPlayerError(ExoPlaybackException error) {
@@ -275,17 +266,14 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     }
 
     @Override
-    public void onPositionDiscontinuity(int reason) {
+    public void onPositionDiscontinuity() {
 
     }
+
 
     @Override
     public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
 
     }
 
-    @Override
-    public void onSeekProcessed() {
-
-    }
 }
