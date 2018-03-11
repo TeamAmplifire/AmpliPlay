@@ -92,8 +92,7 @@
                 android:paddingBottom="4dip"
                 android:paddingLeft="10dip"
                 android:paddingRight="4dip"
-                android:paddingTop="4dip"
-                />
+                android:paddingTop="4dip" />
 
         </LinearLayout>
 
@@ -142,7 +141,7 @@
         app:srcCompat="@color/colorAccent"/>
 
     <TextView
-        android:id="@+id/artist"
+        android:id="@+id/artistName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/albumName"
@@ -153,5 +152,5 @@
         android:text="Artist Name"
         app:layout_constraintBottom_toTopOf="@+id/media_controller"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 </RelativeLayout>

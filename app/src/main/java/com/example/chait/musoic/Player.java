@@ -64,7 +64,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.player);
+        setContentView(R.layout.player_interface);
 
         //player.getCurrentTrackSelections();
         Bundle message = getIntent().getExtras();
@@ -82,7 +82,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         albumN.setText(album);
         trackN = findViewById(R.id.trackName);
         trackN.setText(track);
-        artistN= findViewById(R.id.artist);
+        artistN= findViewById(R.id.artistName);
         artistN.setText(artist);
 
         renderersFactory = new DefaultRenderersFactory(getApplicationContext());
@@ -147,7 +147,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private void play() {
         btnPlay = findViewById(R.id.btnPlay);
         btnPlay.requestFocus();
-        btnPlay.setImageResource(R.drawable.ic_play_arrow);
+        btnPlay.setImageResource(R.drawable.ic_pause_dark);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,10 +160,10 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private void setPlayPause(boolean play){
         isPlaying = play;
         player.setPlayWhenReady(play);
-        if(!isPlaying){
-            btnPlay.setImageResource(R.drawable.ic_pause);
+        if(isPlaying){
+            btnPlay.setImageResource(R.drawable.ic_pause_dark);
         }else{
-            btnPlay.setImageResource(R.drawable.ic_play_arrow);
+            btnPlay.setImageResource(R.drawable.ic_play_arrow_dark);
         }
     }
 
