@@ -17,19 +17,14 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.util.ArrayList;
-
-/**
- * Created by chait on 07-03-2018.
- */
 
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder> {
 
     private ArrayList<com.project.amplifire.Song> mSongs;
     private PopupMenu mPopupMenu;
-    Context mContext;
+    private Context mContext;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
@@ -81,6 +76,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                 songDurationString = songDurationInt / 60 + ":" + songDurationInt % 60;
             }
         }
+
         holder.titleView.setText(currentSong.getMTitle());
         holder.artistView.setText(currentSong.getMArtist());
         holder.albumView.setText(currentSong.getMAlbum());
@@ -89,13 +85,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
-
-                                                   Intent intent = new Intent(mContext, Player.class);
-                                                   intent.putExtra("songID", currentSong.getMId());
-                                                   intent.putExtra("Track",currentSong.getMTitle());
-                                                   intent.putExtra("Album",currentSong.getMAlbum());
-                                                   intent.putExtra("Artist",currentSong.getMArtist());
-                                                   mContext.startActivity(intent);
+                                                   play(currentSong, mContext);
                                                }
                                            });
         holder.songOverflowButton.setOnClickListener(new View.OnClickListener() {
@@ -110,14 +100,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                         public boolean onMenuItemClick(MenuItem item) {
                             switch(item.getItemId()) {
                                 case R.id.play:
-                                            Intent intent = new Intent(mContext, Player.class);
-                                            intent.putExtra("songID", currentSong.getMId());
-                                            intent.putExtra("Track",currentSong.getMTitle());
-                                            intent.putExtra("Album",currentSong.getMAlbum());
-                                            intent.putExtra("Artist",currentSong.getMArtist());
-
-                                            mContext.startActivity(intent);
-                                    Toast.makeText(v.getContext(), "PLAY SONG", Toast.LENGTH_SHORT).show();
+                                    play(currentSong, mContext);
                                     break;
                                 case R.id.delete:
                                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -164,6 +147,16 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     public void updateList(ArrayList<Song> list){
         mSongs = list;
         notifyDataSetChanged();
+    }
+
+    public void play(Song currentSong, Context context){
+        Intent intent = new Intent(context, Player.class);
+        intent.putExtra("songID", currentSong.getMId());
+        intent.putExtra("track",currentSong.getMTitle());
+        intent.putExtra("album",currentSong.getMAlbum());
+        intent.putExtra("artist",currentSong.getMArtist());
+        intent.putExtra("albumID", currentSong.getMAlbumId());
+        context.startActivity(intent);
     }
 
     public void deleteFromContentProvider(Long id){

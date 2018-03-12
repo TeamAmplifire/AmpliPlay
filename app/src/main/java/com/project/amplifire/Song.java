@@ -6,13 +6,14 @@ package com.project.amplifire;
 
 public class Song {
     private long mId;
+    private long mAlbumId;
     private String mTitle;
     private String mArtist;
     private String mDuration;
     private String mAlbum;
     private String mFullPath;
 
-    public Song(long songId, String songTitle, String songArtist, String songAlbum, String songDuration, String songFullPath){
+    public Song(long songId, long songAlbumID, String songTitle, String songArtist, String songAlbum, String songDuration, String songFullPath){
 
         mId = songId;
         mTitle = songTitle;
@@ -20,10 +21,15 @@ public class Song {
         mDuration = songDuration;
         mAlbum = songAlbum;
         mFullPath = songFullPath;
+        mAlbumId = songAlbumID;
     }
 
     public long getMId() {
         return mId;
+    }
+
+    public long getMAlbumId() {
+        return mAlbumId;
     }
 
     public String getMTitle() {

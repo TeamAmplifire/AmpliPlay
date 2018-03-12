@@ -1,11 +1,13 @@
 package com.project.amplifire;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -37,6 +39,8 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Formatter;
 import java.util.Locale;
 
@@ -68,19 +72,26 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_interface);
-        //player.r
-
-        //player.getCurrentTrackSelections();
         Bundle message = getIntent().getExtras();
         long currSong = (Long) message.get("songID");
-        String track = (String)message.get("Track");
-        String album = (String) message.get("Album");
-        String artist = (String) message.get("Artist");
+        long albumID = (Long) message.get("albumID");
+        String track = (String)message.get("track");
+        String album = (String) message.get("album");
+        String artist = (String) message.get("artist");
 
         trackUri = ContentUris.withAppendedId(
                 android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, currSong);
-       //
-       // Toast.makeText(this, "" + trackUri, Toast.LENGTH_LONG).show();
+        Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
+        Uri uri = ContentUris.withAppendedId(sArtworkUri, albumID);
+        ContentResolver contentResolver = this.getApplicationContext().getContentResolver();
+        InputStream in = null;
+        try {
+            in = contentResolver.openInputStream(uri);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Bitmap artwork = BitmapFactory.decodeStream(in);
 
         albumN = findViewById(R.id.albumName);
         albumN.setText(album);
@@ -97,6 +108,9 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         albumImage = findViewById(R.id.image_album_art);
         albumImage.requestFocus();
         albumImage.setImageResource(R.drawable.album_art_template);
+        if(artwork != null) {
+            albumImage.setImageBitmap(artwork);
+        }
 
         renderersFactory = new DefaultRenderersFactory(getApplicationContext());
         bandwidthMeter = new DefaultBandwidthMeter();

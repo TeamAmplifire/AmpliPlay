@@ -19,8 +19,6 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.PopupMenu;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
-    private SearchView mSearchView;
-    private PopupMenu mPopupMenu;
-    //private ImageButton libraryOverflowButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         mSongView = findViewById(R.id.song_list);
         mSongArrayList = new ArrayList<Song>();
-//        mSearchView = findViewById(R.id.searchView);
-        //libraryOverflowButton = findViewById(R.id.libraryOverflowButton);
-
     }
 
     @Override
@@ -66,43 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 return o1.getMTitle().compareTo(o2.getMTitle());
             }
         });
-
         setList();
-//        libraryOverflowButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mPopupMenu = new PopupMenu(v.getContext(), v);
-//                MenuInflater menuInflater = mPopupMenu.getMenuInflater();
-//                menuInflater.inflate(R.menu.library_overflow_menu, mPopupMenu.getMenu());
-//                mPopupMenu.show();
-//                mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                    @Override
-//                    public boolean onMenuItemClick(MenuItem item) {
-//                        switch(item.getItemId()){
-//                            case R.id.rescan_library:
-//                                getSongList();
-//                                setList();
-//                                break;
-//                            case R.id.settings:
-//                                break;
-//                        }
-//                        return false;
-//                    }
-//                });
-//            }
-//        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-//        mSearchView = (SearchView) searchItem.getActionView();
-//        PopupMenu mMenu = new PopupMenu(this.getApplication(), mSearchView);
-//        MenuInflater menuInflater = mMenu.getMenuInflater();
-//        menuInflater.inflate(R.menu.search_menu, menu);
-//
         getMenuInflater().inflate(R.menu.search_menu, menu);
-
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -159,16 +120,18 @@ public class MainActivity extends AppCompatActivity {
                 int idColumn  = musicCursor.getColumnIndex(MediaStore.Audio.Media._ID);
                 int artistColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
                 int albumColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);
+                int albumIDColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID); //Added by titan
                 int durationColumn  = musicCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
                 int fullPathColumn = (musicCursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                 do{
                     long thisID = musicCursor.getLong(idColumn);
+                    long thisAlbumID = musicCursor.getLong(albumIDColumn);
                     String thisTitle = musicCursor.getString(titleColumn);
                     String thisArtist = musicCursor.getString(artistColumn);
                     String thisAlbum = musicCursor.getString(albumColumn);
                     String thisDuration = musicCursor.getString(durationColumn);
                     String thisFullPath = musicCursor.getString(fullPathColumn);
-                    mSongArrayList.add(new Song(thisID, thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
+                    mSongArrayList.add(new Song(thisID, thisAlbumID,thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
                 }while(musicCursor.moveToNext());
             }
         }catch(Exception exception){
