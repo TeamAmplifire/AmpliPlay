@@ -130,6 +130,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                 case R.id.apply_ringtone:
                                     Toast.makeText(v.getContext(), "APPLY RINGTONE", Toast.LENGTH_SHORT).show();
                                     break;
+                                case R.id.rename:
+                                    break;
+                                case R.id.info:
+                                    break;
                             }
                             return false;
                         }
@@ -165,6 +169,15 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         String where = "_ID=?";
         String[] args = {Long.toString(id)};
         musicResolver.delete(musicUri, where, args);
+    }
+
+    public void renameSong(Long id){
+
+        ContentResolver musicResolver = mContext.getContentResolver();
+        Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        String where = "_ID?";
+        String[] args = {Long.toString(id)};
+       // musicResolver.update();**********Karna hai abhi ye********Chedna mat************
     }
 
     public int deleteTarget(String path) {
