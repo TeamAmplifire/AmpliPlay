@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,6 +63,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private Uri trackUri;
     private ImageButton btnNext;
     private ImageButton btnPrev;
+    private ImageView albumImage;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +92,11 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
         artistN = findViewById(R.id.artistName);
         artistN.setText(artist);
-        Log.d("Amplifire", "onCreate: " + artist);
         artistN.setSelected(true);
+
+        albumImage = findViewById(R.id.image_album_art);
+        albumImage.requestFocus();
+        albumImage.setImageResource(R.drawable.album_art_template);
 
         renderersFactory = new DefaultRenderersFactory(getApplicationContext());
         bandwidthMeter = new DefaultBandwidthMeter();
@@ -113,10 +118,12 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                         null);
 
         player.prepare(mediaSource);
+
         if(player.getVolume()==0)
         {
             Toast.makeText(this, "TURN ON VOLUME", Toast.LENGTH_SHORT).show();
         }
+
         controls();
 
     }
