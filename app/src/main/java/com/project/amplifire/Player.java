@@ -66,6 +66,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_interface);
+        //player.r
 
         //player.getCurrentTrackSelections();
         Bundle message = getIntent().getExtras();
@@ -172,8 +173,10 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         isPlaying = play;
         player.setPlayWhenReady(play);
         if(isPlaying){
+            setProgress();
             btnPlay.setImageResource(R.drawable.ic_pause_dark);
         }else{
+            setProgress();
             btnPlay.setImageResource(R.drawable.ic_play_arrow_dark);
         }
     }
@@ -262,7 +265,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     @Override
     protected void onPause() {
         super.onPause();
-        player.release();
+       // player.release();
         player.setPlayWhenReady(true);
     }
 

@@ -21,9 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
 
-import com.project.amplifire.Song;
-import com.project.amplifire.VerticalAdapter;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
