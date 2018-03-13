@@ -127,7 +127,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toStartOf="@+id/btnNext"
         app:layout_constraintStart_toEndOf="@+id/btnPrev"
-        app:srcCompat="@drawable/ic_play_arrow_dark_50dp" />
+        app:srcCompat="@drawable/ic_play_arrow_dark" />
 
     <TextView
         android:id="@+id/time_current"
