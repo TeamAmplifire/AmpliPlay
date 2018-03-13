@@ -123,20 +123,25 @@ public class Playlist {
     public ArrayList<Song> getSongs(ContentResolver resolver, long playlistID){
 
         Uri playlistUri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistID);
-        String[] projection = new String[] { MediaStore.Audio.Playlists.Members.PLAY_ORDER, MediaStore.Audio.Playlists.Members._ID};
-        Cursor cursor = resolver.query(playlistUri, projection, null, null, null);
+//        String[] projection = new String[] { MediaStore.Audio.Playlists.Members.PLAY_ORDER, MediaStore.Audio.Playlists.Members._ID};
+        Cursor musicCursor = resolver.query(playlistUri, null/*projection*/, null, null, null);
+        String where = "_ID=?";
+        Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+//        Cursor musicCursor = resolver.query(musicUri, null, null, null, null);
 
         ArrayList<Song> songList = new ArrayList<Song>();
         do{
-            long thisID = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
-            long thisAlbumID = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
-            String thisTitle = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
-            String thisArtist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-            String thisAlbum = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
-            String thisDuration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
-            String thisFullPath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
+//            long songID = playlistCursor.getLong(playlistCursor.getColumnIndex(MediaStore.Audio.Playlists.Members._ID
+//            ));
+            long thisID = musicCursor.getLong(musicCursor.getColumnIndex(MediaStore.Audio.Media._ID));
+            long thisAlbumID = musicCursor.getLong(musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
+            String thisTitle = musicCursor.getString(musicCursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
+            String thisArtist = musicCursor.getString(musicCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
+            String thisAlbum = musicCursor.getString(musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
+            String thisDuration = musicCursor.getString(musicCursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
+            String thisFullPath = musicCursor.getString(musicCursor.getColumnIndex(MediaStore.Audio.Media.DATA));
             songList.add(new Song(thisID, thisAlbumID,thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
-        }while(cursor.moveToNext());
+        }while(musicCursor.moveToNext());
         return songList;
     }
 }
