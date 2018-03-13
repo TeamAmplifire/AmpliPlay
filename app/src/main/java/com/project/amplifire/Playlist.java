@@ -119,7 +119,7 @@ public class Playlist {
         }while(cursor.moveToNext());
         return recentSongs;
     }
-    public ArrayList<Song> getSongs(ContentResolver resolver, long playlistID){
+    public static ArrayList<Song> getSongs(ContentResolver resolver, long playlistID){
 
         Uri playlistUri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistID);
 //        String[] projection = new String[] { MediaStore.Audio.Playlists.Members.PLAY_ORDER, MediaStore.Audio.Playlists.Members._ID};
