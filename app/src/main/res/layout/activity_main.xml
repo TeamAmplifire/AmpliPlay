@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="com.project.amplifire.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/libraryToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         android:layout_weight="1"
         android:background="?attr/colorPrimaryDark"
         android:minHeight="?attr/actionBarSize"
@@ -20,15 +21,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/libraryToolbar"
+        tools:text="995 Songs" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/song_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/libraryToolbar"
-        app:layout_constraintVertical_bias="1.0" >
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
     </android.support.v7.widget.RecyclerView>
 
