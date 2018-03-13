@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/image_album_art"
@@ -16,6 +15,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/album_art_template" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorLight"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
 
     <TextView
         android:id="@+id/trackName"
@@ -108,10 +120,11 @@
         android:layout_height="wrap_content"
 
         android:layout_marginBottom="8dp"
+
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toStartOf="@+id/btnNext"
         app:layout_constraintStart_toEndOf="@+id/btnPrev"
         app:srcCompat="@drawable/ic_play_arrow_dark_50dp" />
@@ -149,11 +162,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_album_art" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <ImageButton
         android:id="@+id/btnPrev"

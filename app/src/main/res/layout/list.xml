@@ -15,23 +15,21 @@
 
         <TextView
             android:id="@+id/song_artist"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
+
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:ellipsize="end"
-            android:maxLength="20"
 
             android:maxLines="1"
             android:text="Artist"
             android:textColor="@color/textColor"
-
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/song_album"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/verticalListGuideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/song_title" />
 
@@ -39,15 +37,15 @@
             android:id="@+id/song_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginStart="16dp"
 
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
-            android:scrollHorizontally="true"
 
+            android:scrollHorizontally="true"
             android:singleLine="true"
             android:text="Title"
             android:textColor="@color/textColor"
@@ -59,14 +57,15 @@
 
         <TextView
             android:id="@+id/song_duration"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-
             android:layout_weight="1"
+
             android:ellipsize="end"
             android:maxLines="1"
             android:scrollHorizontally="true"
+            android:singleLine="true"
 
             android:text="4:20"
             android:textAlignment="viewEnd"
@@ -78,23 +77,25 @@
 
         <TextView
             android:id="@+id/song_album"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
 
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
+
             android:scrollHorizontally="true"
+            android:singleLine="true"
 
             android:text="Album"
             android:textAlignment="viewEnd"
             android:textColor="@color/textColor"
-
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/songOverflowButton"
+            app:layout_constraintStart_toStartOf="@+id/verticalListGuideline"
             app:layout_constraintTop_toBottomOf="@+id/song_duration" />
 
         <ImageButton
@@ -112,6 +113,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_more_vert_dark_45dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/verticalListGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
+
 
     </android.support.constraint.ConstraintLayout>
 
