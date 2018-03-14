@@ -38,12 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar libraryToolbar = findViewById(R.id.libraryToolbar);
         setSupportActionBar(libraryToolbar);
-
         String title = "AmpliPlay";
         SpannableString s = new SpannableString(title);
         s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(s);
-
         mSongView = findViewById(R.id.song_list);
         mSongArrayList = new ArrayList<Song>();
     }
@@ -60,7 +58,13 @@ public class MainActivity extends AppCompatActivity {
         });
         setList();
     }
-
+    @Override
+    protected void onPause(){
+        super.onPause();
+//        if(!mSongArrayList.isEmpty()){
+//            mSongArrayList.clear();
+//        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
@@ -79,15 +83,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-
-        if(!mSongArrayList.isEmpty()){
-            mSongArrayList.clear();
-        }
     }
     public void filter(String text){
         ArrayList<Song> temp = new ArrayList<Song>();
