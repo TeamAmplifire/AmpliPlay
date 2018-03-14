@@ -1,6 +1,7 @@
 package com.project.amplifire;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -129,6 +130,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     Toast.makeText(v.getContext(), "APPLY RINGTONE", Toast.LENGTH_SHORT).show();
                                     break;
                                 case R.id.rename:
+//                                    String newName;
+//                                    renameSong(currentSong.getMId(), newName);
                                     break;
                                 case R.id.info:
                                     break;
@@ -164,13 +167,14 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         String[] args = {Long.toString(id)};
         musicResolver.delete(musicUri, where, args);
     }
-    public void renameSong(Long id){
-
+    public void renameSong(Long id, String newName){
         ContentResolver musicResolver = mContext.getContentResolver();
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String where = "_ID?";
         String[] args = {Long.toString(id)};
-       // musicResolver.update();**********Karna hai abhi ye********Chedna mat************
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Audio.Media.TITLE, newName);
+        musicResolver.update(musicUri, values, where, args);
     }
     public int deleteTarget(String path) {
         File target = new File(path);

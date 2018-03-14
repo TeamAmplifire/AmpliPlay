@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
+    private Bundle mListState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +63,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-//        if(!mSongArrayList.isEmpty()){
-//            mSongArrayList.clear();
+//        @Override
+//        protected Parcelable onSaveInstanceState() {
+//            Bundle bundle = new Bundle();
+//            bundle.putParcelable(SAVED_LAYOUT_MANAGER, mSongView.getLayoutManager().onSaveInstanceState());
+//            return bundle;
+//        }
+        if(!mSongArrayList.isEmpty()){
+            mSongArrayList.clear();
+        }
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+//        @Override
+//        protected void onRestoreInstanceState(Parcelable state) {
+//            if (state instanceof Bundle) {
+//                layoutManagerSavedState = ((Bundle) state).getParcelable(SAVED_LAYOUT_MANAGER);
+//            }
+//            super.onRestoreInstanceState(state);
 //        }
     }
     @Override
