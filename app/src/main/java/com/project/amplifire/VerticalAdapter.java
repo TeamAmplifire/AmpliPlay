@@ -48,14 +48,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     public VerticalAdapter(ArrayList<com.project.amplifire.Song> theSongs) {
         mSongs = theSongs;
     }
-
     @Override
     public VerticalAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list, parent, false);
         return new MyViewHolder(itemView);
     }
-
     @Override
     public void onBindViewHolder(VerticalAdapter.MyViewHolder holder, final int position) {
 
@@ -142,17 +140,14 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             });
 
     }
-
     @Override
     public int getItemCount() {
         return mSongs.size();
     }
-
     public void updateList(ArrayList<Song> list){
         mSongs = list;
         notifyDataSetChanged();
     }
-
     public void play(Song currentSong, Context context){
         Intent intent = new Intent(context, Player.class);
         intent.putExtra("songID", currentSong.getMId());
@@ -162,7 +157,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         intent.putExtra("albumID", currentSong.getMAlbumId());
         context.startActivity(intent);
     }
-
     public void deleteFromContentProvider(Long id){
         ContentResolver musicResolver = mContext.getContentResolver();
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
@@ -170,7 +164,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         String[] args = {Long.toString(id)};
         musicResolver.delete(musicUri, where, args);
     }
-
     public void renameSong(Long id){
 
         ContentResolver musicResolver = mContext.getContentResolver();
@@ -179,7 +172,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         String[] args = {Long.toString(id)};
        // musicResolver.update();**********Karna hai abhi ye********Chedna mat************
     }
-
     public int deleteTarget(String path) {
         File target = new File(path);
 
