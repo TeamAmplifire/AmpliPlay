@@ -64,14 +64,6 @@ public class songListFragment extends Fragment
         if(rootView == null) {}
         else {
             mSongView = rootView.findViewById(R.id.song_list);
-            Collections.sort(mSongArrayList, new Comparator<Song>()
-            {
-                @Override
-                public int compare(Song o1, Song o2)
-                {
-                    return o1.getMTitle().compareTo(o2.getMTitle());
-                }
-            });
             setList();
         }
         setHasOptionsMenu(true);
@@ -185,6 +177,14 @@ public class songListFragment extends Fragment
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         songAdt = new VerticalAdapter(mSongArrayList);
         mSongView.setLayoutManager(mLinearLayoutManager);
+        Collections.sort(mSongArrayList, new Comparator<Song>()
+        {
+            @Override
+            public int compare(Song o1, Song o2)
+            {
+                return o1.getMTitle().compareTo(o2.getMTitle());
+            }
+        });
         mSongView.setAdapter(songAdt);
     }
 
@@ -198,6 +198,14 @@ public class songListFragment extends Fragment
                 temp.add(d);
             }
         }
+        Collections.sort(temp, new Comparator<Song>()
+        {
+            @Override
+            public int compare(Song o1, Song o2)
+            {
+                return o1.getMTitle().compareTo(o2.getMTitle());
+            }
+        });
         songAdt.updateList(temp);
     }
 
