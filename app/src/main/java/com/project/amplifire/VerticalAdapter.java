@@ -56,7 +56,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         return new MyViewHolder(itemView);
     }
     @Override
-    public void onBindViewHolder(VerticalAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(VerticalAdapter.MyViewHolder holder, final int position)
+    {
 
         final Song currentSong = mSongs.get(position);
         int songDurationInt = Integer.parseInt(currentSong.getMDuration());
