@@ -35,16 +35,12 @@ public class songListFragment extends Fragment
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
 
-    public songListFragment(){
-
-    }
+    public songListFragment(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mSongArrayList = new ArrayList<Song>();
-        getSongList();
     }
 
     @Override
@@ -53,13 +49,10 @@ public class songListFragment extends Fragment
         View rootView = inflater.inflate(R.layout.song_list_fragment, container, false);
         rootView.setTag(TAG);
 
-        if(rootView == null)
-        {
-            Log.d("AMP", "LUL");
-        }
-        else
-        {
-            Log.d("AMP", "NOT LUL");
+        mSongArrayList = new ArrayList<Song>();
+        getSongList();
+        if(rootView == null) {}
+        else {
             mSongView = rootView.findViewById(R.id.song_list);
             Collections.sort(mSongArrayList, new Comparator<Song>()
             {
@@ -78,6 +71,8 @@ public class songListFragment extends Fragment
     @Override
     public void onStart() {
         super.onStart();
+        mSongArrayList = new ArrayList<Song>();
+        getSongList();
     }
 
     @Override
@@ -153,7 +148,7 @@ public class songListFragment extends Fragment
         mSongView.setAdapter(songAdt);
     }
 
-    public void filter(String text)
+    public  void filter(String text)
     {
         ArrayList<Song> temp = new ArrayList<Song>();
         for (Song d : mSongArrayList)

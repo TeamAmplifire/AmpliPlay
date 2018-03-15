@@ -9,13 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private ArrayList<Song> mSongArrayList;
     private ViewPager mViewPager;
 
     @Override
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         SpannableString s = new SpannableString(title);
         s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(s);
-       // changeFragment(0);
         setupViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
     }
@@ -50,17 +50,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-//
-//        if(!mSongArrayList.isEmpty()){
-//            mSongArrayList.clear();
-//        }
-    }
+   }
     @Override
     protected void onResume(){
         super.onResume();
     }
 
-
+//
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.search_menu, menu);
@@ -81,5 +77,4 @@ public class MainActivity extends AppCompatActivity {
 //
 //        return super.onCreateOptionsMenu(menu);
 //    }
-
 }
