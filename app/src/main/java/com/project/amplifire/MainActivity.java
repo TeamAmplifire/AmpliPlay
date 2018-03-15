@@ -3,6 +3,7 @@ package com.project.amplifire;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,14 +25,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mViewPager = findViewById(R.id.viewPager);
+
         Toolbar libraryToolbar = findViewById(R.id.libraryToolbar);
         setSupportActionBar(libraryToolbar);
         String title = "AmpliPlay";
         SpannableString s = new SpannableString(title);
         s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         getSupportActionBar().setTitle(s);
+
         setupViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
+
+        TabLayout tabLayout = findViewById(R.id.library_tab_layout);
+        tabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override

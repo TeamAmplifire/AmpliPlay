@@ -15,22 +15,26 @@ public class FragmentAdapter extends FragmentStatePagerAdapter{
     private ArrayList<Fragment> mFragments = new ArrayList<Fragment>();
     private ArrayList<String> mTitleFragmentList = new ArrayList<String>();
 
-    public FragmentAdapter(FragmentManager fm) {
+    public FragmentAdapter(FragmentManager fm)
+    {
         super(fm);
     }
 
-    public void addFragment(Fragment fragment, String title){
+    public void addFragment(Fragment fragment, String title)
+    {
         mFragments.add(fragment);
         mTitleFragmentList.add(title);
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public Fragment getItem(int position)
+    {
         return mFragments.get(position);
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return mFragments.size();
     }
 
