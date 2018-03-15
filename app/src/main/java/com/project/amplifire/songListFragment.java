@@ -5,6 +5,7 @@ import android.Manifest;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,8 +14,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -48,7 +57,6 @@ public class songListFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.song_list_fragment, container, false);
         rootView.setTag(TAG);
-
         mSongArrayList = new ArrayList<Song>();
         getSongList();
         if(rootView == null) {}
@@ -64,6 +72,14 @@ public class songListFragment extends Fragment
             });
             setList();
         }
+        setHasOptionsMenu(true);
+        Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
+        ((MainActivity)getActivity()).setSupportActionBar(libraryToolbar);
+        String title = "AmpliPlay";
+        SpannableString s = new SpannableString(title);
+        s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(s);
+        libraryToolbar.inflateMenu(R.menu.search_menu);
 
         return rootView;
     }
@@ -159,5 +175,25 @@ public class songListFragment extends Fragment
             }
         }
         songAdt.updateList(temp);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return false;
+            }
+        });
     }
 }

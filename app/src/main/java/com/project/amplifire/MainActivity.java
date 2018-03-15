@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -26,16 +28,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mViewPager = findViewById(R.id.viewPager);
 
-        Toolbar libraryToolbar = findViewById(R.id.libraryToolbar);
-        setSupportActionBar(libraryToolbar);
-        String title = "AmpliPlay";
-        SpannableString s = new SpannableString(title);
-        s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        getSupportActionBar().setTitle(s);
-
         setupViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
-
+//        Toolbar libraryToolbar = findViewById(R.id.libraryToolbar);
+//        setSupportActionBar(libraryToolbar);
+//        String title = "AmpliPlay";
+//        SpannableString s = new SpannableString(title);
+//        s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        getSupportActionBar().setTitle(s);
         TabLayout tabLayout = findViewById(R.id.library_tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
     }
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-//
+
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.search_menu, menu);
