@@ -25,6 +25,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -36,13 +37,13 @@
         android:id="@+id/library_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/libraryToolbar"
-        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorColor="@color/colorAccent"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/colorPrimary">
+        app:tabSelectedTextColor="@color/colorAccent">
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"

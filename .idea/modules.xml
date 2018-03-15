@@ -4,8 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AmpliPlay.iml" filepath="$PROJECT_DIR$/AmpliPlay.iml" />
       <module fileurl="file://C:\Android Projects\Musioc\AmpliPlay.iml" filepath="C:\Android Projects\Musioc\AmpliPlay.iml" />
+      <module fileurl="file://C:\Android Projects\AmpliPlay\AmpliPlay.iml" filepath="C:\Android Projects\AmpliPlay\AmpliPlay.iml" />
       <module fileurl="file://C:\androidProjects\AmpliPlay\Musioc.iml" filepath="C:\androidProjects\AmpliPlay\Musioc.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Android Projects\AmpliPlay\app\app.iml" filepath="C:\Android Projects\AmpliPlay\app\app.iml" />
     </modules>
   </component>
 </project>
