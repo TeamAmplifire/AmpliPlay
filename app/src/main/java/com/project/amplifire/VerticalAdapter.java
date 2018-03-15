@@ -153,10 +153,18 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     }
     public void play(Song currentSong, Context context){
         Intent intent = new Intent(context, Player.class);
+        String artist = currentSong.getMArtist();
+        String album = currentSong.getMAlbum();
+        if(artist.equals("<unknown>")){
+            artist = "";
+        }
+        if(album.equals("<unknown>")){
+            album = "";
+        }
         intent.putExtra("songID", currentSong.getMId());
         intent.putExtra("track",currentSong.getMTitle());
-        intent.putExtra("album",currentSong.getMAlbum());
-        intent.putExtra("artist",currentSong.getMArtist());
+        intent.putExtra("album",album);
+        intent.putExtra("artist",artist);
         intent.putExtra("albumID", currentSong.getMAlbumId());
         context.startActivity(intent);
     }

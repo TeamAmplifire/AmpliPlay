@@ -93,19 +93,19 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
         Bitmap artwork = BitmapFactory.decodeStream(in);
 
-        albumN = findViewById(R.id.albumName);
-        albumN.setText(album);
-        albumN.setSelected(true);
-
+        if(album != null) {
+            albumN = findViewById(R.id.albumName);
+            albumN.setText(album);
+            albumN.setSelected(true);
+        }
         trackN = findViewById(R.id.trackName);
+        artistN = findViewById(R.id.artistName);
+        albumImage = findViewById(R.id.image_album_art);
+
         trackN.setText(track);
         trackN.setSelected(true);
-
-        artistN = findViewById(R.id.artistName);
         artistN.setText(artist);
         artistN.setSelected(true);
-
-        albumImage = findViewById(R.id.image_album_art);
         albumImage.requestFocus();
         albumImage.setImageResource(R.drawable.album_art_template);
         if(artwork != null) {

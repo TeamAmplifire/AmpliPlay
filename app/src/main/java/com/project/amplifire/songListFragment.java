@@ -3,6 +3,7 @@ package com.project.amplifire;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -113,33 +115,29 @@ public class songListFragment extends Fragment
         outState.putParcelable(SAVED_LAYOUT_MANAGER, mSongView.getLayoutManager().onSaveInstanceState());
     }
 
-    public void getSongList()
-    {
+    public void getSongList() {
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED)
-        {
+                != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(getActivity() ,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
         }
         ContentResolver musicResolver = getActivity().getContentResolver();
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor musicCursor = null;
-        try{
+        try {
             musicCursor = musicResolver.query(musicUri, null, null, null, null);
-
-
-            if(musicCursor != null && musicCursor.moveToFirst()){
+            if (musicCursor != null && musicCursor.moveToFirst()) {
                 int titleColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
-                int idColumn  = musicCursor.getColumnIndex(MediaStore.Audio.Media._ID);
+                int idColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media._ID);
                 int artistColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
                 int albumColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM);
-                int albumIDColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID); //Added by titan
-                int durationColumn  = musicCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
+                int albumIDColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
+                int durationColumn = musicCursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
                 int fullPathColumn = (musicCursor.getColumnIndex(MediaStore.Audio.Media.DATA));
-                do{
+                do {
                     long thisID = musicCursor.getLong(idColumn);
                     long thisAlbumID = musicCursor.getLong(albumIDColumn);
                     String thisTitle = musicCursor.getString(titleColumn);
@@ -147,15 +145,41 @@ public class songListFragment extends Fragment
                     String thisAlbum = musicCursor.getString(albumColumn);
                     String thisDuration = musicCursor.getString(durationColumn);
                     String thisFullPath = musicCursor.getString(fullPathColumn);
-                    mSongArrayList.add(new Song(thisID, thisAlbumID,thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
-                }while(musicCursor.moveToNext());
-            }
-        }catch(Exception exception){
-            if(musicCursor != null) {
-                musicCursor.close();
+                    if (thisArtist.equals("<unknown>")) {
+                        ContentValues values = new ContentValues();
+                        values.put(MediaStore.Audio.Media.ARTIST, "");
+                        String where = "_ID=?";
+                        musicResolver.update(musicUri, values, where, new String[]{Long.toString(thisID)});
+//                        thisArtist = "";
+                    }
+                    File file = new File(thisFullPath);
+                    String fileParent = file.getParent();
+                    File parentFile = new File(fileParent);
+                    String folderName = parentFile.getName();
+                    if(thisAlbum.equals(folderName)){
+                        ContentValues values = new ContentValues();
+                        values.put(MediaStore.Audio.Media.ALBUM, "");
+                        String where = "_ID=?";
+                        musicResolver.update(musicUri, values, where, new String[]{Long.toString(thisID)});
+//                        thisAlbum = "";
+                    }
+                    if(thisArtist.equals("<unknown>")){
+                        thisArtist = "";
+                    }
+                    if(thisAlbum.equals("<unknown>")){
+                        thisAlbum = "";
+                    }
+                    mSongArrayList.add(new Song(thisID, thisAlbumID, thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
+                } while (musicCursor.moveToNext());
             }
         }
-    }
+            catch(Exception exception){
+                if (musicCursor != null) {
+                    musicCursor.close();
+                }
+            }
+        }
+
     public void setList()
     {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
