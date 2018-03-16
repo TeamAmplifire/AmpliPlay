@@ -6,190 +6,233 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ImageView
-        android:id="@+id/image_album_art"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/albumLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/album_art_template" />
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorLight"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline" />
-
-    <TextView
-        android:id="@+id/trackName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:freezesText="true"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-
-        android:text="Title"
-        android:textColor="@color/textColor"
-        android:textSize="14sp"
-
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/artistName"
+        app:layout_constraintBottom_toTopOf="@id/albumartPlayerSeparator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/media_progress"
-        app:layout_constraintVertical_bias="0.35000002" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/albumName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/imageButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_shuffle_dark" />
 
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:freezesText="true"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
+        <ImageButton
+            android:id="@+id/imageButton2"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_repeat_dark" />
 
-        android:text="Album"
-        android:textColor="@color/textColor"
-        android:textSize="14sp"
-
-        app:layout_constraintBottom_toTopOf="@+id/artistName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/trackName" />
-
-    <TextView
-        android:id="@+id/player_end_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="4:20"
-        android:textColor="@color/textColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/media_progress" />
-
-    <TextView
-        android:id="@+id/artistName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-
-        android:freezesText="true"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:paddingLeft="15dip"
-        android:paddingRight="15dip"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:text="Artist"
-        android:textColor="@color/textColor"
-        android:textSize="14sp"
-
-        app:layout_constraintBottom_toTopOf="@+id/btnPlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/albumName" />
-
-    <ImageButton
-        android:id="@+id/btnPlay"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginBottom="8dp"
-
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toStartOf="@+id/btnNext"
-        app:layout_constraintStart_toEndOf="@+id/btnPrev"
-        app:srcCompat="@drawable/ic_play_arrow_dark" />
-
-    <TextView
-        android:id="@+id/time_current"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="0:00"
-        android:textColor="@color/textColor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/media_progress" />
-
-    <ImageButton
-        android:id="@+id/btnNext"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-
-        android:minHeight="0dp"
-
-        android:minWidth="0dp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnPlay"
-        app:srcCompat="@drawable/ic_skip_next_dark" />
-
-    <SeekBar
-        android:id="@+id/media_progress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
-
-    <ImageButton
-        android:id="@+id/btnPrev"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-
-        android:contentDescription="previous_button"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPlay"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_skip_previous_dark" />
+        <ImageView
+            android:id="@+id/image_album_art"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/album_art_template" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/albumartPlayerSeparator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="248dp" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/controlsLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumartPlayerSeparator">
+
+        <TextView
+            android:id="@+id/artistName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
+            android:freezesText="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="Artist"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+
+            app:layout_constraintBottom_toTopOf="@+id/btnPlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumName" />
+
+        <TextView
+            android:id="@+id/albumName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+
+            android:text="Album"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+
+            app:layout_constraintBottom_toTopOf="@+id/artistName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/trackName" />
+
+        <ImageButton
+            android:id="@+id/btnPlay"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnNext"
+            app:layout_constraintStart_toEndOf="@+id/btnPrev"
+            app:layout_constraintTop_toTopOf="@+id/buttonsGuidelineTop"
+            app:srcCompat="@drawable/ic_play_circle_filled" />
+
+        <ImageButton
+            android:id="@+id/btnPrev"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+
+            android:layout_marginTop="8dp"
+            android:contentDescription="previous_button"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/controlsLayout"
+            app:layout_constraintEnd_toStartOf="@+id/btnPlay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/buttonsGuidelineTop"
+            app:srcCompat="@drawable/ic_skip_previous_dark" />
+
+        <TextView
+            android:id="@+id/player_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="4:20"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/media_progress" />
+
+        <TextView
+            android:id="@+id/time_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="0:00"
+            android:textColor="@color/textColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/media_progress" />
+
+        <TextView
+            android:id="@+id/trackName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+
+            android:text="Title"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/artistName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/media_progress"
+            app:layout_constraintVertical_bias="0.35000002" />
+
+        <SeekBar
+            android:id="@+id/media_progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+
+            android:layout_marginTop="8dp"
+
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnPlay"
+            app:layout_constraintTop_toTopOf="@+id/buttonsGuidelineTop"
+            app:srcCompat="@drawable/ic_skip_next_dark" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/buttonsGuidelineTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="160dp" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

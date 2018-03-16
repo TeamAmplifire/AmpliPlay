@@ -180,7 +180,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private void play() {
         btnPlay = findViewById(R.id.btnPlay);
         btnPlay.requestFocus();
-        btnPlay.setImageResource(R.drawable.ic_pause_dark);
+        btnPlay.setImageResource(R.drawable.ic_pause_circle_filled);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -195,10 +195,10 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         player.setPlayWhenReady(play);
         if(isPlaying){
             setProgress();
-            btnPlay.setImageResource(R.drawable.ic_pause_dark);
+            btnPlay.setImageResource(R.drawable.ic_pause_circle_filled);
         }else{
             setProgress();
-            btnPlay.setImageResource(R.drawable.ic_play_arrow_dark);
+            btnPlay.setImageResource(R.drawable.ic_play_circle_filled);
         }
     }
 
