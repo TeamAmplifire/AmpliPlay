@@ -58,9 +58,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         return new MyViewHolder(itemView);
     }
     @Override
-    public void onBindViewHolder(VerticalAdapter.MyViewHolder holder, final int position)
+    public void onBindViewHolder(final VerticalAdapter.MyViewHolder holder, final int position)
     {
-
         final Song currentSong = mSongs.get(position);
         int songDurationInt = Integer.parseInt(currentSong.getMDuration());
         String songDurationString;
@@ -90,7 +89,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
             holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
         }
-        else{
+        else {
             holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorText));
             holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorText));
             holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
@@ -99,8 +98,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
-                                                   play(currentSong, mContext);
-                                               }
+                                                       holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                                       holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                                       holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                                       holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                                       play(currentSong, mContext);
+                                                   }
                                            });
         holder.songOverflowButton.setOnClickListener(new View.OnClickListener() {
                 @Override

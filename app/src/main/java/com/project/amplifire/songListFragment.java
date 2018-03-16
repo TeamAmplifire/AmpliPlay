@@ -27,6 +27,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -85,7 +86,6 @@ public class songListFragment extends Fragment
     @Override
     public void onPause(){
         super.onPause();
-
         if(!mSongArrayList.isEmpty()){
             mSongArrayList.clear();
         }
@@ -166,7 +166,6 @@ public class songListFragment extends Fragment
                 }
             }
         }
-
     public void setList()
     {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
