@@ -82,7 +82,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:text="Artist"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorText"
             android:textSize="14sp"
 
             app:layout_constraintBottom_toTopOf="@+id/btnPlay"
@@ -106,7 +106,7 @@
             android:singleLine="true"
 
             android:text="Album"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorText"
             android:textSize="14sp"
 
             app:layout_constraintBottom_toTopOf="@+id/artistName"
@@ -167,7 +167,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="0:00"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/media_progress" />
 
@@ -187,7 +187,7 @@
             android:singleLine="true"
 
             android:text="Title"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorText"
             android:textSize="14sp"
 
             android:textStyle="bold"

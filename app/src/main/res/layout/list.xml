@@ -26,7 +26,7 @@
 
             android:maxLines="1"
             android:text="Artist"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorText"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/verticalListGuideline"
@@ -48,7 +48,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:text="Title"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorText"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/song_duration"
@@ -69,7 +69,7 @@
 
             android:text="4:20"
             android:textAlignment="viewEnd"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorText"
 
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/songOverflowButton"
@@ -91,7 +91,7 @@
 
             android:text="Album"
             android:textAlignment="viewEnd"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorText"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/songOverflowButton"
