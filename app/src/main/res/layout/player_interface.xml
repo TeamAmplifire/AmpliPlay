@@ -139,7 +139,7 @@
             android:layout_marginBottom="16dp"
 
             android:layout_marginTop="8dp"
-            android:contentDescription="previous_button"
+            android:contentDescription="@string/previous_button"
             android:minHeight="0dp"
             android:minWidth="0dp"
             android:padding="10dp"

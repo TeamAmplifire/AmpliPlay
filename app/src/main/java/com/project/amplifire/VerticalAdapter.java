@@ -1,5 +1,6 @@
 package com.project.amplifire;
 
+import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -61,6 +62,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     {
         final int tempPosition = holder.getAdapterPosition();
         final Song currentSong = mSongs.get(tempPosition);
+        final FragmentManager fm = ((MainActivity)mContext).getFragmentManager();
         int songDurationInt = Integer.parseInt(currentSong.getMDuration());
         String songDurationString;
         songDurationInt /= 1000;
@@ -95,6 +97,16 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
             holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
         }
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                DFragment.setMSong(currentSong);
+                DFragment dFragment = new DFragment();
+//                dFragment.setMSong(currentSong);
+                dFragment.show(fm, "Song info activity");
+                return true;
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
