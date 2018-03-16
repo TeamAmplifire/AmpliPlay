@@ -61,11 +61,8 @@ public class songListFragment extends Fragment
         rootView.setTag(TAG);
         mSongArrayList = new ArrayList<Song>();
         getSongList();
-        if(rootView == null) {}
-        else {
-            mSongView = rootView.findViewById(R.id.song_list);
-            setList();
-        }
+        mSongView = rootView.findViewById(R.id.song_list);
+        setList();
         setHasOptionsMenu(true);
         Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
         ((MainActivity)getActivity()).setSupportActionBar(libraryToolbar);
@@ -142,7 +139,6 @@ public class songListFragment extends Fragment
                         values.put(MediaStore.Audio.Media.ARTIST, "");
                         String where = "_ID=?";
                         musicResolver.update(musicUri, values, where, new String[]{Long.toString(thisID)});
-//                        thisArtist = "";
                     }
                     File file = new File(thisFullPath);
                     String fileParent = file.getParent();
@@ -153,7 +149,6 @@ public class songListFragment extends Fragment
                         values.put(MediaStore.Audio.Media.ALBUM, "");
                         String where = "_ID=?";
                         musicResolver.update(musicUri, values, where, new String[]{Long.toString(thisID)});
-//                        thisAlbum = "";
                     }
                     if(thisArtist.equals("<unknown>")){
                         thisArtist = "";

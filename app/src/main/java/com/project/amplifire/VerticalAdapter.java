@@ -5,8 +5,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -76,12 +78,24 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                 songDurationString = songDurationInt / 60 + ":" + songDurationInt % 60;
             }
         }
-
         holder.titleView.setText(currentSong.getMTitle());
         holder.artistView.setText(currentSong.getMArtist());
         holder.albumView.setText(currentSong.getMAlbum());
         holder.durationView.setText(songDurationString);
         holder.itemView.setTag(position);
+        if(currentSong.getMId() == Player.getCurrentSongID())
+        {
+            holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+            holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+            holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+            holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+        }
+        else{
+            holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
@@ -153,6 +167,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         notifyDataSetChanged();
     }
     public void play(Song currentSong, Context context){
+
         Intent intent = new Intent(context, Player.class);
         String artist = currentSong.getMArtist();
         String album = currentSong.getMAlbum();
@@ -193,7 +208,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             notifyDataSetChanged();
             return 0;
         }
-
         else if(target.exists() && target.isDirectory() && target.canRead()) {
             String[] file_list = target.list();
 

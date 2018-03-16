@@ -30,14 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         setupViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
-
-//        Toolbar libraryToolbar = findViewById(R.id.libraryToolbar);
-//        setSupportActionBar(libraryToolbar);
-//        String title = "AmpliPlay";
-//        SpannableString s = new SpannableString(title);
-//        s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        getSupportActionBar().setTitle(s);
-
         TabLayout tabLayout = findViewById(R.id.library_tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
     }
@@ -63,26 +55,4 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.search_menu, menu);
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                filter(newText);
-//                return false;
-//            }
-//        });
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
 }

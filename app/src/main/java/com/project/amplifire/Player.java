@@ -68,6 +68,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private ImageButton btnNext;
     private ImageButton btnPrev;
     private ImageView albumImage;
+    private static long currentsongID;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +79,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         String track = (String)message.get("track");
         String album = (String) message.get("album");
         String artist = (String) message.get("artist");
+        currentsongID = currSong;
 
         trackUri = ContentUris.withAppendedId(
                 android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, currSong);
@@ -326,6 +328,9 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     @Override
     public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
 
+    }
+    public static long  getCurrentSongID(){
+        return currentsongID;
     }
 
 }

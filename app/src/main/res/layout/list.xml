@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="#fff"
     android:onClick="songPicked"
+    android:duplicateParentState="true"
     android:orientation="horizontal">
 
     <android.support.constraint.ConstraintLayout
