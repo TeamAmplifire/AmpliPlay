@@ -12,7 +12,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColorPrimary">@color/textColor</item>
+        <item name="android:textColorPrimary">@color/colorText</item>
         <item name="android:textColorPrimaryInverse">@color/colorLight</item>
     </style>
 
@@ -20,7 +20,12 @@
         <item name="android:textColorPrimary">@color/colorLight</item>
     </style>
 
-    <style name="AmpliFire_Light_New" parent="AppTheme" />
+    <style name="AmpliFire_Light_New" parent="AppTheme" >
+        <item name="colorPrimary">@color/alt_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/alt_colorPrimaryDark</item>
+        <item name="colorAccent">@color/alt_colorAccent</item>
+        <item name="android:colorBackground">@color/alt_colorLight</item>
+    </style>
 
     <style name="Theme.AppTheme.DayNight.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar" />
 

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="alt_colorPrimary">#34495e</color>
+    <color name="alt_colorPrimaryDark">#2c3e50</color>
+    <color name="alt_colorAccent">#12cbc4</color>
+    <color name="alt_colorLight">#ecf0f1</color>
+    <color name="alt_colorText">#2c3e50</color>
+
     <color name="colorPrimary">#ecf0f1</color>
     <color name="colorPrimaryDark">#B53471</color>
     <color name="colorAccent">#ED4C67</color>

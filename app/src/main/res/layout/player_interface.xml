@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorLight">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/albumLayout"
@@ -48,7 +48,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/album_art_template" />
+            app:srcCompat="@drawable/album_art_template_alt2" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.Guideline
