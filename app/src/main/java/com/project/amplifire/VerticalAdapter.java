@@ -5,10 +5,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -48,7 +47,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         }
     }
 
-    public VerticalAdapter(ArrayList<com.project.amplifire.Song> theSongs) {
+    VerticalAdapter(ArrayList<com.project.amplifire.Song> theSongs) {
         mSongs = theSongs;
     }
     @Override
@@ -58,9 +57,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         return new MyViewHolder(itemView);
     }
     @Override
-    public void onBindViewHolder(final VerticalAdapter.MyViewHolder holder, final int position)
+    public void onBindViewHolder(final VerticalAdapter.MyViewHolder holder, int position)
     {
-        final Song currentSong = mSongs.get(position);
+        final int tempPosition = holder.getAdapterPosition();
+        final Song currentSong = mSongs.get(tempPosition);
         int songDurationInt = Integer.parseInt(currentSong.getMDuration());
         String songDurationString;
         songDurationInt /= 1000;
@@ -81,7 +81,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         holder.artistView.setText(currentSong.getMArtist());
         holder.albumView.setText(currentSong.getMAlbum());
         holder.durationView.setText(songDurationString);
-        holder.itemView.setTag(position);
+        holder.itemView.setTag(tempPosition);
         if(currentSong.getMId() == Player.getCurrentSongID())
         {
             holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
@@ -126,7 +126,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
                                                     if (deleteTarget(currentSong.getMFullPath()) != 0){
-                                                        mSongs.remove(position);
+                                                        mSongs.remove(tempPosition);
                                                         deleteFromContentProvider(currentSong.getMId());
                                                         Toast.makeText(v.getContext(), "Song Deleted", Toast.LENGTH_SHORT).show();
                                                     }
