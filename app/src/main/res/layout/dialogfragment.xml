@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:minWidth="350dp"
+    android:minHeight="350dp"
     android:background="@color/colorAccent"
-    android:layout_height="320dp">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/album_art_view"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="wrap_content"
+        android:minHeight="300dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/album_art"
         android:scaleType="centerCrop"
@@ -112,7 +113,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/f_songOverflowButton"
             app:layout_constraintStart_toStartOf="@+id/verticalListGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/song_duration" />
+            app:layout_constraintTop_toBottomOf="@+id/f_song_duration" />
 
         <ImageButton
             android:id="@+id/f_songOverflowButton"

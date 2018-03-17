@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,6 +48,11 @@ public class DFragment extends DialogFragment {
 
         final View rootView = inflater.inflate(R.layout.dialogfragment, container,
                 false);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int height = displayMetrics.heightPixels;
+//        int width = displayMetrics.widthPixels;
+//        getDialog().getWindow().setLayout(width, height);
         TextView artistView = rootView.findViewById(R.id.f_song_artist);
         artistView.setSelected(true);
         TextView albumView = rootView.findViewById(R.id.f_song_album);
@@ -58,10 +64,25 @@ public class DFragment extends DialogFragment {
         ImageButton overflowMenuInflater = rootView.findViewById(R.id.f_songOverflowButton);
         ImageView albumImage = rootView.findViewById(R.id.album_art_view);
         FloatingActionButton floatingActionButton = rootView.findViewById(R.id.fab);
-        String artist = mSong.getMArtist();
-        artistView.setText(artist);
+        int songDurationInt = Integer.parseInt(mSong.getMDuration());
+        String songDurationString;
+        songDurationInt /= 1000;
+        if (songDurationInt >= 3600 && songDurationInt <= 86400) {
+            if (songDurationInt%60 < 10) {
+                songDurationString = songDurationInt / 3600 + ":0" + songDurationInt / 60 + ":" + songDurationInt % 60;
+            }else{
+                songDurationString = songDurationInt / 3600 + ":" + songDurationInt / 60 + ":" + songDurationInt % 60;
+            }
+        }else {
+            if(songDurationInt%60 < 10){
+                songDurationString = songDurationInt / 60 + ":0" + songDurationInt % 60;
+            }else{
+                songDurationString = songDurationInt / 60 + ":" + songDurationInt % 60;
+            }
+        }
+        artistView.setText(mSong.getMArtist());
         albumView.setText(mSong.getMAlbum());
-        durationView.setText(mSong.getMDuration());
+        durationView.setText(songDurationString);
         titleView.setText(mSong.getMTitle());
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
         Uri uri = ContentUris.withAppendedId(sArtworkUri, mSong.getMAlbumId());
