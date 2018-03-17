@@ -9,12 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -81,6 +81,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         setContentView(R.layout.player_interface);
         Bundle message = getIntent().getExtras();
         position = (Integer) message.get("position");
+        Log.v("player",position+"");
         songArray = VerticalAdapter.getSongsList();
         Song currentSong = songArray.get(position);
 
@@ -110,18 +111,17 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 repeat_clickCount %=3;
                 switch (repeat_clickCount)
                 {
-                    case 1:
-                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_off);
-                        onRepeatModeChanged(0);
-                        break;
-                    case 2:
-                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_all);
+                    case 0:
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_dark);
                         onRepeatModeChanged(1);
                         break;
-                    case 3:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_dark);
+                    case 1:
+                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_all);
                         onRepeatModeChanged(2);
-                        Toast.makeText(Player.this, "Repeat Off", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_off);
+                        onRepeatModeChanged(3);
                         break;
                 }
             }
@@ -330,13 +330,13 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
         switch (repeatMode) {
             case 1:
-                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_OFF);
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
                 break;
             case 2:
                 player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ALL);
                 break;
             case 3:
-                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_OFF);
                 break;
         }
     }
