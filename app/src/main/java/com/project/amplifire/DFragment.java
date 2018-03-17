@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,13 +33,15 @@ public class DFragment extends DialogFragment {
 
     private static Song mSong;
     private PopupMenu mPopupMenu;
+    private static int mPosition;
 
     public DFragment() {
         super();
     }
 
-    public static void setMSong(Song song){
+    public static void setMSong(Song song, int position){
         mSong = song;
+        mPosition = position;
     }
     @Nullable
     @Override
@@ -48,11 +49,6 @@ public class DFragment extends DialogFragment {
 
         final View rootView = inflater.inflate(R.layout.dialogfragment, container,
                 false);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-//        int height = displayMetrics.heightPixels;
-//        int width = displayMetrics.widthPixels;
-//        getDialog().getWindow().setLayout(width, height);
         TextView artistView = rootView.findViewById(R.id.f_song_artist);
         artistView.setSelected(true);
         TextView albumView = rootView.findViewById(R.id.f_song_album);
@@ -101,7 +97,7 @@ public class DFragment extends DialogFragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                play(mSong, rootView.getContext());
+                play(rootView.getContext(), mPosition);
             }
         });
         overflowMenuInflater.setOnClickListener(new View.OnClickListener() {
@@ -130,22 +126,10 @@ public class DFragment extends DialogFragment {
 
         return rootView;
     }
-    public void play(Song currentSong, Context context){
+    public void play(Context context, int position){
 
         Intent intent = new Intent(context, Player.class);
-        String artist = currentSong.getMArtist();
-        String album = currentSong.getMAlbum();
-        if(artist.equals("<unknown>")){
-            artist = "";
-        }
-        if(album.equals("<unknown>")){
-            album = "";
-        }
-        intent.putExtra("songID", currentSong.getMId());
-        intent.putExtra("track",currentSong.getMTitle());
-        intent.putExtra("album",album);
-        intent.putExtra("artist",artist);
-        intent.putExtra("albumID", currentSong.getMAlbumId());
+        intent.putExtra("position", position);
         context.startActivity(intent);
     }
 

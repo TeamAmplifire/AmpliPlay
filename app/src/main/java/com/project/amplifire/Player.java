@@ -64,7 +64,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private ExtractorsFactory extractorsFactory;
     private MediaSource mediaSource;
     private TrackSelection.Factory trackSelectionFactory;
-    private SimpleExoPlayer player;
+    private static SimpleExoPlayer player;
     private Uri trackUri;
     private ImageButton btnNext,btnPrev,btnPlay,btnShuffle,btnRepeat;
     private ImageView albumImage;
@@ -159,17 +159,16 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         btnPrev.requestFocus();
         btnPrev.setImageResource(R.drawable.ic_skip_previous_dark);
         btnPrev.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-//                                            onPositionDiscontinuity(position);
-                                            player.stop();
-                                            position--;
-                                            Song newSong = songArray.get(position);
-                                            updateUI(newSong);
-                                            player.setPlayWhenReady(true);
-                                        }
-                                    }
-        );
+            @Override
+            public void onClick(View view) {
+                player.stop();
+//                VerticalAdapter.setPreviousSongPosition(position);
+                position--;
+                Song newSong = songArray.get(position);
+                updateUI(newSong);
+                player.setPlayWhenReady(true);
+            }
+        });
     }
 
     private void next() {
@@ -179,8 +178,8 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(Player.this, "Next Song", Toast.LENGTH_SHORT).show();
                 player.stop();
+//                VerticalAdapter.setPreviousSongPosition(position);
                 position++;
                 Song newSong = songArray.get(position);
                 updateUI(newSong);
@@ -456,5 +455,8 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
         player.prepare(mediaSource);
         controls();
+    }
+    public static void stopCurrentSong(){
+        player.stop();
     }
 }
