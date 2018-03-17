@@ -12,10 +12,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -27,6 +32,8 @@ import java.io.InputStream;
 public class DFragment extends DialogFragment {
 
     private static Song mSong;
+    private PopupMenu mPopupMenu;
+
     public DFragment() {
         super();
     }
@@ -48,8 +55,9 @@ public class DFragment extends DialogFragment {
         durationView.setSelected(true);
         TextView titleView = rootView.findViewById(R.id.f_song_title);
         titleView.setSelected(true);
+        ImageButton overflowMenuInflater = rootView.findViewById(R.id.f_songOverflowButton);
         ImageView albumImage = rootView.findViewById(R.id.album_art_view);
-        FloatingActionButton floatingActionButton = getActivity().findViewById(R.id.fab);
+        FloatingActionButton floatingActionButton = rootView.findViewById(R.id.fab);
         String artist = mSong.getMArtist();
         artistView.setText(artist);
         albumView.setText(mSong.getMAlbum());
@@ -69,12 +77,35 @@ public class DFragment extends DialogFragment {
         if(artwork != null) {
             albumImage.setImageBitmap(artwork);
         }
-//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                play(mSong, rootView.getContext());
-//            }
-//        });
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                play(mSong, rootView.getContext());
+            }
+        });
+        overflowMenuInflater.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                mPopupMenu = new PopupMenu(v.getContext(), v);
+                MenuInflater menuInflater = mPopupMenu.getMenuInflater();
+                menuInflater.inflate(R.menu.d_fragment_overflow_menu, mPopupMenu.getMenu());
+                mPopupMenu.show();
+                mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch(item.getItemId()){
+                            case R.id.f_enqueue:
+                                Toast.makeText(v.getContext(), "Enqueue", Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.f_add_to_playlist:
+                                Toast.makeText(v.getContext(), "Add to playlist", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+            }
+        });
 
         return rootView;
     }
