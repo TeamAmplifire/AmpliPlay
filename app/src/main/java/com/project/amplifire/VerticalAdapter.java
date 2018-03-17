@@ -147,7 +147,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     builder.setMessage("Are you sure you want to delete this song?")
                                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    if (deleteTarget(currentSong.getMFullPath()) != 0){
+                                                    if (deleteTarget(currentSong.getMFullPath()) == 0){
                                                         mSongs.remove(tempPosition);
                                                         deleteFromContentProvider(currentSong.getMId());
                                                         Toast.makeText(v.getContext(), "Song Deleted", Toast.LENGTH_SHORT).show();
