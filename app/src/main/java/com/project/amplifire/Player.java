@@ -14,7 +14,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -68,7 +67,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private Uri trackUri;
     private ImageButton btnNext,btnPrev,btnPlay,btnShuffle,btnRepeat;
     private ImageView albumImage;
-    int repeat_clickCount =0;
+    int repeat_clickCount = 0;
     int shuffle_clickCounter =0;
     int position;
     ArrayList<Song> songArray;
@@ -110,18 +109,17 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 repeat_clickCount %=3;
                 switch (repeat_clickCount)
                 {
-                    case 1:
+                    case 0:
                         btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
                         onRepeatModeChanged(0);
                         break;
-                    case 2:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_enabled);
+                    case 1:
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_enabled);
                         onRepeatModeChanged(1);
                         break;
-                    case 3:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_enabled);
+                    case 2:
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_enabled);
                         onRepeatModeChanged(2);
-                        Toast.makeText(Player.this, "Repeat Off", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -328,14 +326,14 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     public void onRepeatModeChanged(int repeatMode) {
 
         switch (repeatMode) {
-            case 1:
+            case 0:
                 player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_OFF);
+                break;
+            case 1:
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
                 break;
             case 2:
                 player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ALL);
-                break;
-            case 3:
-                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
                 break;
         }
     }
