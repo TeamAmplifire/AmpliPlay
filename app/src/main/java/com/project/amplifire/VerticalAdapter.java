@@ -30,14 +30,14 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     private Context mContext;
     private ArrayList<MyViewHolder> holders;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
         TextView artistView;
         TextView albumView;
         TextView durationView;
         ImageButton songOverflowButton;
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             titleView = itemView.findViewById(R.id.song_title);
             artistView = itemView.findViewById(R.id.song_artist);
@@ -187,18 +187,18 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     public int getItemCount() {
         return mSongs.size();
     }
-    public void updateList(ArrayList<Song> list){
+    void updateList(ArrayList<Song> list){
         mSongs = list;
         notifyDataSetChanged();
     }
-    public void play(Context context, int position){
+    private void play(Context context, int position){
 
         Intent intent = new Intent(context, Player.class);
         intent.putExtra("position", position);
 
         context.startActivity(intent);
     }
-    public void deleteFromContentProvider(Long id){
+    private void deleteFromContentProvider(Long id){
         ContentResolver musicResolver = mContext.getContentResolver();
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String where = "_ID=?";
@@ -214,7 +214,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         values.put(MediaStore.Audio.Media.TITLE, newName);
         musicResolver.update(musicUri, values, where, args);
     }
-    public int deleteTarget(String path) {
+    private int deleteTarget(String path) {
         File target = new File(path);
 
         if(target.exists() && target.isFile() && target.canWrite()) {
@@ -250,10 +250,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         }
         return -1;
     }
-    public static ArrayList<Song> getSongsList(){
+    static ArrayList<Song> getSongsList(){
         return mSongs;
     }
-    public void setColor(){
+    private void setColor(){
         for(int i=0; i<holders.size(); i++){
             holders.get(i).artistView.setTextColor(mContext.getResources().getColor(R.color.colorText));
             holders.get(i).titleView.setTextColor(mContext.getResources().getColor(R.color.colorText));
