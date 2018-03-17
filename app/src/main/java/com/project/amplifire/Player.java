@@ -9,12 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -81,7 +81,6 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         setContentView(R.layout.player_interface);
         Bundle message = getIntent().getExtras();
         position = (Integer) message.get("position");
-        Log.v("player",position+"");
         songArray = VerticalAdapter.getSongsList();
         Song currentSong = songArray.get(position);
 
@@ -103,7 +102,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
         btnRepeat = findViewById(R.id.repeat);
         btnRepeat.requestFocus();
-        btnRepeat.setImageResource(R.drawable.ic_repeat_dark);
+        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
         btnRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,17 +110,18 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 repeat_clickCount %=3;
                 switch (repeat_clickCount)
                 {
-                    case 0:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_dark);
-                        onRepeatModeChanged(1);
-                        break;
                     case 1:
-                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_all);
-                        onRepeatModeChanged(2);
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
+                        onRepeatModeChanged(0);
                         break;
                     case 2:
-                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_off);
-                        onRepeatModeChanged(3);
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_enabled);
+                        onRepeatModeChanged(1);
+                        break;
+                    case 3:
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_enabled);
+                        onRepeatModeChanged(2);
+                        Toast.makeText(Player.this, "Repeat Off", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -132,7 +132,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private void shuffle() {
         btnShuffle = findViewById(R.id.shuffle);
         btnShuffle.requestFocus();
-        btnShuffle.setImageResource(R.drawable.exo_controls_shuffle);
+        btnShuffle.setImageResource(R.drawable.ic_shuffle_disabled);
         btnShuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,11 +142,11 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 switch (shuffle_clickCounter)
                 {
                     case 0:
-                        btnShuffle.setImageResource(R.drawable.exo_controls_shuffle);
+                        btnShuffle.setImageResource(R.drawable.ic_shuffle_disabled);
                         onShuffleModeEnabledChanged(false);
                         break;
                     case 1:
-                        btnShuffle.setImageResource(R.drawable.ic_shuffle_dark);
+                        btnShuffle.setImageResource(R.drawable.ic_shuffle_enabled);
                         onShuffleModeEnabledChanged(true);
                         break;
                 }
@@ -329,13 +329,13 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
         switch (repeatMode) {
             case 1:
-                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_OFF);
                 break;
             case 2:
                 player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ALL);
                 break;
             case 3:
-                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_OFF);
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
                 break;
         }
     }
@@ -346,9 +346,6 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         if(shuffleModeEnabled)
         {
             player.setShuffleModeEnabled(true);
-            int shuffle =player.getCurrentPeriodIndex();
-            Song shuffledSong = songArray.get(shuffle);
-            updateUI(shuffledSong);
         }
         else
         {
