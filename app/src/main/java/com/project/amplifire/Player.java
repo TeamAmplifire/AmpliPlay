@@ -347,6 +347,9 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         if(shuffleModeEnabled)
         {
             player.setShuffleModeEnabled(true);
+            int shuffle =player.getCurrentPeriodIndex();
+            Song shuffledSong = songArray.get(shuffle);
+            updateUI(shuffledSong);
         }
         else
         {

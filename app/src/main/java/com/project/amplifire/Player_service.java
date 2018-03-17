@@ -12,12 +12,14 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 
+import com.google.android.exoplayer2.ExoPlayer;
+
 /**
  * Created by Utsav on 3/13/2018.
  */
 
 public class Player_service extends Service {
-    Player mPlayer;
+    ExoPlayer mPlayer;
 
 
     @Nullable
@@ -74,7 +76,7 @@ public class Player_service extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.mPlayer.releaseInstance();
+        this.mPlayer.release();
         stopSelf();
     }
 
