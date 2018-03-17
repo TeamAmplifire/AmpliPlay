@@ -102,7 +102,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
         btnRepeat = findViewById(R.id.repeat);
         btnRepeat.requestFocus();
-        btnRepeat.setImageResource(R.drawable.ic_repeat_dark);
+        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
         btnRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,15 +111,15 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 switch (repeat_clickCount)
                 {
                     case 1:
-                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_off);
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
                         onRepeatModeChanged(0);
                         break;
                     case 2:
-                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_all);
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_enabled);
                         onRepeatModeChanged(1);
                         break;
                     case 3:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_dark);
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_enabled);
                         onRepeatModeChanged(2);
                         Toast.makeText(Player.this, "Repeat Off", Toast.LENGTH_SHORT).show();
                         break;
@@ -132,7 +132,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private void shuffle() {
         btnShuffle = findViewById(R.id.shuffle);
         btnShuffle.requestFocus();
-        btnShuffle.setImageResource(R.drawable.exo_controls_shuffle);
+        btnShuffle.setImageResource(R.drawable.ic_shuffle_disabled);
         btnShuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,11 +142,11 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 switch (shuffle_clickCounter)
                 {
                     case 0:
-                        btnShuffle.setImageResource(R.drawable.exo_controls_shuffle);
+                        btnShuffle.setImageResource(R.drawable.ic_shuffle_disabled);
                         onShuffleModeEnabledChanged(false);
                         break;
                     case 1:
-                        btnShuffle.setImageResource(R.drawable.ic_shuffle_dark);
+                        btnShuffle.setImageResource(R.drawable.ic_shuffle_enabled);
                         onShuffleModeEnabledChanged(true);
                         break;
                 }
