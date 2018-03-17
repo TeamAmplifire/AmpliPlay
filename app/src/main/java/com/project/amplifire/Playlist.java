@@ -6,11 +6,49 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 public class Playlist {
 
+    private String playlistName;
+    private long playlistID;
+
+    public String getPlaylistName() {
+        return playlistName;
+    }
+
+    public long getPlaylistID() {
+        return playlistID;
+    }
+
+    public Playlist(String xplaylistName, long playlistID) {
+        this.playlistName = xplaylistName;
+        this.playlistID = playlistID;
+    }
+
+    public static ArrayList<Playlist> getAllPlaylists(ContentResolver resolver){
+        ArrayList<Playlist> mPlaylist = new ArrayList<Playlist>();
+        Cursor cursor = resolver.query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, null,
+                null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do{
+                int nameColumn = cursor.getColumnIndex(MediaStore.Audio.Playlists.NAME);
+                int idColumn = cursor.getColumnIndex(MediaStore.Audio.Playlists._ID);
+                long id = cursor.getLong(idColumn);
+                String name = cursor.getString(nameColumn);
+                Log.d("hhhh", name);
+                Playlist playlist = new Playlist(name, id);
+                mPlaylist.add(playlist);
+            }while(cursor.moveToNext());
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return mPlaylist;
+    }
 
     public static long getPlaylist(ContentResolver resolver, String name)
     {
@@ -26,7 +64,6 @@ public class Playlist {
                 id = cursor.getLong(0);
             cursor.close();
         }
-
         return id;
     }
     public static long createPlaylist(ContentResolver resolver, String name)

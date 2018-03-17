@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AmpliPlay.iml" filepath="$PROJECT_DIR$/AmpliPlay.iml" />
       <module fileurl="file://E:\AMPLIFIRE\Musioc-New\AmpliPlay.iml" filepath="E:\AMPLIFIRE\Musioc-New\AmpliPlay.iml" />
       <module fileurl="file://C:\Android Projects\AmpliPlay\AmpliPlay.iml" filepath="C:\Android Projects\AmpliPlay\AmpliPlay.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Musioc-New.iml" filepath="$PROJECT_DIR$/Musioc-New.iml" />
+      <module fileurl="file://C:\androidProjects\AmpliPlay\Musioc-New.iml" filepath="C:\androidProjects\AmpliPlay\Musioc-New.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Android Projects\AmpliPlay\app\app.iml" filepath="C:\Android Projects\AmpliPlay\app\app.iml" />
     </modules>

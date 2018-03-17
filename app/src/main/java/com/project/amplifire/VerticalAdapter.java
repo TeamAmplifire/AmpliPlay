@@ -28,7 +28,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     private static ArrayList<com.project.amplifire.Song> mSongs;
     private PopupMenu mPopupMenu;
     private Context mContext;
-    private int mposition;
+    private ArrayList<MyViewHolder> holders;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
@@ -51,6 +51,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
 
     VerticalAdapter(ArrayList<com.project.amplifire.Song> theSongs) {
         mSongs = theSongs;
+        holders = new ArrayList<MyViewHolder>();
     }
     @Override
     public VerticalAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -61,7 +62,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     @Override
     public void onBindViewHolder(final VerticalAdapter.MyViewHolder holder, int position)
     {
-        mposition = holder.getAdapterPosition();
+        if(!holders.contains(holder)){
+            holders.add(holder);
+        }
         final int tempPosition = holder.getAdapterPosition();
         final Song currentSong = mSongs.get(tempPosition);
         final FragmentManager fm = ((MainActivity)mContext).getFragmentManager();
@@ -99,24 +102,24 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
             holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
         }
-//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                DFragment.setMSong(currentSong);
-//                DFragment dFragment = new DFragment();
-////                dFragment.setMSong(currentSong);
-//                dFragment.show(fm, "Song info activity");
-//                return true;
-//            }
-//        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                DFragment.setMSong(currentSong, tempPosition);
+                DFragment dFragment = new DFragment();
+                dFragment.show(fm, "Song info activity");
+                return true;
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
+                                                   setColor();
                                                        holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
                                                        holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
                                                        holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
                                                        holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-                                                       play(currentSong, mContext);
+                                                       play(mContext, tempPosition);
                                                    }
                                            });
         holder.songOverflowButton.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +134,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                         public boolean onMenuItemClick(MenuItem item) {
                             switch(item.getItemId()) {
                                 case R.id.play:
-                                    play(currentSong, mContext);
+                                    setColor();
+                                    holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                    holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                    holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                    holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                    play(mContext, tempPosition);
                                     break;
                                 case R.id.delete:
                                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -139,7 +147,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     builder.setMessage("Are you sure you want to delete this song?")
                                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
-                                                    if (deleteTarget(currentSong.getMFullPath()) != 0){
+                                                    if (deleteTarget(currentSong.getMFullPath()) == 0){
                                                         mSongs.remove(tempPosition);
                                                         deleteFromContentProvider(currentSong.getMId());
                                                         Toast.makeText(v.getContext(), "Song Deleted", Toast.LENGTH_SHORT).show();
@@ -153,7 +161,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     builder.show();
                                     break;
                                 case R.id.add_to_playlist:
-                                    Toast.makeText(v.getContext(), "ADD TO PLAYLIST MENU OPEN", Toast.LENGTH_SHORT).show();
+                                    PlaylistDialog playlistDialog = new PlaylistDialog();
+                                    playlistDialog.show(fm, "Playlist Fragment");
                                     break;
                                 case R.id.enqueue:
                                     Toast.makeText(v.getContext(), "ENQUEUE", Toast.LENGTH_SHORT).show();
@@ -183,19 +192,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         mSongs = list;
         notifyDataSetChanged();
     }
-    public void play(Song currentSong, Context context){
+    public void play(Context context, int position){
 
         Intent intent = new Intent(context, Player.class);
-        String artist = currentSong.getMArtist();
-        String album = currentSong.getMAlbum();
-        if(artist.equals("<unknown>")){
-            artist = "";
-        }
-        if(album.equals("<unknown>")){
-            album = "";
-        }
-        intent.putExtra("position", mposition);
-
+        intent.putExtra("position", position);
         context.startActivity(intent);
     }
     public void deleteFromContentProvider(Long id){
@@ -252,5 +252,13 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     }
     public static ArrayList<Song> getSongsList(){
         return mSongs;
+    }
+    private void setColor(){
+        for(int i=0; i<holders.size(); i++){
+            holders.get(i).artistView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holders.get(i).titleView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holders.get(i).albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holders.get(i).durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+        }
     }
 }

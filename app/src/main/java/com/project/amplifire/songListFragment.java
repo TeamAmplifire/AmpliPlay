@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -44,6 +45,7 @@ public class songListFragment extends Fragment
     public ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
+    private DividerItemDecoration mDividerItemDecoration;
 
     public songListFragment(){}
 
@@ -177,6 +179,11 @@ public class songListFragment extends Fragment
                 return o1.getMTitle().compareTo(o2.getMTitle());
             }
         });
+        mDividerItemDecoration = new DividerItemDecoration(
+                mSongView.getContext(),
+                mLinearLayoutManager.getOrientation()
+        );
+        mSongView.addItemDecoration(mDividerItemDecoration);
         mSongView.setAdapter(songAdt);
     }
 

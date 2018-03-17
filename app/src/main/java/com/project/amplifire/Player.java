@@ -296,7 +296,6 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     @Override
     protected void onPause() {
         super.onPause();
-       // player.release();
         player.setPlayWhenReady(true);
     }
 
@@ -364,22 +363,6 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     public void onPositionDiscontinuity(int reason) {
 
     }
-
-//    @Override
-//    public void onPositionDiscontinuity(int reason) {
-//
-//        if(reason != player.getCurrentWindowIndex())
-//        {
-//           position--;
-//           Song song =
-//
-//        }
-//        else {
-//            Toast.makeText(this, "NOT", Toast.LENGTH_SHORT).show();
-//        }
-
-
-
 
     @Override
     public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
@@ -450,8 +433,5 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
         player.prepare(mediaSource);
         controls();
-    }
-    public static void stopCurrentSong(){
-        player.stop();
     }
 }
