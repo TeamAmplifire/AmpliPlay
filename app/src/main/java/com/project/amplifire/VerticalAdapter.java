@@ -25,9 +25,10 @@ import java.util.ArrayList;
 
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder> {
 
-    private ArrayList<com.project.amplifire.Song> mSongs;
+    private static ArrayList<com.project.amplifire.Song> mSongs;
     private PopupMenu mPopupMenu;
     private Context mContext;
+    private int mposition;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
@@ -60,6 +61,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     @Override
     public void onBindViewHolder(final VerticalAdapter.MyViewHolder holder, int position)
     {
+        mposition = holder.getAdapterPosition();
         final int tempPosition = holder.getAdapterPosition();
         final Song currentSong = mSongs.get(tempPosition);
         final FragmentManager fm = ((MainActivity)mContext).getFragmentManager();
@@ -97,16 +99,16 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
             holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
         }
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                DFragment.setMSong(currentSong);
-                DFragment dFragment = new DFragment();
-//                dFragment.setMSong(currentSong);
-                dFragment.show(fm, "Song info activity");
-                return true;
-            }
-        });
+//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                DFragment.setMSong(currentSong);
+//                DFragment dFragment = new DFragment();
+////                dFragment.setMSong(currentSong);
+//                dFragment.show(fm, "Song info activity");
+//                return true;
+//            }
+//        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
@@ -192,11 +194,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         if(album.equals("<unknown>")){
             album = "";
         }
-        intent.putExtra("songID", currentSong.getMId());
-        intent.putExtra("track",currentSong.getMTitle());
-        intent.putExtra("album",album);
-        intent.putExtra("artist",artist);
-        intent.putExtra("albumID", currentSong.getMAlbumId());
+        intent.putExtra("position", mposition);
+
         context.startActivity(intent);
     }
     public void deleteFromContentProvider(Long id){
@@ -250,5 +249,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                 }
         }
         return -1;
+    }
+    public static ArrayList<Song> getSongsList(){
+        return mSongs;
     }
 }

@@ -20,14 +20,12 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class songListFragment extends Fragment
     private static final String TAG = "SongListFragment";
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 100;
     private static final String SAVED_LAYOUT_MANAGER ="layoutmanager" ;
-    private ArrayList<Song> mSongArrayList;
+    public ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
 
@@ -182,7 +180,7 @@ public class songListFragment extends Fragment
         mSongView.setAdapter(songAdt);
     }
 
-    public  void filter(String text)
+    public void filter(String text)
     {
         ArrayList<Song> temp = new ArrayList<Song>();
         for (Song d : mSongArrayList)

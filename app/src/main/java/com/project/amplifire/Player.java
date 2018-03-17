@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -41,6 +42,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Locale;
 
@@ -52,7 +54,6 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
     private SeekBar seekPlayerProgress;
     private Handler handler;
-    private ImageButton btnPlay;
     private TextView txtCurrentTime, txtEndTime, albumN, trackN, artistN;
     private boolean isPlaying = true;
     private Handler mainHandler;
@@ -65,83 +66,25 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private TrackSelection.Factory trackSelectionFactory;
     private SimpleExoPlayer player;
     private Uri trackUri;
-    private ImageButton btnNext;
-    private ImageButton btnPrev;
+    private ImageButton btnNext,btnPrev,btnPlay,btnShuffle,btnRepeat;
     private ImageView albumImage;
+    int repeat_clickCount =0;
+    int shuffle_clickCounter =0;
+    int position;
+    ArrayList<Song> songArray;
+
     private static long currentsongID;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_interface);
         Bundle message = getIntent().getExtras();
-        long currSong = (Long) message.get("songID");
-        long albumID = (Long) message.get("albumID");
-        String track = (String)message.get("track");
-        String album = (String) message.get("album");
-        String artist = (String) message.get("artist");
-        currentsongID = currSong;
+        position = (Integer) message.get("position");
+        songArray = VerticalAdapter.getSongsList();
+        Song currentSong = songArray.get(position);
 
-        trackUri = ContentUris.withAppendedId(
-                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, currSong);
-        Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
-        Uri uri = ContentUris.withAppendedId(sArtworkUri, albumID);
-        ContentResolver contentResolver = this.getApplicationContext().getContentResolver();
-        InputStream in = null;
-        try {
-            in = contentResolver.openInputStream(uri);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Bitmap artwork = BitmapFactory.decodeStream(in);
-
-        if(album != null) {
-            albumN = findViewById(R.id.albumName);
-            albumN.setText(album);
-            albumN.setSelected(true);
-        }
-        trackN = findViewById(R.id.trackName);
-        artistN = findViewById(R.id.artistName);
-        albumImage = findViewById(R.id.image_album_art);
-
-        trackN.setText(track);
-        trackN.setSelected(true);
-        artistN.setText(artist);
-        artistN.setSelected(true);
-        albumImage.requestFocus();
-        albumImage.setImageResource(R.drawable.album_art_template);
-        if(artwork != null) {
-            albumImage.setImageBitmap(artwork);
-        }
-
-        renderersFactory = new DefaultRenderersFactory(getApplicationContext());
-        bandwidthMeter = new DefaultBandwidthMeter();
-        trackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
-
-
-        DefaultTrackSelector trackSelector = new DefaultTrackSelector(trackSelectionFactory);
-        loadControl = new DefaultLoadControl();
-
-        player = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector, loadControl);
-        player.addListener(this);
-
-        dataSourceFactory = new DefaultDataSourceFactory(getApplicationContext(), "ExoplayerDemo");
-        extractorsFactory = new DefaultExtractorsFactory();
-        mainHandler = new Handler();
-        mediaSource = new ExtractorMediaSource(trackUri,dataSourceFactory,
-                        extractorsFactory,
-                        mainHandler,
-                        null);
-
-        player.prepare(mediaSource);
-
-        if(player.getVolume()==0)
-        {
-            Toast.makeText(this, "TURN ON VOLUME", Toast.LENGTH_SHORT).show();
-        }
-
-        controls();
-
+        updateUI(currentSong);
     }
 
     private void controls() {
@@ -150,7 +93,65 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         play();
         next();
         setProgress();
+        repeat();
+        shuffle();
         previous();
+    }
+
+    private void repeat() {
+
+        btnRepeat = findViewById(R.id.repeat);
+        btnRepeat.requestFocus();
+        btnRepeat.setImageResource(R.drawable.ic_repeat_dark);
+        btnRepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                repeat_clickCount++;
+                repeat_clickCount %=3;
+                switch (repeat_clickCount)
+                {
+                    case 1:
+                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_off);
+                        onRepeatModeChanged(0);
+                        break;
+                    case 2:
+                        btnRepeat.setImageResource(R.drawable.exo_controls_repeat_all);
+                        onRepeatModeChanged(1);
+                        break;
+                    case 3:
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_dark);
+                        onRepeatModeChanged(2);
+                        Toast.makeText(Player.this, "Repeat Off", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+
+    }
+
+    private void shuffle() {
+        btnShuffle = findViewById(R.id.shuffle);
+        btnShuffle.requestFocus();
+        btnShuffle.setImageResource(R.drawable.exo_controls_shuffle);
+        btnShuffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shuffle_clickCounter++;
+                shuffle_clickCounter%=2;
+
+                switch (shuffle_clickCounter)
+                {
+                    case 0:
+                        btnShuffle.setImageResource(R.drawable.exo_controls_shuffle);
+                        onShuffleModeEnabledChanged(false);
+                        break;
+                    case 1:
+                        btnShuffle.setImageResource(R.drawable.ic_shuffle_dark);
+                        onShuffleModeEnabledChanged(true);
+                        break;
+                }
+            }
+        });
     }
 
     private void previous() {
@@ -160,7 +161,12 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         btnPrev.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            Toast.makeText(Player.this, "PREVIOUS SONG", Toast.LENGTH_SHORT).show();
+//                                            onPositionDiscontinuity(position);
+                                            player.stop();
+                                            position--;
+                                            Song newSong = songArray.get(position);
+                                            updateUI(newSong);
+                                            player.setPlayWhenReady(true);
                                         }
                                     }
         );
@@ -173,7 +179,12 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Player.this, "Next Song", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Player.this, "Next Song", Toast.LENGTH_SHORT).show();
+                player.stop();
+                position++;
+                Song newSong = songArray.get(position);
+                updateUI(newSong);
+                player.setPlayWhenReady(true);
 
             }
         });
@@ -294,14 +305,14 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
 
     @Override
-    public void onTimelineChanged(Timeline timeline, Object manifest) {
+    public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
 
     }
 
     @Override
     public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-
     }
+
 
     @Override
     public void onLoadingChanged(boolean isLoading) {
@@ -311,26 +322,136 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
 
+
+    }
+
+    @Override
+    public void onRepeatModeChanged(int repeatMode) {
+
+        switch (repeatMode) {
+            case 1:
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_OFF);
+                break;
+            case 2:
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ALL);
+                break;
+            case 3:
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
+                break;
+        }
+    }
+
+    @Override
+    public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+
+        if(shuffleModeEnabled)
+        {
+            player.setShuffleModeEnabled(true);
+        }
+        else
+        {
+            player.setShuffleModeEnabled(false);
+        }
+
     }
 
 
     @Override
     public void onPlayerError(ExoPlaybackException error) {
 
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.player_Layout),"ERROR: " +error,Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     @Override
-    public void onPositionDiscontinuity() {
+    public void onPositionDiscontinuity(int reason) {
 
     }
+
+//    @Override
+//    public void onPositionDiscontinuity(int reason) {
+//
+//        if(reason != player.getCurrentWindowIndex())
+//        {
+//           position--;
+//           Song song =
+//
+//        }
+//        else {
+//            Toast.makeText(this, "NOT", Toast.LENGTH_SHORT).show();
+//        }
+
+
 
 
     @Override
     public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
 
     }
+
     public static long  getCurrentSongID(){
         return currentsongID;
     }
 
+    @Override
+    public void onSeekProcessed() {
+
+    }
+    public void updateUI(Song currentSong){
+        currentsongID = currentSong.getMId();
+
+        trackUri = ContentUris.withAppendedId(
+                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, currentSong.getMId());
+        Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
+        Uri uri = ContentUris.withAppendedId(sArtworkUri, currentSong.getMAlbumId());
+        ContentResolver contentResolver = this.getApplicationContext().getContentResolver();
+        InputStream in = null;
+        try {
+            in = contentResolver.openInputStream(uri);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Bitmap artwork = BitmapFactory.decodeStream(in);
+
+        if(currentSong.getMAlbum() != null) {
+            albumN = findViewById(R.id.albumName);
+            albumN.setText(currentSong.getMAlbum());
+            albumN.setSelected(true);
+        }
+        trackN = findViewById(R.id.trackName);
+        artistN = findViewById(R.id.artistName);
+        albumImage = findViewById(R.id.image_album_art);
+
+        trackN.setText(currentSong.getMTitle());
+        trackN.setSelected(true);
+        artistN.setText(currentSong.getMArtist());
+        artistN.setSelected(true);
+        albumImage.requestFocus();
+        albumImage.setImageResource(R.drawable.album_art_template);
+        if(artwork != null) {
+            albumImage.setImageBitmap(artwork);
+        }
+
+        renderersFactory = new DefaultRenderersFactory(getApplicationContext());
+        bandwidthMeter = new DefaultBandwidthMeter();
+        trackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
+
+        DefaultTrackSelector trackSelector = new DefaultTrackSelector(trackSelectionFactory);
+        loadControl = new DefaultLoadControl();
+
+        player = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector, loadControl);
+        player.addListener(this);
+
+        dataSourceFactory = new DefaultDataSourceFactory(getApplicationContext(), "ExoplayerDemo");
+        extractorsFactory = new DefaultExtractorsFactory();
+        mainHandler = new Handler();
+        mediaSource = new ExtractorMediaSource(trackUri,dataSourceFactory,
+                extractorsFactory,
+                mainHandler,
+                null);
+
+        player.prepare(mediaSource);
+        controls();
+    }
 }

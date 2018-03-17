@@ -32,6 +32,8 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".Player_service"/>
+
     </application>
 
 </manifest>
