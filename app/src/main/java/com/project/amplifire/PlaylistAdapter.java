@@ -28,6 +28,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         }
     }
 
+
     public PlaylistAdapter(ArrayList<Playlist> playlists) {
         mPlaylists = playlists;
     }
