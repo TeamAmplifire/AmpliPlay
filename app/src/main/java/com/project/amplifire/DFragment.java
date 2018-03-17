@@ -49,10 +49,10 @@ public class DFragment extends DialogFragment {
         final View rootView = inflater.inflate(R.layout.dialogfragment, container,
                 false);
         DisplayMetrics displayMetrics = new DisplayMetrics();
-//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-//        int height = displayMetrics.heightPixels;
-//        int width = displayMetrics.widthPixels;
-//        getDialog().getWindow().setLayout(width, height);
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        getDialog().getWindow().setLayout(width, height);
         TextView artistView = rootView.findViewById(R.id.f_song_artist);
         artistView.setSelected(true);
         TextView albumView = rootView.findViewById(R.id.f_song_album);

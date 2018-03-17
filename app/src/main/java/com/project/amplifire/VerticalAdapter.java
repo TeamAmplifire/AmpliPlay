@@ -99,16 +99,16 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
             holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
         }
-//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                DFragment.setMSong(currentSong);
-//                DFragment dFragment = new DFragment();
-////                dFragment.setMSong(currentSong);
-//                dFragment.show(fm, "Song info activity");
-//                return true;
-//            }
-//        });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                DFragment.setMSong(currentSong);
+                DFragment dFragment = new DFragment();
+                dFragment.setMSong(currentSong);
+                dFragment.show(fm, "Song info activity");
+                return true;
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
