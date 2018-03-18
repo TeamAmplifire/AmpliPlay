@@ -165,6 +165,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     playlistDialog.show(fm, "Playlist Fragment");
                                     break;
                                 case R.id.enqueue:
+                                    if(Player.enqueue == null) {
+                                        Player.enqueue = new ArrayList<Song>();
+                                    }
+                                        Player.enqueue.add(currentSong);
                                     Toast.makeText(v.getContext(), "ENQUEUE", Toast.LENGTH_SHORT).show();
                                     break;
                                 case R.id.apply_ringtone:
@@ -175,6 +179,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
 //                                    renameSong(currentSong.getMId(), newName);
                                     break;
                                 case R.id.info:
+
                                     break;
                             }
                             return false;
