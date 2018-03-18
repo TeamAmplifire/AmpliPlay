@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -329,8 +330,33 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+        
+        switch (playbackState)
+        {
+            case ExoPlayer.STATE_READY:
+//                Song thisPlay = songArray.get(position);
+//                updateUI(thisPlay);
+//                player.setPlayWhenReady(true);
+                Toast.makeText(this, "READY", Toast.LENGTH_SHORT).show();
+                break;
+                
+            case ExoPlayer.STATE_ENDED:
+                position++;
+                Song nextPlay = songArray.get(position);
+                updateUI(nextPlay);
+                player.setPlayWhenReady(true);
+//                Toast.makeText(this, "ENDED", Toast.LENGTH_SHORT).show();
+                break;
+                
+            case ExoPlayer.STATE_IDLE:
+                Toast.makeText(this, "IDLE", Toast.LENGTH_SHORT).show();
+                break;
 
-
+            case ExoPlayer.STATE_BUFFERING:
+                Toast.makeText(this, "BUFFERING", Toast.LENGTH_SHORT).show();
+                break;
+        }
+            
     }
 
     @Override
