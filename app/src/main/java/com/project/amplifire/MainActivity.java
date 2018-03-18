@@ -1,21 +1,9 @@
 package com.project.amplifire;
 
-import android.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mViewPager = findViewById(R.id.viewPager);
-
         setupViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
         TabLayout tabLayout = findViewById(R.id.library_tab_layout);

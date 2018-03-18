@@ -81,17 +81,21 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         Bundle message = getIntent().getExtras();
         position = (Integer) message.get("position");
         songArray = VerticalAdapter.getSongsList();
-        Song currentSong = songArray.get(position);
-
-        updateUI(currentSong);
+        final Song currentSong = songArray.get(position);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                updateUI(currentSong);
+            }
+        });
     }
 
     private void controls() {
         time();
         seekBar();
+        setProgress();
         play();
         next();
-        setProgress();
         repeat();
         shuffle();
         previous();
@@ -162,8 +166,13 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 player.stop();
 //                VerticalAdapter.setPreviousSongPosition(position);
                 position--;
-                Song newSong = songArray.get(position);
-                updateUI(newSong);
+                final Song newSong = songArray.get(position);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateUI(newSong);
+                    }
+                });
                 player.setPlayWhenReady(true);
             }
         });
@@ -179,8 +188,13 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 player.stop();
 //                VerticalAdapter.setPreviousSongPosition(position);
                 position++;
-                Song newSong = songArray.get(position);
-                updateUI(newSong);
+                final Song newSong = songArray.get(position);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateUI(newSong);
+                    }
+                });
                 player.setPlayWhenReady(true);
 
             }
@@ -234,7 +248,6 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     }
 
     private void setProgress() {
-       // seekPlayerProgress.setProgress(0);
         seekPlayerProgress.setMax((int) player.getDuration()/1000);
         txtCurrentTime.setText(stringForTime((int)player.getCurrentPosition()));
         txtEndTime.setText(stringForTime((int)player.getDuration()));
@@ -249,7 +262,6 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                     seekPlayerProgress.setProgress(mCurrentPosition);
                     txtCurrentTime.setText(stringForTime((int)player.getCurrentPosition()));
                     txtEndTime.setText(stringForTime((int)player.getDuration()));
-
                     handler.postDelayed(this, 1000);
                 }
             }
@@ -382,6 +394,26 @@ public class Player extends Activity implements ExoPlayer.EventListener {
 
         trackUri = ContentUris.withAppendedId(
                 android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, currentSong.getMId());
+
+        renderersFactory = new DefaultRenderersFactory(getApplicationContext());
+        bandwidthMeter = new DefaultBandwidthMeter();
+        trackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
+
+        DefaultTrackSelector trackSelector = new DefaultTrackSelector(trackSelectionFactory);
+        loadControl = new DefaultLoadControl();
+
+        player = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector, loadControl);
+        player.addListener(this);
+
+        dataSourceFactory = new DefaultDataSourceFactory(getApplicationContext(), "ExoplayerDemo");
+        extractorsFactory = new DefaultExtractorsFactory();
+        mainHandler = new Handler();
+        mediaSource = new ExtractorMediaSource(trackUri,dataSourceFactory,
+                extractorsFactory,
+                mainHandler,
+                null);
+        player.prepare(mediaSource);
+        controls();
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
         Uri uri = ContentUris.withAppendedId(sArtworkUri, currentSong.getMAlbumId());
         ContentResolver contentResolver = this.getApplicationContext().getContentResolver();
@@ -412,26 +444,5 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         if(artwork != null) {
             albumImage.setImageBitmap(artwork);
         }
-
-        renderersFactory = new DefaultRenderersFactory(getApplicationContext());
-        bandwidthMeter = new DefaultBandwidthMeter();
-        trackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
-
-        DefaultTrackSelector trackSelector = new DefaultTrackSelector(trackSelectionFactory);
-        loadControl = new DefaultLoadControl();
-
-        player = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector, loadControl);
-        player.addListener(this);
-
-        dataSourceFactory = new DefaultDataSourceFactory(getApplicationContext(), "ExoplayerDemo");
-        extractorsFactory = new DefaultExtractorsFactory();
-        mainHandler = new Handler();
-        mediaSource = new ExtractorMediaSource(trackUri,dataSourceFactory,
-                extractorsFactory,
-                mainHandler,
-                null);
-
-        player.prepare(mediaSource);
-        controls();
     }
 }
