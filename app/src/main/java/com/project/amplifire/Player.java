@@ -72,7 +72,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     int shuffle_clickCounter =0;
     int position;
     ArrayList<Song> songArray;
-
+    static ArrayList<Song> enqueue;
     private static long currentsongID;
 
 
@@ -187,9 +187,15 @@ public class Player extends Activity implements ExoPlayer.EventListener {
             @Override
             public void onClick(View view) {
                 player.stop();
-//                VerticalAdapter.setPreviousSongPosition(position);
-                position++;
-                final Song newSong = songArray.get(position);
+                final Song newSong;
+                if(enqueue == null) {
+                    position++;
+                    newSong = songArray.get(position);
+                }
+                else{
+                    newSong = enqueue.get(0);
+                    enqueue.remove(0);
+                }
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -341,8 +347,15 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 break;
                 
             case ExoPlayer.STATE_ENDED:
-                position++;
-                Song nextPlay = songArray.get(position);
+                Song nextPlay;
+                if(enqueue == null) {
+                    position++;
+                    nextPlay = songArray.get(position);
+                }
+                else {
+                    nextPlay = enqueue.get(0);
+                    enqueue.remove(0);
+                }
                 updateUI(nextPlay);
                 player.setPlayWhenReady(true);
 //                Toast.makeText(this, "ENDED", Toast.LENGTH_SHORT).show();
