@@ -1,21 +1,29 @@
 package com.project.amplifire;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -45,17 +53,15 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Locale;
-
-/**
- * Created by Utsav on 3/10/2018.
- */
-
 public class Player extends Activity implements ExoPlayer.EventListener {
+
+    private static final float ALBUM_ART_ELEVATION = 4.0f;
+
 
     private SeekBar seekPlayerProgress;
     private Handler handler;
     private TextView txtCurrentTime, txtEndTime, albumN, trackN, artistN;
-    private boolean isPlaying = true;
+    private static boolean isPlaying = true;
     private Handler mainHandler;
     private RenderersFactory renderersFactory;
     private BandwidthMeter bandwidthMeter;
@@ -70,7 +76,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private ImageView albumImage;
     int repeat_clickCount = 0;
     int shuffle_clickCounter =0;
-    int position;
+    static  int position;
     ArrayList<Song> songArray;
     static ArrayList<Song> enqueue;
     private static long currentsongID;
@@ -80,16 +86,53 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_interface);
         Bundle message = getIntent().getExtras();
-        position = (Integer) message.get("position");
+        try {
+            position = (Integer) message.get("position");
+        }catch(Exception e){}
         songArray = VerticalAdapter.getSongsList();
         final Song currentSong = songArray.get(position);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 updateUI(currentSong);
+                Intent intent = new Intent(Player.this,Player_service.class);
+                intent.setAction(References.ACTION.STARTFOREGROUND_ACTION);
+                startService(intent);
             }
         });
+//        Intent notificationIntent = new Intent(this, Player.class);
+//        notificationIntent.setAction(References.ACTION.MAIN_ACTION);
+//        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent = PendingIntent.getForegroundService(this, 0,
+//                notificationIntent, 0);
+//
+//
+//        Intent playPause = new Intent(this, Player_service.class);
+//        playPause.setAction(References.ACTION.PLAY_PAUSE_ACTION);
+//        playPause.putExtra("PLAYER_ACTION",References.ACTION.PLAY_PAUSE_ACTION);
+//        PendingIntent pend_play = PendingIntent.getBroadcast(this, 1, playPause, 0);
+//
+//        Intent stop = new Intent(this,Player_service.class);
+//        stop.setAction(References.ACTION.STOPFOREGROUND_ACTION);
+//        stop.putExtra("PLAYER_ACTION",References.ACTION.STOPFOREGROUND_ACTION);
+//        PendingIntent pend_stop = PendingIntent.getBroadcast(this,2,stop,0);
+//
+//        Bitmap icon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round);
+//        Notification notification = new NotificationCompat.Builder(this)
+//                .setContentTitle("Ampliplay")
+//                .setContentText("Current $ong")
+//                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+//                .setLargeIcon(Bitmap.createScaledBitmap(icon, 500, 500, false))
+//                .setContentIntent(pendingIntent)
+//                .setOngoing(true)
+//                .addAction(android.R.drawable.ic_media_play, "Play", pend_play)
+//                .addAction(R.drawable.exo_edit_mode_logo,"STOP",pend_stop)
+//                .build();
+//        startForeground(References.NOTIFICATION_ID.FOREGROUND_SERVICE, notification);
+        //notification.notify();
     }
+
+
 
     private void controls() {
         time();
@@ -221,14 +264,20 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     }
 
 
-    private void setPlayPause(boolean play){
+    public void setPlayPause(boolean play){
         isPlaying = play;
         player.setPlayWhenReady(play);
         if(isPlaying){
             setProgress();
+            Intent intent = new Intent(this,Player_service.class);
+            intent.setAction(References.ACTION.STARTFOREGROUND_ACTION);
+            startService(intent);
             btnPlay.setImageResource(R.drawable.ic_pause_circle_filled);
         }else{
             setProgress();
+            Intent intent = new Intent(this,Player_service.class);
+            intent.setAction(References.ACTION.STOPFOREGROUND_ACTION);
+            stopService(intent);
             btnPlay.setImageResource(R.drawable.ic_play_circle_filled);
         }
     }
@@ -362,11 +411,11 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 break;
                 
             case ExoPlayer.STATE_IDLE:
-                Toast.makeText(this, "IDLE", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "IDLE", Toast.LENGTH_SHORT).show();
                 break;
 
             case ExoPlayer.STATE_BUFFERING:
-                Toast.makeText(this, "BUFFERING", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "BUFFERING", Toast.LENGTH_SHORT).show();
                 break;
         }
             
@@ -483,5 +532,14 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         if(artwork != null) {
             albumImage.setImageBitmap(artwork);
         }
+
+        albumImage.setElevation(ALBUM_ART_ELEVATION);
+    }
+    public static SimpleExoPlayer getPlayer(){
+        return player;
+    }
+    public static boolean getIsPlaying(){
+        return isPlaying;
+
     }
 }

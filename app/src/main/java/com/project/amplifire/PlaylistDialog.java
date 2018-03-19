@@ -45,13 +45,14 @@ public class PlaylistDialog extends DialogFragment {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mPlaylistAdapter = new PlaylistAdapter(mPlaylists);
         Log.d("size", mPlaylists.size()+"");
+
         mPlaylistRecyclerView = rootView.findViewById(R.id.playlist_View);
-        mDividerItemDecoration = new DividerItemDecoration(
-                mPlaylistRecyclerView.getContext(),
-                mLinearLayoutManager.getOrientation()
-        );
-        mPlaylistRecyclerView.addItemDecoration(mDividerItemDecoration);
         mPlaylistRecyclerView.setLayoutManager(mLinearLayoutManager);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+//                layoutManager.getOrientation());
+//        recyclerView.addItemDecoration(dividerItemDecoration);
+        mDividerItemDecoration = new DividerItemDecoration(mPlaylistRecyclerView.getContext(), mLinearLayoutManager.getOrientation());
+        mPlaylistRecyclerView.addItemDecoration(mDividerItemDecoration);
         mPlaylistRecyclerView.setAdapter(mPlaylistAdapter);
         mFloatingActionButton = rootView.findViewById(R.id.playlist_floating_action);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
@@ -17,17 +18,20 @@ public class PlayerReceiver extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent)
     {
+        context.getApplicationContext();
         Bundle action = intent.getExtras();
         String playerAction = action.getString("PLAYER_ACTION");
-        SimpleExoPlayer player = Player.getPlayer();
         switch(playerAction)
         {
             case References.ACTION.PLAY_PAUSE_ACTION:
-                boolean play = Player.getIsPlaying();
+//                boolean play = Player.getIsPlaying();
+                Toast.makeText(context, "Play Pause Action Received", Toast.LENGTH_SHORT).show();
                 break;
             case References.ACTION.PREV_ACTION:
+                Toast.makeText(context, "Previous Action Received", Toast.LENGTH_SHORT).show();
                 break;
             case References.ACTION.NEXT_ACTION:
+                Toast.makeText(context, "Next Action Received", Toast.LENGTH_SHORT).show();
                 break;
         }
 
