@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.DataModels;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;

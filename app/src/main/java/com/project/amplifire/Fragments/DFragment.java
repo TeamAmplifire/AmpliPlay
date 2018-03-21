@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.Fragments;
 
 import android.app.DialogFragment;
 import android.content.ContentResolver;
@@ -21,6 +21,10 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.project.amplifire.Playback.Player;
+import com.project.amplifire.R;
+import com.project.amplifire.DataModels.Song;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

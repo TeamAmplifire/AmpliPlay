@@ -1,9 +1,13 @@
-package com.project.amplifire;
+package com.project.amplifire.Playback;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+
+import com.project.amplifire.Adapters.FragmentAdapter;
+import com.project.amplifire.Fragments.songListFragment;
+import com.project.amplifire.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,20 +24,16 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.library_tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
     }
-
     @Override
     protected void onStart(){
         super.onStart();
     }
-
-
     public void setupViewPager(ViewPager viewPager) {
 
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
         adapter.addFragment(new songListFragment(),"abc");
         viewPager.setAdapter(adapter);
     }
-
     @Override
     protected void onPause(){
         super.onPause();

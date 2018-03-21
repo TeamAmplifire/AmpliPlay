@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.Fragments;
 
 
 import android.Manifest;
@@ -27,6 +27,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.project.amplifire.Playback.MainActivity;
+import com.project.amplifire.R;
+import com.project.amplifire.DataModels.Song;
+import com.project.amplifire.Adapters.VerticalAdapter;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.Adapters;
 
 import android.app.FragmentManager;
 import android.content.ContentResolver;
@@ -20,12 +20,19 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.project.amplifire.DataModels.Song;
+import com.project.amplifire.Fragments.DFragment;
+import com.project.amplifire.Fragments.PlaylistDialog;
+import com.project.amplifire.Playback.MainActivity;
+import com.project.amplifire.Playback.Player;
+import com.project.amplifire.R;
+
 import java.io.File;
 import java.util.ArrayList;
 
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder> {
 
-    private static ArrayList<com.project.amplifire.Song> mSongs;
+    private static ArrayList<Song> mSongs;
     private PopupMenu mPopupMenu;
     private Context mContext;
     private ArrayList<MyViewHolder> holders;
@@ -49,7 +56,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         }
     }
 
-    VerticalAdapter(ArrayList<com.project.amplifire.Song> theSongs) {
+    public VerticalAdapter(ArrayList<Song> theSongs) {
         mSongs = theSongs;
         holders = new ArrayList<MyViewHolder>();
     }

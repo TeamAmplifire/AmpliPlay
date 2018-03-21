@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.Fragments;
 
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -14,6 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.project.amplifire.DataModels.Playlist;
+import com.project.amplifire.Adapters.PlaylistAdapter;
+import com.project.amplifire.R;
 
 import java.util.ArrayList;
 
@@ -61,7 +65,7 @@ public class PlaylistDialog extends DialogFragment {
                 Fragment fragment = fm.findFragmentByTag(tag);
                 if(fragment != null)
                     fm.beginTransaction().remove(fragment).commit();
-                SetPlaylistName newSetPlaylist = new SetPlaylistName();
+                SetPlaylistNameFragment newSetPlaylist = new SetPlaylistNameFragment();
                 newSetPlaylist.show(fm, "Create Playlist");
             }
         });

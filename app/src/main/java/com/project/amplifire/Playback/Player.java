@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.Playback;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -39,6 +39,9 @@ import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.project.amplifire.Adapters.VerticalAdapter;
+import com.project.amplifire.DataModels.Song;
+import com.project.amplifire.R;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -70,9 +73,9 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private ImageView albumImage;
     int repeat_clickCount = 0;
     int shuffle_clickCounter =0;
-    int position;
+    static int position = 0;
     ArrayList<Song> songArray;
-    static ArrayList<Song> enqueue;
+    public static ArrayList<Song> enqueue;
     private static long currentsongID;
 
 

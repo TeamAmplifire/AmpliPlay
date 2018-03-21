@@ -1,4 +1,5 @@
-package com.project.amplifire;
+
+package com.project.amplifire.DataModels;
 
 /**
  * Created by chait on 07-03-2018.

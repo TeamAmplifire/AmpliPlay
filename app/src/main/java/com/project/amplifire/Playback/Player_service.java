@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.Playback;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -13,6 +13,8 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.android.exoplayer2.ExoPlayer;
+import com.project.amplifire.DataModels.References;
+import com.project.amplifire.R;
 
 /**
  * Created by Utsav on 3/13/2018.
