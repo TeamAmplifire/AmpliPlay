@@ -1,4 +1,4 @@
-package com.project.amplifire.Playback;
+package com.project.amplifire;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,10 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.project.amplifire.Adapters.FragmentAdapter;
 import com.project.amplifire.Fragments.songListFragment;
-import com.project.amplifire.R;
 
 
-public class MainActivity extends AppCompatActivity {
+public class Library extends AppCompatActivity {
 
     private ViewPager mViewPager;
 

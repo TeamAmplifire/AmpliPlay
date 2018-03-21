@@ -28,7 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.project.amplifire.Playback.MainActivity;
+import com.project.amplifire.Library;
 import com.project.amplifire.R;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.Adapters.VerticalAdapter;
@@ -71,11 +71,11 @@ public class songListFragment extends Fragment
         setList();
         setHasOptionsMenu(true);
         Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
-        ((MainActivity)getActivity()).setSupportActionBar(libraryToolbar);
+        ((Library)getActivity()).setSupportActionBar(libraryToolbar);
         String title = "AmpliPlay";
         SpannableString s = new SpannableString(title);
         s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(s);
+        ((Library)getActivity()).getSupportActionBar().setTitle(s);
         libraryToolbar.inflateMenu(R.menu.search_menu);
 
         return rootView;

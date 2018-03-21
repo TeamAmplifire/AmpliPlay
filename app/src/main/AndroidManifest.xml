@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".Playback.MainActivity"
+        <activity android:name=".Library"
             android:theme="@style/AmpliFire_Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

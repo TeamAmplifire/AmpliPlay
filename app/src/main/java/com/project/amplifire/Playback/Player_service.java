@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.project.amplifire.DataModels.References;
+import com.project.amplifire.Library;
 import com.project.amplifire.R;
 
 /**
@@ -38,7 +39,7 @@ public class Player_service extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent.getAction().equals(References.ACTION.STARTFOREGROUND_ACTION)) {
-            Intent notificationIntent = new Intent(this, MainActivity.class);
+            Intent notificationIntent = new Intent(this, Library.class);
             notificationIntent.setAction(References.ACTION.MAIN_ACTION);
             notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,

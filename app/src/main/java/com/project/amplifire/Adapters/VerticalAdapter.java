@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.Fragments.DFragment;
 import com.project.amplifire.Fragments.PlaylistDialog;
-import com.project.amplifire.Playback.MainActivity;
+import com.project.amplifire.Library;
 import com.project.amplifire.Playback.Player;
 import com.project.amplifire.R;
 
@@ -74,7 +74,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         }
         final int tempPosition = holder.getAdapterPosition();
         final Song currentSong = mSongs.get(tempPosition);
-        final FragmentManager fm = ((MainActivity)mContext).getFragmentManager();
+        final FragmentManager fm = ((Library)mContext).getFragmentManager();
         int songDurationInt = Integer.parseInt(currentSong.getMDuration());
         String songDurationString;
         songDurationInt /= 1000;
