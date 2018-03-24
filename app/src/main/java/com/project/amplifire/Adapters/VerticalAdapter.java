@@ -20,8 +20,10 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.Fragments.DFragment;
+import com.project.amplifire.Fragments.InfoFragment;
 import com.project.amplifire.Fragments.PlaylistDialog;
 import com.project.amplifire.Library;
 import com.project.amplifire.Playback.Player;
@@ -75,22 +77,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         final int tempPosition = holder.getAdapterPosition();
         final Song currentSong = mSongs.get(tempPosition);
         final FragmentManager fm = ((Library)mContext).getFragmentManager();
-        int songDurationInt = Integer.parseInt(currentSong.getMDuration());
-        String songDurationString;
-        songDurationInt /= 1000;
-        if (songDurationInt >= 3600 && songDurationInt <= 86400) {
-            if (songDurationInt%60 < 10) {
-                songDurationString = songDurationInt / 3600 + ":0" + songDurationInt / 60 + ":" + songDurationInt % 60;
-            }else{
-                songDurationString = songDurationInt / 3600 + ":" + songDurationInt / 60 + ":" + songDurationInt % 60;
-            }
-        }else {
-            if(songDurationInt%60 < 10){
-            songDurationString = songDurationInt / 60 + ":0" + songDurationInt % 60;
-            }else{
-                songDurationString = songDurationInt / 60 + ":" + songDurationInt % 60;
-            }
-        }
+        String songDurationString = getFormattedDuration(currentSong.getMDuration());
         holder.titleView.setText(currentSong.getMTitle());
         holder.artistView.setText(currentSong.getMArtist());
         holder.albumView.setText(currentSong.getMAlbum());
@@ -114,7 +101,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             public boolean onLongClick(View v) {
                 DFragment.setMSong(currentSong, tempPosition);
                 DFragment dFragment = new DFragment();
-                dFragment.show(fm, "Song info activity");
+                dFragment.show(fm, References.FRAGMENT_TAGS.SONG_DETAILS);
                 return true;
             }
         });
@@ -168,8 +155,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     builder.show();
                                     break;
                                 case R.id.add_to_playlist:
-                                    PlaylistDialog playlistDialog = new PlaylistDialog();
-                                    playlistDialog.show(fm, "Playlist Fragment");
+                                    PlaylistDialog playlistDialog = new PlaylistDialog(currentSong);
+                                    playlistDialog.show(fm, References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
                                     break;
                                 case R.id.enqueue:
                                     if(Player.enqueue == null) {
@@ -186,7 +173,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
 //                                    renameSong(currentSong.getMId(), newName);
                                     break;
                                 case R.id.info:
-
+                                    InfoFragment infoFragment = new InfoFragment(currentSong);
+                                    infoFragment.show(fm, References.FRAGMENT_TAGS.INFO_FRAGMENT);
+                                    notifyDataSetChanged();
                                     break;
                             }
                             return false;
@@ -272,5 +261,24 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             holders.get(i).albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
             holders.get(i).durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
         }
+    }
+    public static String getFormattedDuration(String duration){
+        int songDurationInt = Integer.parseInt(duration);
+        String songDurationString;
+        songDurationInt /= 1000;
+        if (songDurationInt >= 3600 && songDurationInt <= 86400) {
+            if (songDurationInt%60 < 10) {
+                songDurationString = songDurationInt / 3600 + ":0" + songDurationInt / 60 + ":" + songDurationInt % 60;
+            }else{
+                songDurationString = songDurationInt / 3600 + ":" + songDurationInt / 60 + ":" + songDurationInt % 60;
+            }
+        }else {
+            if(songDurationInt%60 < 10){
+                songDurationString = songDurationInt / 60 + ":0" + songDurationInt % 60;
+            }else{
+                songDurationString = songDurationInt / 60 + ":" + songDurationInt % 60;
+            }
+        }
+        return songDurationString;
     }
 }

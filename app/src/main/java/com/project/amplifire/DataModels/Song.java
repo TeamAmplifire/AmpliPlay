@@ -25,6 +25,18 @@ public class Song {
         mAlbumId = songAlbumID;
     }
 
+    public void setTitle(String title) {
+        mTitle = title;
+    }
+
+    public void setArtist(String artist) {
+        mArtist = artist;
+    }
+
+    public void setAlbum(String album) {
+        mAlbum = album;
+    }
+
     public long getMId() {
         return mId;
     }

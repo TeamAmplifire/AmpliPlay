@@ -1,6 +1,7 @@
 package com.project.amplifire.Fragments;
 
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -20,14 +21,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.project.amplifire.Adapters.VerticalAdapter;
+import com.project.amplifire.DataModels.References;
+import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.Playback.Player;
 import com.project.amplifire.R;
-import com.project.amplifire.DataModels.Song;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * Created by chait on 17-03-2018.
@@ -47,6 +50,7 @@ public class DFragment extends DialogFragment {
         mSong = song;
         mPosition = position;
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -64,22 +68,7 @@ public class DFragment extends DialogFragment {
         ImageButton overflowMenuInflater = rootView.findViewById(R.id.f_songOverflowButton);
         ImageView albumImage = rootView.findViewById(R.id.album_art_view);
         FloatingActionButton floatingActionButton = rootView.findViewById(R.id.fab);
-        int songDurationInt = Integer.parseInt(mSong.getMDuration());
-        String songDurationString;
-        songDurationInt /= 1000;
-        if (songDurationInt >= 3600 && songDurationInt <= 86400) {
-            if (songDurationInt%60 < 10) {
-                songDurationString = songDurationInt / 3600 + ":0" + songDurationInt / 60 + ":" + songDurationInt % 60;
-            }else{
-                songDurationString = songDurationInt / 3600 + ":" + songDurationInt / 60 + ":" + songDurationInt % 60;
-            }
-        }else {
-            if(songDurationInt%60 < 10){
-                songDurationString = songDurationInt / 60 + ":0" + songDurationInt % 60;
-            }else{
-                songDurationString = songDurationInt / 60 + ":" + songDurationInt % 60;
-            }
-        }
+        String songDurationString = VerticalAdapter.getFormattedDuration(mSong.getMDuration());
         artistView.setText(mSong.getMArtist());
         albumView.setText(mSong.getMAlbum());
         durationView.setText(songDurationString);
@@ -87,6 +76,7 @@ public class DFragment extends DialogFragment {
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
         Uri uri = ContentUris.withAppendedId(sArtworkUri, mSong.getMAlbumId());
         ContentResolver contentResolver = getActivity().getApplicationContext().getContentResolver();
+        final FragmentManager fm = getActivity().getFragmentManager();
         InputStream in = null;
         try {
             in = contentResolver.openInputStream(uri);
@@ -116,10 +106,14 @@ public class DFragment extends DialogFragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch(item.getItemId()){
                             case R.id.f_enqueue:
-                                Toast.makeText(v.getContext(), "Enqueue", Toast.LENGTH_SHORT).show();
+                                if(Player.enqueue == null) {
+                                    Player.enqueue = new ArrayList<Song>();
+                                }
+                                Player.enqueue.add(mSong);
                                 break;
                             case R.id.f_add_to_playlist:
-                                Toast.makeText(v.getContext(), "Add to playlist", Toast.LENGTH_SHORT).show();
+                                PlaylistDialog playlistDialog = new PlaylistDialog(mSong);
+                                playlistDialog.show(fm, References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
                                 break;
                         }
                         return false;

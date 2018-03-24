@@ -11,17 +11,15 @@ import com.project.amplifire.Fragments.songListFragment;
 
 public class Library extends AppCompatActivity {
 
-    private ViewPager mViewPager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mViewPager = findViewById(R.id.viewPager);
-        setupViewPager(mViewPager);
-        mViewPager.setCurrentItem(0);
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        setupViewPager(viewPager);
+        viewPager.setCurrentItem(0);
         TabLayout tabLayout = findViewById(R.id.library_tab_layout);
-        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setupWithViewPager(viewPager);
     }
     @Override
     protected void onStart(){
@@ -30,7 +28,7 @@ public class Library extends AppCompatActivity {
     public void setupViewPager(ViewPager viewPager) {
 
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
-        adapter.addFragment(new songListFragment(),"abc");
+        adapter.addFragment(new songListFragment(),"Song adapter");
         viewPager.setAdapter(adapter);
     }
     @Override

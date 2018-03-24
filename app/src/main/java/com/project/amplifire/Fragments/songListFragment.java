@@ -50,7 +50,6 @@ public class songListFragment extends Fragment
     public ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
-    private DividerItemDecoration mDividerItemDecoration;
 
     public songListFragment(){}
 
@@ -184,11 +183,11 @@ public class songListFragment extends Fragment
                 return o1.getMTitle().compareTo(o2.getMTitle());
             }
         });
-        mDividerItemDecoration = new DividerItemDecoration(
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                 mSongView.getContext(),
                 mLinearLayoutManager.getOrientation()
         );
-        mSongView.addItemDecoration(mDividerItemDecoration);
+        mSongView.addItemDecoration(dividerItemDecoration);
         mSongView.setAdapter(songAdt);
     }
 
