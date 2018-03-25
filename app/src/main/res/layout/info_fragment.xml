@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:ellipsize="marquee"
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -30,7 +30,7 @@
         android:textSize="18sp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/filePathText"
+        app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/infoHeaderText"
         tools:text="file_location" />
 
@@ -46,7 +46,7 @@
         android:textColor="@color/alt_colorPrimary"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/durationText"
+        app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/file_album"
         tools:text="4:20" />
 
@@ -62,7 +62,7 @@
         android:textColor="@color/alt_colorPrimary"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sizeText"
+        app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/file_duration"
         tools:text="quality" />
 
@@ -89,7 +89,7 @@
         android:textSize="18sp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/titleText"
+        app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/file_location"
         tools:text="title_text" />
 
@@ -116,7 +116,7 @@
         android:textSize="18sp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/artistText"
+        app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/file_track_name"
         tools:text="Artist" />
 
@@ -143,7 +143,7 @@
         android:textSize="18sp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/albumText"
+        app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/file_artist"
         tools:text="Album" />
 
@@ -153,6 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
         android:text="@string/edit"
         android:textColor="@color/colorPrimary"
@@ -166,70 +167,82 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Info"
-        android:textAlignment="viewStart"
+        android:text="Song Info"
+        android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Info" />
+        tools:text="Song Info" />
 
     <TextView
         android:id="@+id/filePathText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:text="File"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorText"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infoHeaderText"
         tools:text="File" />
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Title"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorText"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filePathText"
         tools:text="Title" />
 
     <TextView
         android:id="@+id/artistText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Artist"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorText"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
         tools:text="Artist" />
 
     <TextView
         android:id="@+id/albumText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Album"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorText"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/artistText"
         tools:text="Album" />
@@ -238,12 +251,15 @@
         android:id="@+id/durationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Duration"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorText"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/albumText"
         tools:text="Duration" />
@@ -252,15 +268,25 @@
         android:id="@+id/sizeText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Size"
+        android:textAlignment="textEnd"
         android:textColor="@color/colorText"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/durationText"
         tools:text="Size" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.21" />
 
 
 </android.support.constraint.ConstraintLayout>

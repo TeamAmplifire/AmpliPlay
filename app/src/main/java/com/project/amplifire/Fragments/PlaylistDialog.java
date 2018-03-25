@@ -46,7 +46,7 @@ public class PlaylistDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.dialog_playlist, container,
+        final View rootView = inflater.inflate(R.layout.playlist_dialog_fragment, container,
                 false);
         final FragmentManager fm = getFragmentManager();
         ContentResolver resolver = getActivity().getContentResolver();

@@ -55,7 +55,7 @@ public class DFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.dialogfragment, container,
+        final View rootView = inflater.inflate(R.layout.song_dialog_fragment, container,
                 false);
         TextView artistView = rootView.findViewById(R.id.f_song_artist);
         artistView.setSelected(true);

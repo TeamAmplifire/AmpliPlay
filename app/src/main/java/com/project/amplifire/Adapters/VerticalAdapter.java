@@ -65,7 +65,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     @Override
     public VerticalAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list, parent, false);
+                .inflate(R.layout.list_item, parent, false);
         return new MyViewHolder(itemView);
     }
     @Override

@@ -1,65 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorAccent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@android:color/background_light">
 
+
+    <TextView
+        android:id="@+id/editTagsHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Edit Tags"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Title"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTagsHeader" />
+
+    <TextView
+        android:id="@+id/artistText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Artist"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <TextView
+        android:id="@+id/albumText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Album"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/artistText" />
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/file_track_name_edit"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorLight"
+        android:padding="8dp"
         android:text="@string/add_text"
-        android:textSize="20sp"
-        android:layout_margin="8dp"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/file_album_edit"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/editTagsHeader" />
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/file_album_edit"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimary"
-        android:layout_margin="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        android:padding="8dp"
         android:text="@string/add_text"
-        app:layout_constraintTop_toBottomOf="@id/file_track_name_edit"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/file_artist_edit"/>
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/file_artist_edit" />
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/file_artist_edit"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimary"
-        android:layout_margin="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"
+        android:padding="8dp"
         android:text="@string/add_text"
-        app:layout_constraintTop_toBottomOf="@id/file_album_edit"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/file_submit_button" />
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/file_track_name_edit" />
 
     <Button
         android:id="@+id/file_submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/colorAccent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_margin="8dp"
+        android:padding="8dp"
         android:text="@string/submit"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file_artist_edit" />
+        app:layout_constraintTop_toBottomOf="@+id/file_album_edit" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="76dp" />
 
 </android.support.constraint.ConstraintLayout>
