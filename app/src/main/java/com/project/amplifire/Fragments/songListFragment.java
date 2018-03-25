@@ -73,7 +73,7 @@ public class songListFragment extends Fragment
         ((Library)getActivity()).setSupportActionBar(libraryToolbar);
         String title = "AmpliPlay";
         SpannableString s = new SpannableString(title);
-        s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        s.setSpan(new ForegroundColorSpan(Color.parseColor("#B53471")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ((Library)getActivity()).getSupportActionBar().setTitle(s);
         libraryToolbar.inflateMenu(R.menu.search_menu);
 
