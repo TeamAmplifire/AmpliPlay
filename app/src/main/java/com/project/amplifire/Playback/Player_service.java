@@ -47,6 +47,7 @@ public class Player_service extends Service {
 
             Intent play = new Intent(this, Player_service.class);
             play.setAction(References.ACTION.PLAY_ACTION);
+
             PendingIntent pend_play = PendingIntent.getService(this, 0, play, 0);
 
             Intent pause = new Intent(this, Player_service.class);

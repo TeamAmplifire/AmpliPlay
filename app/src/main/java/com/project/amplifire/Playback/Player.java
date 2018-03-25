@@ -8,13 +8,12 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -53,7 +52,7 @@ import java.util.Locale;
  * Created by Utsav on 3/10/2018.
  */
 
-public class Player extends Activity implements ExoPlayer.EventListener {
+public class Player extends Activity implements PlaybackInterface {
 
     private SeekBar seekPlayerProgress;
     private Handler handler;
@@ -70,13 +69,15 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     private static SimpleExoPlayer player;
     private Uri trackUri;
     private ImageButton btnNext,btnPrev,btnPlay,btnShuffle,btnRepeat;
-    private ImageView albumImage;
     int repeat_clickCount = 0;
     int shuffle_clickCounter =0;
     static int position = 0;
     ArrayList<Song> songArray;
     public static ArrayList<Song> enqueue;
-    private static long currentsongID;
+    private static long currentSongID;
+    ExoplayerEventListener mExoplayerEventListener = new ExoplayerEventListener();
+    public static final float VOLUME_DUCK = 0.2f;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,35 +106,35 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         previous();
     }
 
-    private void repeat() {
-
-        btnRepeat = findViewById(R.id.repeat);
-        btnRepeat.requestFocus();
-        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
-        btnRepeat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                repeat_clickCount++;
-                repeat_clickCount %=3;
-                switch (repeat_clickCount)
-                {
-                    case 0:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
-                        onRepeatModeChanged(0);
-                        break;
-                    case 1:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_enabled);
-                        onRepeatModeChanged(1);
-                        break;
-                    case 2:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_enabled);
-                        onRepeatModeChanged(2);
-                        break;
-                }
-            }
-        });
-
-    }
+//    private void repeat() {
+//
+//        btnRepeat = findViewById(R.id.repeat);
+//        btnRepeat.requestFocus();
+//        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
+//        btnRepeat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                repeat_clickCount++;
+//                repeat_clickCount %=3;
+//                switch (repeat_clickCount)
+//                {
+//                    case 0:
+//                        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
+//                        mExoplayerEventListener.onRepeatModeChanged(0);
+//                        break;
+//                    case 1:
+//                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_enabled);
+//                        mExoplayerEventListener.onRepeatModeChanged(1);
+//                        break;
+//                    case 2:
+//                        btnRepeat.setImageResource(R.drawable.ic_repeat_enabled);
+//                        mExoplayerEventListener.onRepeatModeChanged(2);
+//                        break;
+//                }
+//            }
+//        });
+//
+//    }
 
     private void shuffle() {
         btnShuffle = findViewById(R.id.shuffle);
@@ -149,11 +150,11 @@ public class Player extends Activity implements ExoPlayer.EventListener {
                 {
                     case 0:
                         btnShuffle.setImageResource(R.drawable.ic_shuffle_disabled);
-                        onShuffleModeEnabledChanged(false);
+                        mExoplayerEventListener.onShuffleModeEnabledChanged(false);
                         break;
                     case 1:
                         btnShuffle.setImageResource(R.drawable.ic_shuffle_enabled);
-                        onShuffleModeEnabledChanged(true);
+                        mExoplayerEventListener.onShuffleModeEnabledChanged(true);
                         break;
                 }
             }
@@ -322,117 +323,118 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     }
 
 
-    @Override
-    public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
-
-    }
-
-    @Override
-    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-    }
-
-
-    @Override
-    public void onLoadingChanged(boolean isLoading) {
-
-    }
-
-    @Override
-    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-        
-        switch (playbackState)
-        {
-            case ExoPlayer.STATE_READY:
-//                Song thisPlay = songArray.get(position);
-//                updateUI(thisPlay);
+//    @Override
+//    public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
+//
+//    }
+//
+//    @Override
+//    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+//    }
+//
+//
+//    @Override
+//    public void onLoadingChanged(boolean isLoading) {
+//
+//    }
+//
+//    @Override
+//    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+//
+//        switch (playbackState)
+//        {
+//            case ExoPlayer.STATE_READY:
+////                Song thisPlay = songArray.get(position);
+////                updateUI(thisPlay);
+////                player.setPlayWhenReady(true);
+//                Toast.makeText(this, "READY", Toast.LENGTH_SHORT).show();
+//                break;
+//
+//            case ExoPlayer.STATE_ENDED:
+//                Song nextPlay;
+//                if(enqueue == null) {
+//                    position++;
+//                    nextPlay = songArray.get(position);
+//                }
+//                else {
+//                    nextPlay = enqueue.get(0);
+//                    enqueue.remove(0);
+//                }
+//                updateUI(nextPlay);
 //                player.setPlayWhenReady(true);
-                Toast.makeText(this, "READY", Toast.LENGTH_SHORT).show();
-                break;
-                
-            case ExoPlayer.STATE_ENDED:
-                Song nextPlay;
-                if(enqueue == null) {
-                    position++;
-                    nextPlay = songArray.get(position);
-                }
-                else {
-                    nextPlay = enqueue.get(0);
-                    enqueue.remove(0);
-                }
-                updateUI(nextPlay);
-                player.setPlayWhenReady(true);
-//                Toast.makeText(this, "ENDED", Toast.LENGTH_SHORT).show();
-                break;
-                
-            case ExoPlayer.STATE_IDLE:
-                Toast.makeText(this, "IDLE", Toast.LENGTH_SHORT).show();
-                break;
+////                Toast.makeText(this, "ENDED", Toast.LENGTH_SHORT).show();
+//                break;
+//
+//            case ExoPlayer.STATE_IDLE:
+//                Toast.makeText(this, "IDLE", Toast.LENGTH_SHORT).show();
+//                break;
+//
+//            case ExoPlayer.STATE_BUFFERING:
+//                Toast.makeText(this, "BUFFERING", Toast.LENGTH_SHORT).show();
+//                break;
+//        }
+//
+//    }
+//
+//    @Override
+//    public void onRepeatModeChanged(int repeatMode) {
+//
+//        switch (repeatMode) {
+//            case 0:
+//                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_OFF);
+//                break;
+//            case 1:
+//                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
+//                break;
+//            case 2:
+//                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ALL);
+//                break;
+//        }
+//    }
+//
+//    @Override
+//    public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+//
+//        if(shuffleModeEnabled)
+//        {
+//            player.setShuffleModeEnabled(true);
+//        }
+//        else
+//        {
+//            player.setShuffleModeEnabled(false);
+//        }
+//
+//    }
+//
+//
+//    @Override
+//    public void onPlayerError(ExoPlaybackException error) {
+//
+//        Snackbar snackbar = Snackbar.make(findViewById(R.id.player_Layout),"ERROR: " +error,Snackbar.LENGTH_LONG);
+//        snackbar.show();
+//    }
 
-            case ExoPlayer.STATE_BUFFERING:
-                Toast.makeText(this, "BUFFERING", Toast.LENGTH_SHORT).show();
-                break;
-        }
-            
-    }
+//    @Override
+//    public void onPositionDiscontinuity(int reason) {
+//
+//    }
 
-    @Override
-    public void onRepeatModeChanged(int repeatMode) {
+//    @Override
+//    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+//
+//    }
 
-        switch (repeatMode) {
-            case 0:
-                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_OFF);
-                break;
-            case 1:
-                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
-                break;
-            case 2:
-                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ALL);
-                break;
-        }
-    }
-
-    @Override
-    public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
-
-        if(shuffleModeEnabled)
-        {
-            player.setShuffleModeEnabled(true);
-        }
-        else
-        {
-            player.setShuffleModeEnabled(false);
-        }
-
-    }
-
-
-    @Override
-    public void onPlayerError(ExoPlaybackException error) {
-
-        Snackbar snackbar = Snackbar.make(findViewById(R.id.player_Layout),"ERROR: " +error,Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
-
-    @Override
-    public void onPositionDiscontinuity(int reason) {
-
-    }
-
-    @Override
-    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
-
-    }
 
     public static long  getCurrentSongID(){
-        return currentsongID;
+        return currentSongID;
     }
 
-    @Override
-    public void onSeekProcessed() {
-
-    }
+//    @Override
+//    public void onSeekProcessed() {
+//
+//    }
     public void updateUI(Song currentSong){
-        currentsongID = currentSong.getMId();
+        currentSongID = currentSong.getMId();
 
         trackUri = ContentUris.withAppendedId(
                 android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, currentSong.getMId());
@@ -445,7 +447,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         loadControl = new DefaultLoadControl();
 
         player = ExoPlayerFactory.newSimpleInstance(renderersFactory, trackSelector, loadControl);
-        player.addListener(this);
+        player.addListener(mExoplayerEventListener);
 
         dataSourceFactory = new DefaultDataSourceFactory(getApplicationContext(), "ExoplayerDemo");
         extractorsFactory = new DefaultExtractorsFactory();
@@ -475,7 +477,7 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         }
         trackN = findViewById(R.id.trackName);
         artistN = findViewById(R.id.artistName);
-        albumImage = findViewById(R.id.image_album_art);
+        ImageView albumImage = findViewById(R.id.image_album_art);
 
         trackN.setText(currentSong.getMTitle());
         trackN.setSelected(true);
@@ -485,6 +487,168 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         albumImage.setImageResource(R.drawable.album_art_template);
         if(artwork != null) {
             albumImage.setImageBitmap(artwork);
+        }
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public void repeat() {
+        btnRepeat = findViewById(R.id.repeat);
+        btnRepeat.requestFocus();
+        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
+        btnRepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                repeat_clickCount++;
+                repeat_clickCount %=3;
+                switch (repeat_clickCount)
+                {
+                    case 0:
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
+                        mExoplayerEventListener.onRepeatModeChanged(0);
+                        break;
+                    case 1:
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_enabled);
+                        mExoplayerEventListener.onRepeatModeChanged(1);
+                        break;
+                    case 2:
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_enabled);
+                        mExoplayerEventListener.onRepeatModeChanged(2);
+                        break;
+                }
+            }
+        });
+    }
+
+    @Override
+    public void setState(int state) {
+
+    }
+
+    @Override
+    public int getstate() {
+        return 0;
+    }
+
+    @Override
+    public boolean isConnected() {
+        return false;
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return false;
+    }
+
+    @Override
+    public long getCurrentStreamPosition() {
+        return 0;
+    }
+
+    @Override
+    public void updateLastKnownStreamPosition() {
+
+    }
+
+    @Override
+    public void play(MediaSessionCompat.QueueItem item) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void seekTo(long position) {
+
+    }
+
+    @Override
+    public void setCurrentMediaId(String mediaId) {
+
+    }
+
+    @Override
+    public String getCurrentMediaId() {
+        return null;
+    }
+
+    @Override
+    public void setCallback(Callback callback) {
+
+    }
+
+    private final class ExoplayerEventListener implements ExoPlayer.EventListener{
+
+        @Override
+        public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
+
+        }
+
+        @Override
+        public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+
+        }
+
+        @Override
+        public void onLoadingChanged(boolean isLoading) {
+
+        }
+
+        @Override
+        public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+
+        }
+
+        @Override
+        public void onRepeatModeChanged(int repeatMode) {
+             switch (repeatMode){
+            case 0:
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_OFF);
+                break;
+            case 1:
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ONE);
+                break;
+            case 2:
+                player.setRepeatMode(com.google.android.exoplayer2.Player.REPEAT_MODE_ALL);
+                break;
+             }
+        }
+
+        @Override
+        public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+
+        }
+
+        @Override
+        public void onPlayerError(ExoPlaybackException error) {
+
+        }
+
+        @Override
+        public void onPositionDiscontinuity(int reason) {
+
+        }
+
+        @Override
+        public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+
+        }
+
+        @Override
+        public void onSeekProcessed() {
+
         }
     }
 }
