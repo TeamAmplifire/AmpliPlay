@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.Fragments;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -12,13 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.project.amplifire.DataModels.Playlist;
+import com.project.amplifire.DataModels.References;
+import com.project.amplifire.R;
+
 /**
  * Created by chait on 17-03-2018.
  */
 
-public class SetPlaylistName extends DialogFragment {
+public class SetPlaylistNameFragment extends DialogFragment {
 
-    public SetPlaylistName() {
+    public SetPlaylistNameFragment() {
     }
 
     @Override
@@ -45,7 +49,7 @@ public class SetPlaylistName extends DialogFragment {
                 if(fragment != null)
                     fm.beginTransaction().remove(fragment).commit();
                 PlaylistDialog playlistDialog = new PlaylistDialog();
-                playlistDialog.show(fm, "Playlist Fragment");
+                playlistDialog.show(fm, References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
             }
         })
                 .setCancelable(true);

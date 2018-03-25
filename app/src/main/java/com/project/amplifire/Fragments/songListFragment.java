@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.Fragments;
 
 
 import android.Manifest;
@@ -28,6 +28,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.project.amplifire.Library;
+import com.project.amplifire.R;
+import com.project.amplifire.DataModels.Song;
+import com.project.amplifire.Adapters.VerticalAdapter;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +50,6 @@ public class songListFragment extends Fragment
     public ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
-    private DividerItemDecoration mDividerItemDecoration;
 
     public songListFragment(){}
 
@@ -66,11 +70,11 @@ public class songListFragment extends Fragment
         setList();
         setHasOptionsMenu(true);
         Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
-        ((MainActivity)getActivity()).setSupportActionBar(libraryToolbar);
+        ((Library)getActivity()).setSupportActionBar(libraryToolbar);
         String title = "AmpliPlay";
         SpannableString s = new SpannableString(title);
         s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(s);
+        ((Library)getActivity()).getSupportActionBar().setTitle(s);
         libraryToolbar.inflateMenu(R.menu.search_menu);
 
         return rootView;
@@ -179,11 +183,11 @@ public class songListFragment extends Fragment
                 return o1.getMTitle().compareTo(o2.getMTitle());
             }
         });
-        mDividerItemDecoration = new DividerItemDecoration(
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                 mSongView.getContext(),
                 mLinearLayoutManager.getOrientation()
         );
-        mSongView.addItemDecoration(mDividerItemDecoration);
+        mSongView.addItemDecoration(dividerItemDecoration);
         mSongView.setAdapter(songAdt);
     }
 

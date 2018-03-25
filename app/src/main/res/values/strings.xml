@@ -15,4 +15,8 @@
     <string name="album_art">album art</string>
     <string name="previous_button">previous_button</string>
     <string name="playlist_name">Playlist Name</string>
+    <string name="not_available">Not Available</string>
+    <string name="edit">Edit</string>
+    <string name="add_text">Add text</string>
+    <string name="submit">Submit</string>
 </resources>

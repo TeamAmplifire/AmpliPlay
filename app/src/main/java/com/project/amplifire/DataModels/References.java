@@ -1,4 +1,4 @@
-package com.project.amplifire;
+package com.project.amplifire.DataModels;
 
 
 /**
@@ -19,5 +19,13 @@ public class References {
 
     public interface NOTIFICATION_ID {
         int FOREGROUND_SERVICE = 101;
+    }
+
+    public interface FRAGMENT_TAGS{
+        String EDIT_TAGS_FRAGMENT = "Edit Tags Fragment";
+        String INFO_FRAGMENT = "Info Fragment";
+        String CREATE_PLAYLIST_FRAGMENT = "Create Playlist";
+        String PLAYLIST_FRAGMENT = "Playlist Fragment";
+        String SONG_DETAILS = "Song details";
     }
 }

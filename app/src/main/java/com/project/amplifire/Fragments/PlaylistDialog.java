@@ -1,5 +1,6 @@
-package com.project.amplifire;
+package com.project.amplifire.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -15,6 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.project.amplifire.Adapters.PlaylistAdapter;
+import com.project.amplifire.DataModels.Playlist;
+import com.project.amplifire.DataModels.References;
+import com.project.amplifire.DataModels.Song;
+import com.project.amplifire.R;
+
 import java.util.ArrayList;
 
 /**
@@ -24,13 +31,15 @@ import java.util.ArrayList;
 public class PlaylistDialog extends DialogFragment {
 
     private ArrayList<Playlist> mPlaylists;
-    private PlaylistAdapter mPlaylistAdapter;
-    private RecyclerView mPlaylistRecyclerView;
-    private FloatingActionButton mFloatingActionButton;
-    private DividerItemDecoration mDividerItemDecoration;
+    private Song currentSelectedSong;
 
     public PlaylistDialog() {
         super();
+    }
+
+    @SuppressLint("ValidFragment")
+    public PlaylistDialog(Song currentSelectedSong) {
+        this.currentSelectedSong = currentSelectedSong;
     }
 
     @Nullable
@@ -43,27 +52,25 @@ public class PlaylistDialog extends DialogFragment {
         ContentResolver resolver = getActivity().getContentResolver();
         mPlaylists = Playlist.getAllPlaylists(resolver);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mPlaylistAdapter = new PlaylistAdapter(mPlaylists);
+        PlaylistAdapter playlistAdapter = new PlaylistAdapter(mPlaylists, currentSelectedSong, getActivity());
         Log.d("size", mPlaylists.size()+"");
-
-        mPlaylistRecyclerView = rootView.findViewById(R.id.playlist_View);
-        mPlaylistRecyclerView.setLayoutManager(mLinearLayoutManager);
-//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-//                layoutManager.getOrientation());
-//        recyclerView.addItemDecoration(dividerItemDecoration);
-        mDividerItemDecoration = new DividerItemDecoration(mPlaylistRecyclerView.getContext(), mLinearLayoutManager.getOrientation());
-        mPlaylistRecyclerView.addItemDecoration(mDividerItemDecoration);
-        mPlaylistRecyclerView.setAdapter(mPlaylistAdapter);
-        mFloatingActionButton = rootView.findViewById(R.id.playlist_floating_action);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+        RecyclerView playlistRecyclerView = rootView.findViewById(R.id.playlist_View);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                playlistRecyclerView.getContext(),
+                mLinearLayoutManager.getOrientation()
+        );
+        playlistRecyclerView.addItemDecoration(dividerItemDecoration);
+        playlistRecyclerView.setLayoutManager(mLinearLayoutManager);
+        playlistRecyclerView.setAdapter(playlistAdapter);
+        FloatingActionButton floatingActionButton = rootView.findViewById(R.id.playlist_floating_action);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tag = "Playlist Fragment";
-                Fragment fragment = fm.findFragmentByTag(tag);
+                Fragment fragment = fm.findFragmentByTag(References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
                 if(fragment != null)
                     fm.beginTransaction().remove(fragment).commit();
-                SetPlaylistName newSetPlaylist = new SetPlaylistName();
-                newSetPlaylist.show(fm, "Create Playlist");
+                SetPlaylistNameFragment newSetPlaylist = new SetPlaylistNameFragment();
+                newSetPlaylist.show(fm, References.FRAGMENT_TAGS.CREATE_PLAYLIST_FRAGMENT);
             }
         });
         return rootView;
@@ -81,26 +88,8 @@ public class PlaylistDialog extends DialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         final FragmentManager fm = getActivity().getFragmentManager();
-        String tag = "Create Playlist";
-        Fragment fragment = fm.findFragmentByTag(tag);
+        Fragment fragment = fm.findFragmentByTag(References.FRAGMENT_TAGS.CREATE_PLAYLIST_FRAGMENT);
         if(fragment != null)
             fm.beginTransaction().remove(fragment).commit();
-    }
-    //    @Override
-//    public void onResume() {
-//        super.onResume();
-//        updateUI();
-//    }
-//
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        updateUI();
-//    }
-
-    public void updateUI(){
-        ContentResolver resolver = getActivity().getContentResolver();
-        mPlaylists = Playlist.getAllPlaylists(resolver);
-        mPlaylistRecyclerView.setAdapter(mPlaylistAdapter);
     }
 }

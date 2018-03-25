@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".Library"
             android:theme="@style/AmpliFire_Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Player"
+        <activity android:name=".Playback.Player"
             android:theme="@style/AmpliFire_Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".Player_service"/>
+        <service android:name=".Playback.Player_service"/>
 
         <receiver android:name=".PlayerReceiver">
             <intent-filter>

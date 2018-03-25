@@ -1,13 +1,8 @@
-package com.project.amplifire;
+package com.project.amplifire.Adapters;
 
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 
 import java.util.ArrayList;
 

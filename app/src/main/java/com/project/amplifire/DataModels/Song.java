@@ -1,4 +1,5 @@
-package com.project.amplifire;
+
+package com.project.amplifire.DataModels;
 
 /**
  * Created by chait on 07-03-2018.
@@ -22,6 +23,18 @@ public class Song {
         mAlbum = songAlbum;
         mFullPath = songFullPath;
         mAlbumId = songAlbumID;
+    }
+
+    public void setTitle(String title) {
+        mTitle = title;
+    }
+
+    public void setArtist(String artist) {
+        mArtist = artist;
+    }
+
+    public void setAlbum(String album) {
+        mAlbum = album;
     }
 
     public long getMId() {
