@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,9 @@ public class InfoFragment extends DialogFragment{
         TextView titleView = rootView.findViewById(R.id.file_track_name);
         TextView albumView = rootView.findViewById(R.id.file_album);
         TextView artistView = rootView.findViewById(R.id.file_artist);
-        Button editButton = rootView.findViewById(R.id.file_edit_button);
+        FloatingActionButton editButton;
+        editButton = rootView.findViewById(R.id.edit_fab);
+        //Button editButton = rootView.findViewById(R.id.edit_fab);
 
         File songFile = new File(currentSong.getMFullPath());
         String location = "" + songFile.getParent();

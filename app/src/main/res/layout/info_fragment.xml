@@ -27,7 +27,7 @@
         android:text="@string/not_available"
         android:textAlignment="viewStart"
         android:textColor="@color/alt_colorPrimary"
-        android:textSize="18sp"
+        android:textSize="14sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline3"
@@ -44,7 +44,7 @@
         android:text="@string/not_available"
         android:textAlignment="viewStart"
         android:textColor="@color/alt_colorPrimary"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/file_album"
@@ -60,7 +60,7 @@
         android:text="@string/not_available"
         android:textAlignment="viewStart"
         android:textColor="@color/alt_colorPrimary"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/file_duration"
@@ -86,7 +86,7 @@
         android:text="@string/not_available"
         android:textAlignment="viewStart"
         android:textColor="@color/alt_colorPrimary"
-        android:textSize="18sp"
+        android:textSize="14sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline3"
@@ -113,7 +113,7 @@
         android:text="@string/not_available"
         android:textAlignment="viewStart"
         android:textColor="@color/alt_colorPrimary"
-        android:textSize="18sp"
+        android:textSize="14sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline3"
@@ -140,27 +140,12 @@
         android:text="@string/not_available"
         android:textAlignment="viewStart"
         android:textColor="@color/alt_colorPrimary"
-        android:textSize="18sp"
+        android:textSize="14sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/file_artist"
         tools:text="Album" />
-
-    <Button
-        android:id="@+id/file_edit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
-        android:text="@string/edit"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file_quality" />
 
     <TextView
         android:id="@+id/infoHeaderText"
@@ -172,12 +157,25 @@
         android:text="Song Info"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Song Info" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/edit_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/file_quality"
+        app:srcCompat="@drawable/ic_edit_white" />
 
     <TextView
         android:id="@+id/filePathText"
@@ -189,7 +187,7 @@
         android:text="File"
         android:textAlignment="textEnd"
         android:textColor="@color/colorText"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -206,7 +204,7 @@
         android:text="Title"
         android:textAlignment="textEnd"
         android:textColor="@color/colorText"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -223,7 +221,7 @@
         android:text="Artist"
         android:textAlignment="textEnd"
         android:textColor="@color/colorText"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -240,7 +238,7 @@
         android:text="Album"
         android:textAlignment="textEnd"
         android:textColor="@color/colorText"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -249,7 +247,7 @@
 
     <TextView
         android:id="@+id/durationText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -257,7 +255,7 @@
         android:text="Duration"
         android:textAlignment="textEnd"
         android:textColor="@color/colorText"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -274,7 +272,7 @@
         android:text="Size"
         android:textAlignment="textEnd"
         android:textColor="@color/colorText"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
@@ -286,7 +284,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.21" />
+        app:layout_constraintGuide_percent="0.19" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class EditTagsFragment extends DialogFragment {
         final EditText titleEditView = rootView.findViewById(R.id.file_track_name_edit);
         final EditText albumEditView = rootView.findViewById(R.id.file_album_edit);
         final EditText artistEditView = rootView.findViewById(R.id.file_artist_edit);
-        Button submitButton = rootView.findViewById(R.id.file_submit_button);
+        FloatingActionButton submitButton = rootView.findViewById(R.id.file_submit_fab);
 
         String title = currentSong.getMTitle();
         String album = currentSong.getMAlbum();
