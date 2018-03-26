@@ -5,16 +5,20 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Outline;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideType;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -479,15 +483,17 @@ public class Player extends Activity implements PlaybackInterface {
         artistN = findViewById(R.id.artistName);
         ImageView albumImage = findViewById(R.id.image_album_art);
 
+        albumImage.setImageResource(R.drawable.album_art_template);
+        if(artwork != null) {
+            //albumImage.setImageBitmap(artwork);
+            Glide.with(this).load(uri).into(albumImage);
+        }
+
         trackN.setText(currentSong.getMTitle());
         trackN.setSelected(true);
         artistN.setText(currentSong.getMArtist());
         artistN.setSelected(true);
         albumImage.requestFocus();
-        albumImage.setImageResource(R.drawable.album_art_template);
-        if(artwork != null) {
-            albumImage.setImageBitmap(artwork);
-        }
     }
 
     @Override
