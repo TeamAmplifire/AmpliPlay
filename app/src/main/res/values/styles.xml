@@ -15,6 +15,7 @@
         <item name="android:textColorPrimary">@color/colorText</item>
         <item name="android:textColorPrimaryInverse">@color/colorLight</item>
         <item name="android:textColorSecondaryInverse">@color/colorLight</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="appBarTheme" parent="AmpliFire_Light">

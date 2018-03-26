@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,25 +58,27 @@ public class InfoFragment extends DialogFragment{
         final FragmentManager fm = getFragmentManager();
 
         TextView locationView = rootView.findViewById(R.id.file_location);
-        TextView extensionView = rootView.findViewById(R.id.file_extension);
+        //TextView extensionView = rootView.findViewById(R.id.file_extension);
         TextView durationView = rootView.findViewById(R.id.file_duration);
         TextView sizeView = rootView.findViewById(R.id.file_quality);
         TextView titleView = rootView.findViewById(R.id.file_track_name);
         TextView albumView = rootView.findViewById(R.id.file_album);
         TextView artistView = rootView.findViewById(R.id.file_artist);
-        Button editButton = rootView.findViewById(R.id.file_edit_button);
+        FloatingActionButton editButton;
+        editButton = rootView.findViewById(R.id.edit_fab);
+        //Button editButton = rootView.findViewById(R.id.edit_fab);
 
         File songFile = new File(currentSong.getMFullPath());
-        String location = "Location: " + songFile.getParent();
-        String extension = "Extension: " + songFile.getAbsolutePath().substring(songFile.getAbsolutePath().lastIndexOf("."));
-        String duration = "Duration: " + VerticalAdapter.getFormattedDuration(currentSong.getMDuration());
-        String size = "Size: " + String.format("%.2f", (double)songFile.getTotalSpace()/(1024*1024*1024)) + "MB";
-        String title = "Title: " + currentSong.getMTitle();
-        String album = "Album: " + currentSong.getMAlbum();
-        String artist = "Artist: " + currentSong.getMArtist();
+        String location = "" + songFile.getParent();
+        //String extension = "" + songFile.getAbsolutePath().substring(songFile.getAbsolutePath().lastIndexOf("."));
+        String duration = "" + VerticalAdapter.getFormattedDuration(currentSong.getMDuration());
+        String size = "" + String.format("%.2f", (double)songFile.getTotalSpace()/(1024*1024*1024)) + "MB";
+        String title = "" + currentSong.getMTitle();
+        String album = "" + currentSong.getMAlbum();
+        String artist = "" + currentSong.getMArtist();
 
         locationView.setText(location);
-        extensionView.setText(extension);
+        //extensionView.setText(extension);
         durationView.setText(duration);
         sizeView.setText(size);
         titleView.setText(title);

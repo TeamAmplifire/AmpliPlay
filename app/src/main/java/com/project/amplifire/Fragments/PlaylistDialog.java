@@ -5,6 +5,8 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ContentResolver;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.project.amplifire.Adapters.PlaylistAdapter;
 import com.project.amplifire.DataModels.Playlist;
@@ -46,7 +49,7 @@ public class PlaylistDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.dialog_playlist, container,
+        final View rootView = inflater.inflate(R.layout.playlist_dialog_fragment, container,
                 false);
         final FragmentManager fm = getFragmentManager();
         ContentResolver resolver = getActivity().getContentResolver();
@@ -55,6 +58,13 @@ public class PlaylistDialog extends DialogFragment {
         PlaylistAdapter playlistAdapter = new PlaylistAdapter(mPlaylists, currentSelectedSong, getActivity());
         Log.d("size", mPlaylists.size()+"");
         RecyclerView playlistRecyclerView = rootView.findViewById(R.id.playlist_View);
+
+//        AlertDialog alertDialogObject = dialogBuilder.create();
+//        ListView listView=alertDialogObject.getListView();
+//        listView.setDivider(new ColorDrawable(Color.BLUE)); // set color
+//        listView.setDividerHeight(2); // set height
+//        alertDialogObject.show();
+
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                 playlistRecyclerView.getContext(),
                 mLinearLayoutManager.getOrientation()

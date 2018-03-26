@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.project.amplifire.Library;
 import com.project.amplifire.R;
@@ -70,11 +72,14 @@ public class songListFragment extends Fragment
         setList();
         setHasOptionsMenu(true);
         Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
-        ((Library)getActivity()).setSupportActionBar(libraryToolbar);
-        String title = "AmpliPlay";
-        SpannableString s = new SpannableString(title);
-        s.setSpan(new ForegroundColorSpan(Color.parseColor("#ecf0f1")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ((Library)getActivity()).getSupportActionBar().setTitle(s);
+//        ((Library)getActivity()).setSupportActionBar(libraryToolbar);
+//        String title = "AmpliPlay";
+//        SpannableString s = new SpannableString(title);
+//        s.setSpan(new ForegroundColorSpan(Color.parseColor("#B53471")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        ((Library)getActivity()).getSupportActionBar().setTitle(s);
+
+
+
         libraryToolbar.inflateMenu(R.menu.search_menu);
 
         return rootView;
@@ -215,9 +220,13 @@ public class songListFragment extends Fragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+
         getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        EditText searchText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchText.setTextColor(getResources().getColor(R.color.colorText));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

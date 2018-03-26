@@ -5,7 +5,7 @@
     android:id="@+id/player_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLight">
+    android:background="@color/colorPrimary">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/albumLayout"
@@ -45,13 +45,14 @@
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
+
+            android:elevation="4dp"
             app:layout_constraintBottom_toTopOf="@+id/shuffle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/album_art_template_alt2" />
+            app:srcCompat="@drawable/album_art_template" />
 
         <android.support.constraint.Guideline
             android:id="@+id/albumArtGuidelineRight"
@@ -80,6 +81,9 @@
         android:id="@+id/controlsLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+
+        android:clipChildren="false"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,9 +144,12 @@
 
             android:layout_marginBottom="16dp"
             android:layout_marginTop="8dp"
+            android:elevation="4dp"
             android:minHeight="0dp"
             android:minWidth="0dp"
+
             android:padding="10dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnNext"
             app:layout_constraintStart_toEndOf="@+id/btnPrev"

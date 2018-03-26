@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_white"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_white_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -33,6 +33,14 @@
         </activity>
 
         <service android:name=".Playback.Player_service"/>
+
+        <receiver android:name=".PlayerReceiver">
+            <intent-filter>
+                <action android:name="com.project.amplifire.player.startforeground"/>
+                <action android:name="com.project.amplifire.player.playpause"/>
+                <action android:name="com.project.amplifire.action.stopforeground"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 
