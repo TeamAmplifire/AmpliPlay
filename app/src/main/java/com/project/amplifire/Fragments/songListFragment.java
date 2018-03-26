@@ -6,7 +6,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,9 +18,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,10 +26,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.project.amplifire.Library;
-import com.project.amplifire.R;
-import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.Adapters.VerticalAdapter;
+import com.project.amplifire.DataModels.Song;
+import com.project.amplifire.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -145,7 +140,7 @@ public class songListFragment extends Fragment
                     String thisFullPath = musicCursor.getString(fullPathColumn);
                     if (thisArtist.equals("<unknown>")) {
                         ContentValues values = new ContentValues();
-                        values.put(MediaStore.Audio.Media.ARTIST, "");
+                        values.put(MediaStore.Audio.Media.ARTIST, "Unknown Artist");
                         String where = "_ID=?";
                         musicResolver.update(musicUri, values, where, new String[]{Long.toString(thisID)});
                     }
@@ -155,15 +150,15 @@ public class songListFragment extends Fragment
                     String folderName = parentFile.getName();
                     if(thisAlbum.equals(folderName)){
                         ContentValues values = new ContentValues();
-                        values.put(MediaStore.Audio.Media.ALBUM, "");
+                        values.put(MediaStore.Audio.Media.ALBUM, "Unknown Album");
                         String where = "_ID=?";
                         musicResolver.update(musicUri, values, where, new String[]{Long.toString(thisID)});
                     }
                     if(thisArtist.equals("<unknown>")){
-                        thisArtist = "";
+                        thisArtist = "Unknown Artist";
                     }
                     if(thisAlbum.equals("<unknown>")){
-                        thisAlbum = "";
+                        thisAlbum = "Unknown Album";
                     }
                     mSongArrayList.add(new Song(thisID, thisAlbumID, thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
                 } while (musicCursor.moveToNext());
