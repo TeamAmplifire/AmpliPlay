@@ -13,18 +13,22 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/albumartPlayerSeparator"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
             android:id="@+id/shuffle"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
             android:cropToPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/albumArtGuidelineRight"
+            app:layout_constraintTop_toBottomOf="@+id/image_album_art"
             app:srcCompat="@drawable/ic_shuffle_disabled" />
 
         <ImageButton
@@ -32,42 +36,54 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
             android:cropToPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/albumArtGuidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/image_album_art"
             app:srcCompat="@drawable/ic_repeat_disabled" />
 
         <ImageView
             android:id="@+id/image_album_art"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
+
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/album_art_template"
+            android:cropToPadding="false"
             android:elevation="4dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toTopOf="@+id/shuffle"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/albumArtGuidelineBottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/album_art_template" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Guideline
             android:id="@+id/albumArtGuidelineRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="371dp" />
+            app:layout_constraintGuide_percent="0.90" />
 
         <android.support.constraint.Guideline
             android:id="@+id/albumArtGuidelineLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="40dp" />
+            app:layout_constraintGuide_percent="0.10" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/albumArtGuidelineBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="346dp" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -136,26 +152,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/trackName" />
-
-        <ImageButton
-            android:id="@+id/btnPlay"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
-            android:elevation="4dp"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-
-            android:padding="10dp"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnNext"
-            app:layout_constraintStart_toEndOf="@+id/btnPrev"
-            app:layout_constraintTop_toTopOf="@+id/buttonsGuidelineTop"
-            app:srcCompat="@drawable/ic_play_circle_filled" />
 
         <ImageButton
             android:id="@+id/btnPrev"
@@ -259,6 +255,26 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="160dp" />
+
+        <ImageButton
+            android:id="@+id/btnPlay"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:elevation="4dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+
+            android:padding="10dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnNext"
+            app:layout_constraintStart_toEndOf="@+id/btnPrev"
+            app:layout_constraintTop_toTopOf="@+id/buttonsGuidelineTop"
+            app:srcCompat="@drawable/ic_play_circle_filled" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
