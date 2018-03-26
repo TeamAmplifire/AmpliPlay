@@ -94,6 +94,14 @@ public class songListFragment extends Fragment
             mSongArrayList.clear();
         }
     }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        songAdt.updateList(mSongArrayList);
+//        mSongView.setAdapter(songAdt);
+//        mSongView.getLayoutManager().scrollToPosition(VerticalAdapter.topElementPosition);
+//    }
+
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState)

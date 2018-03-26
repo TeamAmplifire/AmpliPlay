@@ -17,9 +17,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
+import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
@@ -72,6 +72,7 @@ public class EditTagsFragment extends DialogFragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                int pos = VerticalAdapter.getSongsList().indexOf(currentSong);
                 String newTitle = titleEditView.getText().toString();
                 String newAlbum = albumEditView.getText().toString();
                 String newArtist = artistEditView.getText().toString();
@@ -87,11 +88,13 @@ public class EditTagsFragment extends DialogFragment {
                 values.put(MediaStore.Audio.Media.ALBUM, newAlbum);
                 values.put(MediaStore.Audio.Media.ARTIST, newArtist);
                 musicResolver.update(musicUri, values, where, args);
+//                VerticalAdapter.setSongAtPosition(pos, currentSong);
                 Fragment fragment = fm.findFragmentByTag(References.FRAGMENT_TAGS.EDIT_TAGS_FRAGMENT);
-                if(fragment != null)
+                if(fragment != null) {
                     fm.beginTransaction().remove(fragment).commit();
-                InfoFragment newInfoFragment = new InfoFragment(currentSong);
-                newInfoFragment.show(fm, References.FRAGMENT_TAGS.INFO_FRAGMENT);
+                }
+//                InfoFragment newInfoFragment = new InfoFragment(currentSong);
+//                newInfoFragment.show(fm, References.FRAGMENT_TAGS.INFO_FRAGMENT);
             }
         });
 

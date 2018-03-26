@@ -38,6 +38,8 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     private PopupMenu mPopupMenu;
     private Context mContext;
     private ArrayList<MyViewHolder> holders;
+    public static int topElementPosition;
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
@@ -109,12 +111,13 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                                @Override
                                                public void onClick(View view) {
                                                    setColor();
-                                                       holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-                                                       holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-                                                       holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-                                                       holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-                                                       play(mContext, tempPosition);
-                                                   }
+                                                   holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                                   holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                                   holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                                   holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+                                                   play(mContext, tempPosition);
+                                                   topElementPosition = tempPosition;
+                                               }
                                            });
         holder.songOverflowButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -128,6 +131,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                         public boolean onMenuItemClick(MenuItem item) {
                             switch(item.getItemId()) {
                                 case R.id.play:
+                                    topElementPosition = tempPosition;
                                     setColor();
                                     holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
                                     holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
@@ -173,9 +177,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
 //                                    renameSong(currentSong.getMId(), newName);
                                     break;
                                 case R.id.info:
+                                    topElementPosition = tempPosition;
                                     InfoFragment infoFragment = new InfoFragment(currentSong);
                                     infoFragment.show(fm, References.FRAGMENT_TAGS.INFO_FRAGMENT);
                                     notifyDataSetChanged();
+//                                    Song newSong = mSongs.get(tempPosition);
+//                                    mSongs.set(tempPosition, newSong);
                                     break;
                             }
                             return false;
@@ -280,5 +287,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
             }
         }
         return songDurationString;
+    }
+    public static void setSongAtPosition(int position, Song song){
+//        mSongs.remove(position);
+        mSongs.set(position, song);
     }
 }

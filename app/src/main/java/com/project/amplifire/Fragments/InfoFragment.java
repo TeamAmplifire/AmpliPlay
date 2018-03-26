@@ -13,7 +13,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.project.amplifire.Adapters.VerticalAdapter;
@@ -78,7 +77,7 @@ public class InfoFragment extends DialogFragment{
         String artist = "" + currentSong.getMArtist();
 
         locationView.setText(location);
-        //extensionView.setText(extension);
+//        extensionView.setText(extension);
         durationView.setText(duration);
         sizeView.setText(size);
         titleView.setText(title);
@@ -94,7 +93,6 @@ public class InfoFragment extends DialogFragment{
                 newEditTagsFragment.show(fm, References.FRAGMENT_TAGS.EDIT_TAGS_FRAGMENT);
             }
         });
-
         return rootView;
     }
 }
