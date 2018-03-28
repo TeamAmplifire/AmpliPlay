@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
@@ -47,6 +48,7 @@ public class songListFragment extends Fragment
     public ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
+    private FastScroller mFastScroller;
 
     public songListFragment(){}
 
@@ -64,8 +66,11 @@ public class songListFragment extends Fragment
         mSongArrayList = new ArrayList<Song>();
         getSongList();
         mSongView = rootView.findViewById(R.id.song_list);
+        mFastScroller = rootView.findViewById(R.id.fastscroll);
         setList();
         setHasOptionsMenu(true);
+
+
         Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
 //        ((Library)getActivity()).setSupportActionBar(libraryToolbar);
 //        String title = "AmpliPlay";
@@ -197,6 +202,7 @@ public class songListFragment extends Fragment
         );
         mSongView.addItemDecoration(dividerItemDecoration);
         mSongView.setAdapter(songAdt);
+        mFastScroller.setRecyclerView(mSongView);
     }
 
     public void filter(String text)

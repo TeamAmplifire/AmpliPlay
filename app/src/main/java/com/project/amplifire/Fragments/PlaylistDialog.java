@@ -59,20 +59,14 @@ public class PlaylistDialog extends DialogFragment {
         Log.d("size", mPlaylists.size()+"");
         RecyclerView playlistRecyclerView = rootView.findViewById(R.id.playlist_View);
 
-//        AlertDialog alertDialogObject = dialogBuilder.create();
-//        ListView listView=alertDialogObject.getListView();
-//        listView.setDivider(new ColorDrawable(Color.BLUE)); // set color
-//        listView.setDividerHeight(2); // set height
-//        alertDialogObject.show();
-
         playlistRecyclerView.setLayoutManager(mLinearLayoutManager);
         playlistRecyclerView.setAdapter(playlistAdapter);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                playlistRecyclerView.getContext(),
-                mLinearLayoutManager.getOrientation()
-        );
-        playlistRecyclerView.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+//                playlistRecyclerView.getContext(),
+//                mLinearLayoutManager.getOrientation()
+//        );
+//        playlistRecyclerView.addItemDecoration(dividerItemDecoration);
 
         FloatingActionButton floatingActionButton = rootView.findViewById(R.id.playlist_floating_action);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

@@ -20,6 +20,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.futuremind.recyclerviewfastscroll.SectionTitleProvider;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.Fragments.DFragment;
@@ -32,7 +33,7 @@ import com.project.amplifire.R;
 import java.io.File;
 import java.util.ArrayList;
 
-public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder> {
+public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder> implements SectionTitleProvider {
 
     private static ArrayList<Song> mSongs;
     private PopupMenu mPopupMenu;
@@ -130,6 +131,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             switch(item.getItemId()) {
+
                                 case R.id.play:
                                     topElementPosition = tempPosition;
                                     setColor();
@@ -139,6 +141,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
                                     play(mContext, tempPosition);
                                     break;
+
                                 case R.id.delete:
                                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                                     builder.setTitle("Delete");
@@ -158,10 +161,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     builder.create();
                                     builder.show();
                                     break;
+
                                 case R.id.add_to_playlist:
                                     PlaylistDialog playlistDialog = new PlaylistDialog(currentSong);
                                     playlistDialog.show(fm, References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
-                                    break;
+
+
                                 case R.id.enqueue:
                                     if(Player.enqueue == null) {
                                         Player.enqueue = new ArrayList<Song>();
@@ -169,13 +174,16 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                         Player.enqueue.add(currentSong);
                                     Toast.makeText(v.getContext(), "ENQUEUE", Toast.LENGTH_SHORT).show();
                                     break;
+
                                 case R.id.apply_ringtone:
                                     Toast.makeText(v.getContext(), "APPLY RINGTONE", Toast.LENGTH_SHORT).show();
                                     break;
+
                                 case R.id.rename:
 //                                    String newName;
 //                                    renameSong(currentSong.getMId(), newName);
                                     break;
+
                                 case R.id.info:
                                     topElementPosition = tempPosition;
                                     InfoFragment infoFragment = new InfoFragment(currentSong);
@@ -288,8 +296,20 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         }
         return songDurationString;
     }
+
     public static void setSongAtPosition(int position, Song song){
 //        mSongs.remove(position);
         mSongs.set(position, song);
+    }
+
+    public Song getSongItem(int position)
+    {
+        return mSongs.get(position);
+    }
+
+    @Override
+    public String getSectionTitle(int position) {
+        //this String will be shown in a bubble for specified position
+        return getSongItem(position).getMTitle().substring(0, 1);
     }
 }
