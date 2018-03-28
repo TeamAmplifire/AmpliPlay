@@ -65,13 +65,15 @@ public class PlaylistDialog extends DialogFragment {
 //        listView.setDividerHeight(2); // set height
 //        alertDialogObject.show();
 
+        playlistRecyclerView.setLayoutManager(mLinearLayoutManager);
+        playlistRecyclerView.setAdapter(playlistAdapter);
+
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                 playlistRecyclerView.getContext(),
                 mLinearLayoutManager.getOrientation()
         );
         playlistRecyclerView.addItemDecoration(dividerItemDecoration);
-        playlistRecyclerView.setLayoutManager(mLinearLayoutManager);
-        playlistRecyclerView.setAdapter(playlistAdapter);
+
         FloatingActionButton floatingActionButton = rootView.findViewById(R.id.playlist_floating_action);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
