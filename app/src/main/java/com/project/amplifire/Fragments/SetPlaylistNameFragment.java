@@ -38,7 +38,7 @@ public class SetPlaylistNameFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {}
         })
-                .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Create", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final FragmentManager fm = getActivity().getFragmentManager();

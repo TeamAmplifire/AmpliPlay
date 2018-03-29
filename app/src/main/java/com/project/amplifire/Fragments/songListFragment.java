@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -196,11 +197,11 @@ public class songListFragment extends Fragment
                 return o1.getMTitle().compareTo(o2.getMTitle());
             }
         });
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                mSongView.getContext(),
-                mLinearLayoutManager.getOrientation()
-        );
-        mSongView.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+//                mSongView.getContext(),
+//                mLinearLayoutManager.getOrientation()
+//        );
+//        mSongView.addItemDecoration(dividerItemDecoration);
         mSongView.setAdapter(songAdt);
         mFastScroller.setRecyclerView(mSongView);
     }
@@ -233,9 +234,14 @@ public class songListFragment extends Fragment
         getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        EditText searchText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchText.setTextColor(getResources().getColor(R.color.colorText));
+//        searchView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//        EditText searchText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+//        searchText.setTextColor(getResources().getColor(R.color.colorText));
+
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
+        searchView.setLayoutParams(params);
+        //searchView.expandActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -248,5 +254,19 @@ public class songListFragment extends Fragment
                 return false;
             }
         });
+
+        MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+
+                return true;
+            }
+        };
+        MenuItemCompat.setOnActionExpandListener(searchItem, expandListener);
     }
 }
