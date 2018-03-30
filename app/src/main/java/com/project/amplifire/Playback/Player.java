@@ -43,6 +43,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
+import com.project.amplifire.Utilities.AlbumArtView;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -483,7 +484,7 @@ public class Player extends Activity implements PlaybackInterface {
         }
         trackN = findViewById(R.id.trackName);
         artistN = findViewById(R.id.artistName);
-        ImageView albumImage = findViewById(R.id.image_album_art);
+        AlbumArtView albumImage = findViewById(R.id.image_album_art);
 
         if(artwork != null) {
             //albumImage.setImageBitmap(artwork);
