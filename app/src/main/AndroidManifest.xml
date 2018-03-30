@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Playback.Player"
-            android:theme="@style/AmpliFire_Light">
+            android:theme="@style/Amplifire_LightStatusBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

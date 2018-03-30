@@ -6,9 +6,11 @@
     <color name="alt_colorLight">#ecf0f1</color>
     <color name="alt_colorText">#2c3e50</color>
 
-    <color name="colorPrimary">#ecf0f1</color>
-    <color name="colorPrimaryDark">#B53471</color>
-    <color name="colorAccent">#B53471</color>
+    <color name="colorPrimary">#eceff1</color>
+    <!--<color name="colorPrimary">#ecf0f1</color>-->
+    <color name="colorPrimaryDark">#c51162</color>
+    <color name="colorAccent">#f50057</color>
+    <!--<color name="colorAccent">#B53471</color>-->
     <!--<color name="colorAccent">#ed4c67</color>-->
     <color name="colorLight">#ecf0f1</color>
     <color name="colorOff">#bdc3c7</color>

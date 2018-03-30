@@ -13,7 +13,10 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/libraryToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:elevation="6dp"
+            android:minHeight="70dp"
             app:layout_scrollFlags="scroll|enterAlways"></android.support.v7.widget.Toolbar>
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
@@ -24,8 +27,11 @@
             android:id="@+id/library_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:elevation="6dp"
+            app:tabIndicatorColor="@color/colorPrimary"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorAccent">
+            app:tabSelectedTextColor="@color/colorPrimary">
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"

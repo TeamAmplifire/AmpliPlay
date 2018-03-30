@@ -234,10 +234,11 @@ public class songListFragment extends Fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-        getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
+        inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         Drawable searchIcon = ContextCompat.getDrawable(getActivity(), R.drawable.ic_search_black_24dp);
-//        searchIcon.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+        searchIcon.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         searchItem.setIcon(searchIcon);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 //        searchView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
