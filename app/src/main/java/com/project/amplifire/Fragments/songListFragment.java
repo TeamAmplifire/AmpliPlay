@@ -197,7 +197,7 @@ public class songListFragment extends Fragment
             @Override
             public int compare(Song o1, Song o2)
             {
-                return o1.getMTitle().compareTo(o2.getMTitle());
+                return o1.getMTitle().toLowerCase().compareTo(o2.getMTitle().toLowerCase());
             }
         });
 //        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
