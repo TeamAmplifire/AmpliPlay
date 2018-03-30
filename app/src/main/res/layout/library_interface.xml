@@ -27,7 +27,7 @@
             android:id="@+id/library_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="@drawable/ic_amplifire_gradient"
             android:elevation="6dp"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabMode="scrollable"

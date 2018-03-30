@@ -28,9 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_check_black_24dp" />
-                            <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="D:\Android Assets\album_art_template.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_ampliplay_gradient" />
+                            <entry key="sourceFile" value="D:\Android Assets\ampliplay_gradient.svg" />
                           </map>
                         </option>
                       </PersistentState>
