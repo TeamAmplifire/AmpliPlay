@@ -29,8 +29,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_ampliplay_gradient" />
-                            <entry key="sourceFile" value="D:\Android Assets\ampliplay_gradient.svg" />
+                            <entry key="outputName" value="ic_amplifire_gradient_inverted" />
+                            <entry key="sourceFile" value="D:\Android Assets\amplifire_gradient_inverted.svg" />
                           </map>
                         </option>
                       </PersistentState>

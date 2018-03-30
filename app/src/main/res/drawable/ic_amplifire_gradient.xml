@@ -4,10 +4,11 @@
     <path android:pathData="M0,0h1000v1000h-1000z"
         android:strokeColor="#000000" android:strokeWidth="1">
         <aapt:attr name="android:fillColor">
-            <gradient android:endX="500" android:endY="-4.066946E-6"
+            <gradient android:endX="500" android:endY="0"
                 android:startX="500" android:startY="1000" android:type="linear">
                 <item android:color="#FFED497B" android:offset="0"/>
-                <item android:color="#FFEE3D75" android:offset="0.1641"/>
+                <item android:color="#FFEF3B74" android:offset="0.2554"/>
+                <item android:color="#FFF21762" android:offset="0.7347"/>
                 <item android:color="#FFF50057" android:offset="1"/>
             </gradient>
         </aapt:attr>
