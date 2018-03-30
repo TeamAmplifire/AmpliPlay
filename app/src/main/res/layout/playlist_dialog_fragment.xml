@@ -43,10 +43,12 @@
         android:layout_marginEnd="16dp"
         android:minHeight="60dp"
         android:minWidth="60dp"
-        android:src="@drawable/ic_add_white"
+        android:src="@drawable/ic_add_black_24dp"
+        android:tint="@color/colorPrimary"
         app:backgroundTint="@color/colorAccent"
         app:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/colorPrimary" />
 
 </android.support.constraint.ConstraintLayout>

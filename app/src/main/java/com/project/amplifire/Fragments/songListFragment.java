@@ -6,12 +6,15 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DividerItemDecoration;
@@ -233,6 +236,9 @@ public class songListFragment extends Fragment
 
         getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
+        Drawable searchIcon = ContextCompat.getDrawable(getActivity(), R.drawable.ic_search_black_24dp);
+//        searchIcon.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+        searchItem.setIcon(searchIcon);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 //        searchView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 //        EditText searchText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);

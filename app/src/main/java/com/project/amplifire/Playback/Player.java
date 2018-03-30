@@ -5,20 +5,18 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Outline;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.view.View;
-import android.view.ViewOutlineProvider;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideType;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -143,7 +141,9 @@ public class Player extends Activity implements PlaybackInterface {
     private void shuffle() {
         btnShuffle = findViewById(R.id.shuffle);
         btnShuffle.requestFocus();
-        btnShuffle.setImageResource(R.drawable.ic_shuffle_disabled);
+        btnShuffle.setImageResource(R.drawable.ic_shuffle_black_40dp);
+        btnShuffle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);
+        btnShuffle.setAlpha(0.54f);
         btnShuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,11 +153,13 @@ public class Player extends Activity implements PlaybackInterface {
                 switch (shuffle_clickCounter)
                 {
                     case 0:
-                        btnShuffle.setImageResource(R.drawable.ic_shuffle_disabled);
+                        btnShuffle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);
+                        btnShuffle.setAlpha(0.54f);
                         mExoplayerEventListener.onShuffleModeEnabledChanged(false);
                         break;
                     case 1:
-                        btnShuffle.setImageResource(R.drawable.ic_shuffle_enabled);
+                        btnShuffle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), android.graphics.PorterDuff.Mode.SRC_IN);
+                        btnShuffle.setAlpha(1.0f);
                         mExoplayerEventListener.onShuffleModeEnabledChanged(true);
                         break;
                 }
@@ -168,7 +170,7 @@ public class Player extends Activity implements PlaybackInterface {
     private void previous() {
         btnPrev = findViewById(R.id.btnPrev);
         btnPrev.requestFocus();
-        btnPrev.setImageResource(R.drawable.ic_skip_previous_dark);
+        btnPrev.setImageResource(R.drawable.ic_skip_previous_black_50dp);
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,7 +192,7 @@ public class Player extends Activity implements PlaybackInterface {
     private void next() {
         btnNext = findViewById(R.id.btnNext);
         btnNext.requestFocus();
-        btnNext.setImageResource(R.drawable.ic_skip_next_dark);
+        btnNext.setImageResource(R.drawable.ic_skip_next_black_50dp);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,7 +221,7 @@ public class Player extends Activity implements PlaybackInterface {
     private void play() {
         btnPlay = findViewById(R.id.btnPlay);
         btnPlay.requestFocus();
-        btnPlay.setImageResource(R.drawable.ic_pause_circle_filled);
+        btnPlay.setImageResource(R.drawable.ic_pause_circle_filled_black_60dp);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,10 +236,10 @@ public class Player extends Activity implements PlaybackInterface {
         player.setPlayWhenReady(play);
         if(isPlaying){
             setProgress();
-            btnPlay.setImageResource(R.drawable.ic_pause_circle_filled);
+            btnPlay.setImageResource(R.drawable.ic_pause_circle_filled_black_60dp);
         }else{
             setProgress();
-            btnPlay.setImageResource(R.drawable.ic_play_circle_filled);
+            btnPlay.setImageResource(R.drawable.ic_play_circle_filled_black_60dp);
         }
     }
 
@@ -483,10 +485,12 @@ public class Player extends Activity implements PlaybackInterface {
         artistN = findViewById(R.id.artistName);
         ImageView albumImage = findViewById(R.id.image_album_art);
 
-        albumImage.setImageResource(R.drawable.album_art_template);
         if(artwork != null) {
             //albumImage.setImageBitmap(artwork);
             Glide.with(this).load(uri).into(albumImage);
+        }
+        else {
+            albumImage.setImageResource(R.drawable.ic_album_art_template);
         }
 
         trackN.setText(currentSong.getMTitle());
@@ -510,7 +514,9 @@ public class Player extends Activity implements PlaybackInterface {
     public void repeat() {
         btnRepeat = findViewById(R.id.repeat);
         btnRepeat.requestFocus();
-        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
+        btnRepeat.setImageResource(R.drawable.ic_repeat_black_40dp);
+        btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);
+        btnRepeat.setAlpha(0.54f);
         btnRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -519,15 +525,21 @@ public class Player extends Activity implements PlaybackInterface {
                 switch (repeat_clickCount)
                 {
                     case 0:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_disabled);
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_black_40dp);
+                        btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);
+                        btnRepeat.setAlpha(0.54f);
                         mExoplayerEventListener.onRepeatModeChanged(0);
                         break;
                     case 1:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_enabled);
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_one_black_40dp);
+                        btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), android.graphics.PorterDuff.Mode.SRC_IN);
+                        btnRepeat.setAlpha(1.0f);
                         mExoplayerEventListener.onRepeatModeChanged(1);
                         break;
                     case 2:
-                        btnRepeat.setImageResource(R.drawable.ic_repeat_enabled);
+                        btnRepeat.setImageResource(R.drawable.ic_repeat_black_40dp);
+                        btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), android.graphics.PorterDuff.Mode.SRC_IN);
+                        btnRepeat.setAlpha(1.0f);
                         mExoplayerEventListener.onRepeatModeChanged(2);
                         break;
                 }

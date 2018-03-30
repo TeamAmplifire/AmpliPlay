@@ -1,8 +1,11 @@
 package com.project.amplifire;
 
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -37,9 +40,11 @@ public class Library extends AppCompatActivity {
                 ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
 
 
+        Drawable logo = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_ampliplay);
+        logo.setColorFilter(getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setLogo(R.drawable.ic_action_actionbarlogo);
+        getSupportActionBar().setLogo(logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
     }
     @Override

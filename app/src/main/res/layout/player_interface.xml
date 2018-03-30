@@ -25,11 +25,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
+            android:alpha=".54"
             android:cropToPadding="true"
+            android:tint="@color/colorText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/albumArtGuidelineRight"
             app:layout_constraintTop_toBottomOf="@+id/image_album_art"
-            app:srcCompat="@drawable/ic_shuffle_disabled" />
+            app:srcCompat="@drawable/ic_shuffle_black_40dp" />
 
         <ImageButton
             android:id="@+id/repeat"
@@ -38,11 +40,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
+            android:alpha=".54"
             android:cropToPadding="true"
+            android:tint="@color/colorText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/albumArtGuidelineLeft"
             app:layout_constraintTop_toBottomOf="@+id/image_album_art"
-            app:srcCompat="@drawable/ic_repeat_disabled" />
+            app:srcCompat="@drawable/ic_repeat_black_40dp" />
 
         <ImageView
             android:id="@+id/image_album_art"
@@ -52,17 +56,20 @@
 
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
-            android:background="@drawable/album_art_template"
+            android:background="@color/alt_colorLight"
             android:cropToPadding="true"
-            android:elevation="4dp"
-            android:scaleType="centerCrop"
+            android:elevation="6dp"
+            android:maxWidth="250dp"
+            android:minWidth="250dp"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/albumArtGuidelineBottom"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <android.support.constraint.Guideline
             android:id="@+id/albumArtGuidelineRight"
@@ -165,11 +172,12 @@
             android:minHeight="0dp"
             android:minWidth="0dp"
             android:padding="10dp"
+            android:tint="@color/colorText"
             app:layout_constraintBottom_toBottomOf="@id/controlsLayout"
             app:layout_constraintEnd_toStartOf="@+id/btnPlay"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/buttonsGuidelineTop"
-            app:srcCompat="@drawable/ic_skip_previous_dark" />
+            app:srcCompat="@drawable/ic_skip_previous_black_50dp" />
 
         <TextView
             android:id="@+id/player_end_time"
@@ -243,11 +251,12 @@
             android:minHeight="0dp"
             android:minWidth="0dp"
             android:padding="10dp"
+            android:tint="@color/colorText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnPlay"
             app:layout_constraintTop_toTopOf="@+id/buttonsGuidelineTop"
-            app:srcCompat="@drawable/ic_skip_next_dark" />
+            app:srcCompat="@drawable/ic_skip_next_black_50dp" />
 
         <android.support.constraint.Guideline
             android:id="@+id/buttonsGuidelineTop"
@@ -268,13 +277,14 @@
             android:minHeight="0dp"
             android:minWidth="0dp"
 
-            android:padding="10dp"
+            android:padding="8dp"
 
+            android:tint="@color/colorText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnNext"
             app:layout_constraintStart_toEndOf="@+id/btnPrev"
             app:layout_constraintTop_toTopOf="@+id/buttonsGuidelineTop"
-            app:srcCompat="@drawable/ic_play_circle_filled" />
+            app:srcCompat="@drawable/ic_pause_circle_filled_black_60dp" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

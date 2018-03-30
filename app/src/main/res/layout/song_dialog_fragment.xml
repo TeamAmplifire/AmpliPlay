@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/album_art_template" />
+        app:srcCompat="@drawable/ic_album_art_template" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -129,7 +129,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_more_vert_dark_45dp" />
+            app:srcCompat="@drawable/ic_more_vert_black_30dp" />
 
         <android.support.constraint.Guideline
             android:id="@+id/verticalListGuideline"
@@ -148,7 +148,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_play_arrow_white"
+        android:src="@drawable/ic_play_circle_filled_black_60dp"
         app:backgroundTint="@color/colorAccent"
         app:elevation="4dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
