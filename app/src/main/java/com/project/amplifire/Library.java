@@ -14,11 +14,17 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.FragmentAdapter;
 import com.project.amplifire.Fragments.songListFragment;
 
+import java.util.List;
+
 
 public class Library extends AppCompatActivity {
+
+    private MaterialSearchView mSearchView;
+    private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +52,10 @@ public class Library extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setLogo(logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        mSearchView = findViewById(R.id.search_view);
     }
+
     @Override
     protected void onStart(){
         super.onStart();
@@ -66,4 +75,15 @@ public class Library extends AppCompatActivity {
         super.onResume();
     }
 
+    @Override
+    public void onBackPressed() {
+        if(mSearchView.isSearchOpen())
+        {
+            mSearchView.closeSearch();
+            //mTabLayout.setEnabled(true);
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
 }

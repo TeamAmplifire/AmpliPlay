@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -31,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.futuremind.recyclerviewfastscroll.FastScroller;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
@@ -53,6 +55,8 @@ public class songListFragment extends Fragment
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
     private FastScroller mFastScroller;
+    private MaterialSearchView mSearchView;
+    private TabLayout libraryTabLayout;
 
     public songListFragment(){}
 
@@ -76,15 +80,10 @@ public class songListFragment extends Fragment
 
 
         Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
-//        ((Library)getActivity()).setSupportActionBar(libraryToolbar);
-//        String title = "AmpliPlay";
-//        SpannableString s = new SpannableString(title);
-//        s.setSpan(new ForegroundColorSpan(Color.parseColor("#B53471")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        ((Library)getActivity()).getSupportActionBar().setTitle(s);
-
-
-
         libraryToolbar.inflateMenu(R.menu.search_menu);
+        mSearchView = getActivity().findViewById(R.id.search_view);
+        libraryTabLayout = getActivity().findViewById(R.id.library_tab_layout);
+
 
         return rootView;
     }
@@ -234,22 +233,11 @@ public class songListFragment extends Fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-        inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.search_menu, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        Drawable searchIcon = ContextCompat.getDrawable(getActivity(), R.drawable.ic_search_black_24dp);
-        searchIcon.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
-        searchItem.setIcon(searchIcon);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-//        searchView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//        EditText searchText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-//        searchText.setTextColor(getResources().getColor(R.color.colorText));
+        getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
 
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-        searchView.setLayoutParams(params);
-        //searchView.expandActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchView.setMenuItem(item);
+        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -262,18 +250,20 @@ public class songListFragment extends Fragment
             }
         });
 
-        MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat.OnActionExpandListener() {
+        mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
-            public boolean onMenuItemActionExpand(MenuItem menuItem) {
-                return true;
+            public void onSearchViewShown() {
+                //libraryTabLayout.setEnabled(false);
+                //Do some magic
             }
 
             @Override
-            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-
-                return true;
+            public void onSearchViewClosed() {
+                //libraryTabLayout.setEnabled(true);
+                //Do some magic
             }
-        };
-        MenuItemCompat.setOnActionExpandListener(searchItem, expandListener);
+        });
+
+
     }
 }
