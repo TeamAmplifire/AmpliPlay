@@ -8,8 +8,8 @@
 
     <color name="colorPrimary">#eceff1</color>
     <!--<color name="colorPrimary">#ecf0f1</color>-->
-    <color name="colorPrimaryDark">#bb002f</color>
-    <color name="colorAccent">#f50057</color>
+    <color name="colorPrimaryDark">#ad1457</color>
+    <color name="colorAccent">#d81b60</color>
     <!--<color name="colorAccent">#B53471</color>-->
     <!--<color name="colorAccent">#ed4c67</color>-->
     <color name="colorLight">#ff5983</color>
