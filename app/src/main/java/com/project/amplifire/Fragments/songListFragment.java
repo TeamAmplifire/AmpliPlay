@@ -1,6 +1,5 @@
 package com.project.amplifire.Fragments;
 
-
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -31,10 +30,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.VerticalAdapter;
+import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
 
@@ -43,15 +44,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-/**
- * Created by aayush on 14-Mar-18.
- */
-
 public class songListFragment extends Fragment
 {
     private static final String TAG = "SongListFragment";
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 100;
-    private static final String SAVED_LAYOUT_MANAGER ="layoutmanager" ;
+    private static final String SAVED_LAYOUT_MANAGER = "layoutmanager" ;
     public ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
@@ -106,7 +103,7 @@ public class songListFragment extends Fragment
 //    @Override
 //    public void onResume() {
 //        super.onResume();
-//        songAdt.updateList(mSongArrayList);
+//        songAdt.updateList(mPlaylistSongArrayList);
 //        mSongView.setAdapter(songAdt);
 //        mSongView.getLayoutManager().scrollToPosition(VerticalAdapter.topElementPosition);
 //    }
@@ -200,11 +197,11 @@ public class songListFragment extends Fragment
                 return o1.getMTitle().toLowerCase().compareTo(o2.getMTitle().toLowerCase());
             }
         });
-//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-//                mSongView.getContext(),
-//                mLinearLayoutManager.getOrientation()
-//        );
-//        mSongView.addItemDecoration(dividerItemDecoration);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                mSongView.getContext(),
+                mLinearLayoutManager.getOrientation()
+        );
+        mSongView.addItemDecoration(dividerItemDecoration);
         mSongView.setAdapter(songAdt);
         mFastScroller.setRecyclerView(mSongView);
     }

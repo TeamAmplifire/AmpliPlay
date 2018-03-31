@@ -27,5 +27,6 @@ public class References {
         String CREATE_PLAYLIST_FRAGMENT = "Create Playlist";
         String PLAYLIST_FRAGMENT = "Playlist Fragment";
         String SONG_DETAILS = "Song details";
+        String RENAME_PLAYLIST_FRAGMENT = "Rename Playlist";
     }
 }

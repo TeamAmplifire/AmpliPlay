@@ -20,4 +20,5 @@
     <string name="add_text">Add text</string>
     <string name="submit">Submit</string>
     <string name="create">Create</string>
+    <string name="remove_from_playlist">Remove from Playlist</string>
 </resources>

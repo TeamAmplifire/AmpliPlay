@@ -5,21 +5,17 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ContentResolver;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.project.amplifire.Adapters.PlaylistAdapter;
+import com.project.amplifire.Adapters.AddToPLaylistAdapter;
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
@@ -55,12 +51,12 @@ public class PlaylistDialog extends DialogFragment {
         ContentResolver resolver = getActivity().getContentResolver();
         mPlaylists = Playlist.getAllPlaylists(resolver);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        PlaylistAdapter playlistAdapter = new PlaylistAdapter(mPlaylists, currentSelectedSong, getActivity());
+        AddToPLaylistAdapter addToPLaylistAdapter = new AddToPLaylistAdapter(mPlaylists, currentSelectedSong, getActivity());
         Log.d("size", mPlaylists.size()+"");
         RecyclerView playlistRecyclerView = rootView.findViewById(R.id.playlist_View);
 
         playlistRecyclerView.setLayoutManager(mLinearLayoutManager);
-        playlistRecyclerView.setAdapter(playlistAdapter);
+        playlistRecyclerView.setAdapter(addToPLaylistAdapter);
 
 //        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
 //                playlistRecyclerView.getContext(),

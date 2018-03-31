@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by chait on 17-03-2018.
  */
 
-public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder> {
+public class AddToPLaylistAdapter extends RecyclerView.Adapter<AddToPLaylistAdapter.PlaylistViewHolder> {
 
     private ArrayList<Playlist> mPlaylists;
     private Context mContext;
@@ -40,7 +40,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
     }
 
 
-    public PlaylistAdapter(ArrayList<Playlist> playlists, Song song, Activity activity) {
+    public AddToPLaylistAdapter(ArrayList<Playlist> playlists, Song song, Activity activity) {
         mPlaylists = playlists;
         currentSong = song;
         mActivity = activity;
@@ -54,7 +54,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
     }
 
     @Override
-    public void onBindViewHolder(final PlaylistAdapter.PlaylistViewHolder holder, int position) {
+    public void onBindViewHolder(final AddToPLaylistAdapter.PlaylistViewHolder holder, int position) {
         final int tempPosition = holder.getAdapterPosition();
         final Playlist currentPlaylist = mPlaylists.get(tempPosition);
         holder.playlistName.setText(currentPlaylist.getPlaylistName());

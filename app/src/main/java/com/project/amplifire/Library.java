@@ -1,6 +1,5 @@
 package com.project.amplifire;
 
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,9 +15,8 @@ import android.text.style.ForegroundColorSpan;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.FragmentAdapter;
+import com.project.amplifire.Fragments.PlaylistGridFragment;
 import com.project.amplifire.Fragments.songListFragment;
-
-import java.util.List;
 
 
 public class Library extends AppCompatActivity {
@@ -64,6 +62,7 @@ public class Library extends AppCompatActivity {
 
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
         adapter.addFragment(new songListFragment(),"Song adapter");
+        adapter.addFragment(new PlaylistGridFragment(), "playlist sons");
         viewPager.setAdapter(adapter);
     }
     @Override
@@ -80,7 +79,7 @@ public class Library extends AppCompatActivity {
         if(mSearchView.isSearchOpen())
         {
             mSearchView.closeSearch();
-            //mTabLayout.setEnabled(true);
+//            mTabLayout.setEnabled(true);
         }
         else {
             super.onBackPressed();

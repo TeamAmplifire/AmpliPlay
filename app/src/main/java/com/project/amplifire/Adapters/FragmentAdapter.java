@@ -14,7 +14,7 @@ public class FragmentAdapter extends FragmentStatePagerAdapter{
 
     private ArrayList<Fragment> mFragments = new ArrayList<Fragment>();
     private ArrayList<String> mTitleFragmentList = new ArrayList<String>();
-    private String tabTitles[] = new String[] {"All Songs", "Albums", "Artists", "Playlists"};
+    private String tabTitles[] = new String[] {"All Songs", "Playlists", "Artists", "Albums"};
 
     public FragmentAdapter(FragmentManager fm)
     {
