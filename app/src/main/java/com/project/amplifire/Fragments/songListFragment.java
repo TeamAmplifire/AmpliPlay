@@ -23,6 +23,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -235,6 +236,7 @@ public class songListFragment extends Fragment
 
         getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
         MenuItem item = menu.findItem(R.id.action_search);
+        ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
 
         mSearchView.setMenuItem(item);
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
@@ -253,14 +255,19 @@ public class songListFragment extends Fragment
         mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-                //libraryTabLayout.setEnabled(false);
-                //Do some magic
+                ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
+                params.height = 0;
+                params.width = libraryTabLayout.getWidth();
+                libraryTabLayout.setLayoutParams(params);
             }
 
             @Override
             public void onSearchViewClosed() {
-                //libraryTabLayout.setEnabled(true);
-                //Do some magic
+                ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                params.width = libraryTabLayout.getWidth();
+                libraryTabLayout.setLayoutParams(params);
+
             }
         });
 
