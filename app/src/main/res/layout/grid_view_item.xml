@@ -12,8 +12,8 @@
 
         <com.project.amplifire.Utilities.AlbumArtView
             android:id="@+id/playlist_thumbnail_image_view"
-            android:layout_width="175"
-            android:layout_height="185"
+            android:layout_width="175dp"
+            android:layout_height="175dp"
             android:layout_margin="16dp"
             android:elevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,8 +27,8 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:alpha=".9"
-            android:background="@color/colorText"
+            android:alpha="1"
+            android:background="#9000"
             android:elevation="6dp"
             android:padding="10dp"
             android:text="Playlist Name"
