@@ -48,7 +48,6 @@ public class songListFragment extends Fragment
 {
     private static final String TAG = "SongListFragment";
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 100;
-    private static final String SAVED_LAYOUT_MANAGER = "layoutmanager" ;
     public ArrayList<Song> mSongArrayList;
     private VerticalAdapter songAdt;
     private RecyclerView mSongView;
@@ -100,7 +99,30 @@ public class songListFragment extends Fragment
             mSongArrayList.clear();
         }
     }
-//    @Override
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(!mSongArrayList.isEmpty()){
+            mSongArrayList.clear();
+        }
+        mSongArrayList = new ArrayList<Song>();
+        getSongList();
+//        setList();
+        Collections.sort(mSongArrayList, new Comparator<Song>()
+        {
+            @Override
+            public int compare(Song o1, Song o2)
+            {
+                return o1.getMTitle().compareTo(o2.getMTitle());
+            }
+        });
+        songAdt.notifyDataSetChanged();
+//        songAdt.updateList(mSongArrayList);
+        mSongView.getLayoutManager().scrollToPosition(VerticalAdapter.topElementPosition);
+    }
+
+    //    @Override
 //    public void onResume() {
 //        super.onResume();
 //        songAdt.updateList(mPlaylistSongArrayList);
@@ -109,18 +131,18 @@ public class songListFragment extends Fragment
 //    }
 
 
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState)
-    {
-        super.onViewStateRestored(savedInstanceState);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(SAVED_LAYOUT_MANAGER, mSongView.getLayoutManager().onSaveInstanceState());
-    }
+//    @Override
+//    public void onViewStateRestored(@Nullable Bundle savedInstanceState)
+//    {
+//        super.onViewStateRestored(savedInstanceState);
+//    }
+//
+//    @Override
+//    public void onSaveInstanceState(Bundle outState)
+//    {
+//        super.onSaveInstanceState(outState);
+//        outState.putParcelable(SAVED_LAYOUT_MANAGER, mSongView.getLayoutManager().onSaveInstanceState());
+//    }
 
     public void getSongList() {
 
@@ -187,7 +209,7 @@ public class songListFragment extends Fragment
     public void setList()
     {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        songAdt = new VerticalAdapter(mSongArrayList);
+        songAdt = new VerticalAdapter(mSongArrayList, this);
         mSongView.setLayoutManager(mLinearLayoutManager);
         Collections.sort(mSongArrayList, new Comparator<Song>()
         {

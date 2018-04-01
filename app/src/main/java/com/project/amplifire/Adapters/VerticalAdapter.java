@@ -1,5 +1,6 @@
 package com.project.amplifire.Adapters;
 
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -26,6 +27,7 @@ import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.Fragments.DFragment;
 import com.project.amplifire.Fragments.InfoFragment;
 import com.project.amplifire.Fragments.PlaylistDialog;
+import com.project.amplifire.Fragments.songListFragment;
 import com.project.amplifire.Library;
 import com.project.amplifire.Playback.Player;
 import com.project.amplifire.R;
@@ -40,6 +42,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     private Context mContext;
     private ArrayList<MyViewHolder> holders;
     public static int topElementPosition;
+    public static Fragment mFragment;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -61,9 +64,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         }
     }
 
-    public VerticalAdapter(ArrayList<Song> theSongs) {
+    public VerticalAdapter(ArrayList<Song> theSongs, Fragment fragment) {
         mSongs = theSongs;
         holders = new ArrayList<MyViewHolder>();
+        mFragment = fragment;
     }
     @Override
     public VerticalAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -177,15 +181,15 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                 case R.id.apply_ringtone:
                                     Toast.makeText(v.getContext(), "APPLY RINGTONE", Toast.LENGTH_SHORT).show();
                                     break;
-
-                                case R.id.rename:
-//                                    String newName;
-//                                    renameSong(currentSong.getMId(), newName);
-                                    break;
-
                                 case R.id.info:
                                     topElementPosition = tempPosition;
                                     InfoFragment infoFragment = new InfoFragment(currentSong);
+//                                    infoFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//                                        @Override
+//                                        public void onDismiss(DialogInterface dialog) {
+//                                            mFragment.onResume();
+//                                        }
+//                                    });
                                     infoFragment.show(fm, References.FRAGMENT_TAGS.INFO_FRAGMENT);
                                     notifyDataSetChanged();
                                     break;
@@ -293,12 +297,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         }
         return songDurationString;
     }
-
-    public static void setSongAtPosition(int position, Song song){
-//        mSongs.remove(position);
-        mSongs.set(position, song);
-    }
-
     public Song getSongItem(int position)
     {
         return mSongs.get(position);

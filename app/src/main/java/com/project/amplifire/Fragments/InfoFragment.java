@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -90,6 +91,12 @@ public class InfoFragment extends DialogFragment{
                 if(fragment != null)
                     fm.beginTransaction().remove(fragment).commit();
                 EditTagsFragment newEditTagsFragment = new EditTagsFragment(currentSong);
+                newEditTagsFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        VerticalAdapter.mFragment.onResume();
+                    }
+                });
                 newEditTagsFragment.show(fm, References.FRAGMENT_TAGS.EDIT_TAGS_FRAGMENT);
             }
         });
