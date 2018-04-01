@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.google.android.exoplayer2.metadata.Metadata;
+import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
@@ -41,7 +43,18 @@ import java.io.IOException;
 public class EditTagsFragment extends DialogFragment {
 
     private Song currentSong;
+    private DialogInterface.OnDismissListener onDismissListener;
 
+    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
+        this.onDismissListener = onDismissListener;
+    }
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (onDismissListener != null) {
+            onDismissListener.onDismiss(dialog);
+        }
+    }
     public EditTagsFragment() {super();}
 
     @SuppressLint("ValidFragment")

@@ -57,9 +57,17 @@ public class PlaylistGridFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPlaylists.clear();
+        mPlaylists = Playlist.getAllPlaylists(getActivity().getContentResolver());
+        setList();
+    }
+
     private void setList() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        mPlaylistGridViewAdapter = new PlaylistGridViewAdapter(getActivity().getApplicationContext(), mPlaylists);
+        mPlaylistGridViewAdapter = new PlaylistGridViewAdapter(getActivity().getApplicationContext(), mPlaylists, PlaylistGridFragment.this);
         mPlaylistView.setLayoutManager(gridLayoutManager);
         Collections.sort(mPlaylists, new Comparator<Playlist>() {
             @Override

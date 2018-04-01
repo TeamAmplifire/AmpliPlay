@@ -1,6 +1,7 @@
 package com.project.amplifire.Adapters;
 
 import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,10 +42,12 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
     private Context mContext;
     private ArrayList<Playlist> mPlaylists;
     private PopupMenu mPopupMenu;
+    private Fragment mFragment;
 
-    public PlaylistGridViewAdapter(Context context, ArrayList<Playlist> playlists) {
+    public PlaylistGridViewAdapter(Context context, ArrayList<Playlist> playlists, Fragment fragment) {
         mContext = context;
         mPlaylists = playlists;
+        mFragment = fragment;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -115,6 +118,12 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                             case R.id.playlist_grid_menu_rename:
                                 final FragmentManager fm = ((Library)mContext).getFragmentManager();
                                 RenamePlaylistDialog renamePlaylistDialog = new RenamePlaylistDialog(mPlaylists.get(position).getPlaylistID());
+                                renamePlaylistDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        mFragment.onResume();
+                                    }
+                                });
                                 renamePlaylistDialog.show(fm, References.FRAGMENT_TAGS.RENAME_PLAYLIST_FRAGMENT);
                                 break;
                             case R.id.playlist_grid_menu_delete:
