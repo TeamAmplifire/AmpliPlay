@@ -27,7 +27,7 @@ public class Library extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.library_interface);
+        setContentView(R.layout.library_activity);
         ViewPager viewPager = findViewById(R.id.viewPager);
         setupViewPager(viewPager);
         viewPager.setCurrentItem(0);

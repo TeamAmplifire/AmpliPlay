@@ -197,11 +197,6 @@ public class songListFragment extends Fragment
                 return o1.getMTitle().toLowerCase().compareTo(o2.getMTitle().toLowerCase());
             }
         });
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                mSongView.getContext(),
-                mLinearLayoutManager.getOrientation()
-        );
-        mSongView.addItemDecoration(dividerItemDecoration);
         mSongView.setAdapter(songAdt);
         mFastScroller.setRecyclerView(mSongView);
     }

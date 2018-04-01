@@ -13,6 +13,6 @@
     <!--<color name="colorAccent">#B53471</color>-->
     <!--<color name="colorAccent">#ed4c67</color>-->
     <color name="colorLight">#ff5983</color>
-    <color name="colorOff">#bdc3c7</color>
+    <color name="colorOff">#84eceff1</color>
     <color name="colorText">#2c3e50</color>
 </resources>

@@ -3,9 +3,7 @@ package com.project.amplifire.Fragments;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -18,9 +16,7 @@ import android.view.ViewGroup;
 import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.PlaylistGridViewAdapter;
-import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.Playlist;
-import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
 
 import java.util.ArrayList;
@@ -43,7 +39,7 @@ public class PlaylistGridFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.playlist_songs, container, false);
+        View rootView = inflater.inflate(R.layout.playlist_recycler_view_fragment, container, false);
         rootView.setTag(TAG);
         mPlaylists = new ArrayList<Playlist>();
         mPlaylists = Playlist.getAllPlaylists(getActivity().getContentResolver());

@@ -4,39 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/song_list_playlist_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/playlist_name"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/song_list_playlist_recyclerView"
+        android:id="@+id/playlist_songs_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginEnd="-1dp"
+        android:background="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent
-"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/song_list_playlist_name" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </android.support.v7.widget.RecyclerView>
 
     <com.futuremind.recyclerviewfastscroll.FastScroller
-        android:id="@+id/song_list_playlist_fastscroll"
+        android:id="@+id/playlist_songs_fastScroller"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:fastscroll__bubbleColor="@color/colorAccent"
-        app:fastscroll__bubbleTextAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        app:fastscroll__bubbleTextAppearance="@style/Base.TextAppearance.AppCompat.Large.Inverse"
         app:fastscroll__handleColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/song_list_playlist_name"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+
 </android.support.constraint.ConstraintLayout>

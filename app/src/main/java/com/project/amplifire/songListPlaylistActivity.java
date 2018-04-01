@@ -1,34 +1,16 @@
 package com.project.amplifire;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.futuremind.recyclerviewfastscroll.FastScroller;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.PlaylistSongAdapter;
-import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.Song;
-import com.project.amplifire.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,7 +32,7 @@ public class songListPlaylistActivity extends Activity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.song_list_playlist);
+        setContentView(R.layout.song_list_playlist_activity);
         Bundle extras = getIntent().getExtras();
         playlistID = (long)extras.get("playlistID");
         mPlaylistSongArrayList = new ArrayList<Song>();
@@ -63,7 +45,7 @@ public class songListPlaylistActivity extends Activity {
 
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 //    {
-//        View rootView = inflater.inflate(R.layout.playlist_songs, container, false);
+//        View rootView = inflater.inflate(R.layout.playlist_recycler_view_fragment, container, false);
 //        rootView.setTag(TAG);
 //        mPlaylistSongArrayList = new ArrayList<Song>();
 //        getPlaylistSongList();
