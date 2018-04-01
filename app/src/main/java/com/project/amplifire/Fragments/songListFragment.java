@@ -108,7 +108,6 @@ public class songListFragment extends Fragment
         }
         mSongArrayList = new ArrayList<Song>();
         getSongList();
-//        setList();
         Collections.sort(mSongArrayList, new Comparator<Song>()
         {
             @Override
@@ -117,9 +116,10 @@ public class songListFragment extends Fragment
                 return o1.getMTitle().compareTo(o2.getMTitle());
             }
         });
+        mSongView.setAdapter(songAdt);
         songAdt.notifyDataSetChanged();
-//        songAdt.updateList(mSongArrayList);
         mSongView.getLayoutManager().scrollToPosition(VerticalAdapter.topElementPosition);
+
     }
 
     //    @Override

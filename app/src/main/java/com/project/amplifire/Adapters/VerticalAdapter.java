@@ -1,6 +1,5 @@
 package com.project.amplifire.Adapters;
 
-import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -9,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,7 +27,6 @@ import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.Fragments.DFragment;
 import com.project.amplifire.Fragments.InfoFragment;
 import com.project.amplifire.Fragments.PlaylistDialog;
-import com.project.amplifire.Fragments.songListFragment;
 import com.project.amplifire.Library;
 import com.project.amplifire.Playback.Player;
 import com.project.amplifire.R;
@@ -184,12 +183,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                 case R.id.info:
                                     topElementPosition = tempPosition;
                                     InfoFragment infoFragment = new InfoFragment(currentSong);
-//                                    infoFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//                                        @Override
-//                                        public void onDismiss(DialogInterface dialog) {
-//                                            mFragment.onResume();
-//                                        }
-//                                    });
                                     infoFragment.show(fm, References.FRAGMENT_TAGS.INFO_FRAGMENT);
                                     notifyDataSetChanged();
                                     break;
