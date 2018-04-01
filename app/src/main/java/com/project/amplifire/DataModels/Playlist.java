@@ -153,7 +153,7 @@ public class Playlist {
 
         ContentValues values = new ContentValues(1);
         values.put(MediaStore.Audio.Playlists.NAME, newName);
-        resolver.update(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, values, "_ID=?", new String[]{Long.toBinaryString(id)});
+        resolver.update(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, values, "_ID=?", new String[]{Long.toString(id)});
     }
     public static ArrayList<Song> getRecentlyAdded(ContentResolver resolver){
 
