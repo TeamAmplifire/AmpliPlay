@@ -27,12 +27,11 @@
         android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:fastscroll__bubbleColor="@color/colorAccent"
-        app:fastscroll__bubbleTextAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
         app:fastscroll__handleColor="@color/colorAccent"
+        app:fastscroll__bubbleTextAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
