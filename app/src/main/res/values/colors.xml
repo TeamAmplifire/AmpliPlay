@@ -15,4 +15,5 @@
     <color name="colorLight">#ff5983</color>
     <color name="colorOff">#84eceff1</color>
     <color name="colorText">#2c3e50</color>
+    <color name="colorTransparentBG">#6000</color>
 </resources>
