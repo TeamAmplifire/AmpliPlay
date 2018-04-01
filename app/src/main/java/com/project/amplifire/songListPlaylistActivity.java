@@ -2,9 +2,14 @@ package com.project.amplifire;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 
 import com.futuremind.recyclerviewfastscroll.FastScroller;
@@ -16,14 +21,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class songListPlaylistActivity extends Activity {
+public class songListPlaylistActivity extends AppCompatActivity {
 
     private static final String SAVED_LAYOUT_MANAGER ="layoutmanager" ;
     public ArrayList<Song> mPlaylistSongArrayList;
     private PlaylistSongAdapter playlistSongAdt;
     private RecyclerView mPlaylistSongView;
-    private FastScroller mFastScroller;
-    private TextView nameView;
+//    private FastScroller mFastScroller;
+    //private TextView nameView;
 //    private MaterialSearchView mSearchView;
 //    private TabLayout libraryTabLayout;
     private long playlistID;
@@ -37,8 +42,11 @@ public class songListPlaylistActivity extends Activity {
         playlistID = (long)extras.get("playlistID");
         mPlaylistSongArrayList = new ArrayList<Song>();
         mPlaylistSongView = findViewById(R.id.song_list_playlist_recyclerView);
-        mFastScroller = findViewById(R.id.song_list_playlist_fastscroll);
-        nameView = findViewById(R.id.song_list_playlist_name);
+      //  mFastScroller = findViewById(R.id.song_list_playlist_fastscroll);
+      //  nameView = findViewById(R.id.song_list_playlist_name);
+
+        Toolbar playlistToolbar = findViewById(R.id.playlist_toolbar);
+        setSupportActionBar(playlistToolbar);
         getPlaylistSongList();
         setPlaylistList();
     }
@@ -84,7 +92,11 @@ public class songListPlaylistActivity extends Activity {
     public void getPlaylistSongList()
     {
         Playlist playlist = Playlist.getPlaylistByID(getContentResolver(), playlistID);
-        nameView.setText(playlist.getPlaylistName());
+        String title = playlist.getPlaylistName();
+        SpannableString s = new SpannableString(title);
+        s.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        getSupportActionBar().setTitle(s);
+       // nameView.setText(playlist.getPlaylistName());
         mPlaylistSongArrayList = playlist.getSongs(getContentResolver());
     }
     public void setPlaylistList()
@@ -106,7 +118,7 @@ public class songListPlaylistActivity extends Activity {
         );
         mPlaylistSongView.addItemDecoration(dividerItemDecoration);
         mPlaylistSongView.setAdapter(playlistSongAdt);
-        mFastScroller.setRecyclerView(mPlaylistSongView);
+        //mFastScroller.setRecyclerView(mPlaylistSongView);
     }
 
 //    public void filter(String text)

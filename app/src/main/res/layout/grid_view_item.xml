@@ -7,8 +7,8 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_margin="8dp"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
@@ -18,8 +18,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:elevation="4dp">
 
             <com.project.amplifire.Utilities.AlbumArtView
@@ -45,7 +45,10 @@
                 android:text="Playlist Name"
                 android:textAlignment="textStart"
                 android:textColor="@color/colorPrimary"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textSize="18sp"
+                android:paddingEnd="24dp"
                 app:layout_constraintBottom_toBottomOf="@+id/grid_view_item_thumbnail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
