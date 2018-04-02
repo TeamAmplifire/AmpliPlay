@@ -57,15 +57,15 @@ public class InfoFragment extends DialogFragment{
         final View rootView = inflater.inflate(R.layout.info_fragment, container);
         final FragmentManager fm = getFragmentManager();
 
-        TextView locationView = rootView.findViewById(R.id.file_location);
+        TextView locationView = rootView.findViewById(R.id.info_fragment_file_location);
         //TextView extensionView = rootView.findViewById(R.id.file_extension);
-        TextView durationView = rootView.findViewById(R.id.file_duration);
-        TextView sizeView = rootView.findViewById(R.id.file_quality);
-        TextView titleView = rootView.findViewById(R.id.file_track_name);
-        TextView albumView = rootView.findViewById(R.id.file_album);
-        TextView artistView = rootView.findViewById(R.id.file_artist);
+        TextView durationView = rootView.findViewById(R.id.info_fragment_file_duration);
+        TextView sizeView = rootView.findViewById(R.id.info_fragment_file_quality);
+        TextView titleView = rootView.findViewById(R.id.info_fragment_file_track_name);
+        TextView albumView = rootView.findViewById(R.id.info_fragment_file_album);
+        TextView artistView = rootView.findViewById(R.id.info_fragment_file_artist);
         FloatingActionButton editButton;
-        editButton = rootView.findViewById(R.id.edit_fab);
+        editButton = rootView.findViewById(R.id.info_fragment_floating_action_button);
         //Button editButton = rootView.findViewById(R.id.edit_fab);
 
         File songFile = new File(currentSong.getMFullPath());

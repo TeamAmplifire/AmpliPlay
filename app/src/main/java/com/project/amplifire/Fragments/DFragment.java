@@ -57,17 +57,17 @@ public class DFragment extends DialogFragment {
 
         final View rootView = inflater.inflate(R.layout.song_dialog_fragment, container,
                 false);
-        TextView artistView = rootView.findViewById(R.id.f_song_artist);
+        TextView artistView = rootView.findViewById(R.id.song_dialog_fragment_song_artist);
         artistView.setSelected(true);
-        TextView albumView = rootView.findViewById(R.id.f_song_album);
+        TextView albumView = rootView.findViewById(R.id.song_dialog_fragment_song_album);
         albumView.setSelected(true);
-        TextView durationView = rootView.findViewById(R.id.f_song_duration);
+        TextView durationView = rootView.findViewById(R.id.song_dialog_fragment_song_duration);
         durationView.setSelected(true);
-        TextView titleView = rootView.findViewById(R.id.f_song_title);
+        TextView titleView = rootView.findViewById(R.id.song_dialog_fragment_song_title);
         titleView.setSelected(true);
-        ImageButton overflowMenuInflater = rootView.findViewById(R.id.f_songOverflowButton);
-        ImageView albumImage = rootView.findViewById(R.id.album_art_view);
-        FloatingActionButton floatingActionButton = rootView.findViewById(R.id.fab);
+        ImageButton overflowMenuInflater = rootView.findViewById(R.id.song_dialog_fragment_song_overflow_button);
+        ImageView albumImage = rootView.findViewById(R.id.song_dialog_fragment_album_art_view);
+        FloatingActionButton floatingActionButton = rootView.findViewById(R.id.song_dialog_fragment_floating_action_button);
         String songDurationString = VerticalAdapter.getFormattedDuration(mSong.getMDuration());
         artistView.setText(mSong.getMArtist());
         albumView.setText(mSong.getMAlbum());
@@ -105,13 +105,13 @@ public class DFragment extends DialogFragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch(item.getItemId()){
-                            case R.id.f_enqueue:
+                            case R.id.dialog_fragment_overflow_enqueue:
                                 if(Player.enqueue == null) {
                                     Player.enqueue = new ArrayList<Song>();
                                 }
                                 Player.enqueue.add(mSong);
                                 break;
-                            case R.id.f_add_to_playlist:
+                            case R.id.dialog_fragment_overflow_add_to_playlist:
                                 PlaylistDialog playlistDialog = new PlaylistDialog(mSong);
                                 playlistDialog.show(fm, References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
                                 break;

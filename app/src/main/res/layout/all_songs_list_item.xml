@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="#fff"
@@ -15,7 +14,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/song_artist"
+            android:id="@+id/all_songs_list_item_song_artist"
             android:layout_width="0dp"
             android:layout_height="20dp"
             android:layout_marginBottom="8dp"
@@ -30,12 +29,12 @@
             android:textColor="@color/colorText"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/verticalListGuideline"
+            app:layout_constraintEnd_toStartOf="@+id/all_songs_list_item_vertical_list_guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/song_title" />
+            app:layout_constraintTop_toBottomOf="@+id/all_songs_list_item_song_title" />
 
         <TextView
-            android:id="@+id/song_title"
+            android:id="@+id/all_songs_list_item_song_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
@@ -52,12 +51,12 @@
             android:textColor="@color/colorText"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/song_duration"
+            app:layout_constraintEnd_toStartOf="@+id/all_songs_list_item_song_duration"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/song_duration"
+            android:id="@+id/all_songs_list_item_song_duration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -73,11 +72,11 @@
 
             android:textColor="@color/colorText"
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/songOverflowButton"
+            app:layout_constraintEnd_toStartOf="@+id/all_songs_list_item_song_overflow_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/song_album"
+            android:id="@+id/all_songs_list_item_song_album"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -95,12 +94,12 @@
             android:textColor="@color/colorText"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/songOverflowButton"
-            app:layout_constraintStart_toStartOf="@+id/verticalListGuideline"
-            app:layout_constraintTop_toBottomOf="@+id/song_duration" />
+            app:layout_constraintEnd_toStartOf="@+id/all_songs_list_item_song_overflow_button"
+            app:layout_constraintStart_toStartOf="@+id/all_songs_list_item_vertical_list_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/all_songs_list_item_song_duration" />
 
         <ImageButton
-            android:id="@+id/songOverflowButton"
+            android:id="@+id/all_songs_list_item_song_overflow_button"
 
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
@@ -118,7 +117,7 @@
             app:srcCompat="@drawable/ic_more_vert_black_30dp" />
 
         <android.support.constraint.Guideline
-            android:id="@+id/verticalListGuideline"
+            android:id="@+id/all_songs_list_item_vertical_list_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

@@ -28,13 +28,13 @@ public class Library extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.library_interface);
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        ViewPager viewPager = findViewById(R.id.library_interface_view_pager);
         setupViewPager(viewPager);
         viewPager.setCurrentItem(0);
-        TabLayout tabLayout = findViewById(R.id.library_tab_layout);
+        TabLayout tabLayout = findViewById(R.id.library_interface_tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
-        Toolbar libraryToolbar = findViewById(R.id.libraryToolbar);
+        Toolbar libraryToolbar = findViewById(R.id.library_interface_libraryToolbar);
         setSupportActionBar(libraryToolbar);
         String title = "  ampliplay";
         SpannableString s = new SpannableString(title);
@@ -51,7 +51,7 @@ public class Library extends AppCompatActivity {
         getSupportActionBar().setLogo(logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        mSearchView = findViewById(R.id.search_view);
+        mSearchView = findViewById(R.id.library_interface_search_view);
     }
 
     @Override

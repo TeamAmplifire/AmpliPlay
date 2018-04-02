@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/file_location"
+        android:id="@+id/info_fragment_file_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -30,12 +30,12 @@
         android:textSize="14sp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/infoHeaderText"
+        app:layout_constraintStart_toEndOf="@+id/info_fragment_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_header"
         tools:text="file_location" />
 
     <TextView
-        android:id="@+id/file_duration"
+        android:id="@+id/info_fragment_file_duration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -46,12 +46,12 @@
         android:textColor="@color/alt_colorPrimary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/file_album"
+        app:layout_constraintStart_toEndOf="@+id/info_fragment_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_file_album"
         tools:text="4:20" />
 
     <TextView
-        android:id="@+id/file_quality"
+        android:id="@+id/info_fragment_file_quality"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -62,12 +62,12 @@
         android:textColor="@color/alt_colorPrimary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/file_duration"
+        app:layout_constraintStart_toEndOf="@+id/info_fragment_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_file_duration"
         tools:text="quality" />
 
     <TextView
-        android:id="@+id/file_track_name"
+        android:id="@+id/info_fragment_file_track_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -89,12 +89,12 @@
         android:textSize="14sp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/file_location"
+        app:layout_constraintStart_toEndOf="@+id/info_fragment_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_file_location"
         tools:text="title_text" />
 
     <TextView
-        android:id="@+id/file_artist"
+        android:id="@+id/info_fragment_file_artist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -116,12 +116,12 @@
         android:textSize="14sp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/file_track_name"
+        app:layout_constraintStart_toEndOf="@+id/info_fragment_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_file_track_name"
         tools:text="Artist" />
 
     <TextView
-        android:id="@+id/file_album"
+        android:id="@+id/info_fragment_file_album"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -143,12 +143,12 @@
         android:textSize="14sp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/file_artist"
+        app:layout_constraintStart_toEndOf="@+id/info_fragment_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_file_artist"
         tools:text="Album" />
 
     <TextView
-        android:id="@+id/infoHeaderText"
+        android:id="@+id/info_fragment_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -165,7 +165,7 @@
         tools:text="Song Info" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/edit_fab"
+        android:id="@+id/info_fragment_floating_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -175,12 +175,12 @@
         android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file_quality"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_file_quality"
         app:rippleColor="@color/colorPrimary"
         app:srcCompat="@drawable/ic_edit_black_24dp" />
 
     <TextView
-        android:id="@+id/filePathText"
+        android:id="@+id/info_fragment_file_path"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -191,13 +191,13 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/info_fragment_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoHeaderText"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_header"
         tools:text="File" />
 
     <TextView
-        android:id="@+id/titleText"
+        android:id="@+id/info_fragment_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -208,13 +208,13 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/info_fragment_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filePathText"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_file_path"
         tools:text="Title" />
 
     <TextView
-        android:id="@+id/artistText"
+        android:id="@+id/info_fragment__artist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -225,13 +225,13 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/info_fragment_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_title"
         tools:text="Artist" />
 
     <TextView
-        android:id="@+id/albumText"
+        android:id="@+id/info_fragment_album"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -242,13 +242,13 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/info_fragment_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artistText"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment__artist"
         tools:text="Album" />
 
     <TextView
-        android:id="@+id/durationText"
+        android:id="@+id/info_fragment_duration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -259,13 +259,13 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/info_fragment_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/albumText"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_album"
         tools:text="Duration" />
 
     <TextView
-        android:id="@+id/sizeText"
+        android:id="@+id/info_fragment_size"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -276,13 +276,13 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/info_fragment_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/durationText"
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_duration"
         tools:text="Size" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/info_fragment_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

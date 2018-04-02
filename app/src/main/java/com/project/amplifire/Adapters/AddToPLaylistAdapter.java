@@ -34,7 +34,7 @@ public class AddToPLaylistAdapter extends RecyclerView.Adapter<AddToPLaylistAdap
 
         public PlaylistViewHolder(View itemView) {
             super(itemView);
-            playlistName = itemView.findViewById(R.id.playlist_item);
+            playlistName = itemView.findViewById(R.id.playlist_list_name);
             mContext = itemView.getContext();
         }
     }

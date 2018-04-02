@@ -3,9 +3,7 @@ package com.project.amplifire.Fragments;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -18,9 +16,7 @@ import android.view.ViewGroup;
 import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.PlaylistGridViewAdapter;
-import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.Playlist;
-import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
 
 import java.util.ArrayList;
@@ -52,10 +48,10 @@ public class PlaylistGridFragment extends Fragment {
         setList();
         setHasOptionsMenu(true);
 
-        Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
+        Toolbar libraryToolbar = getActivity().findViewById(R.id.library_interface_libraryToolbar);
         libraryToolbar.inflateMenu(R.menu.search_menu);
-        mSearchView = getActivity().findViewById(R.id.search_view);
-        libraryTabLayout = getActivity().findViewById(R.id.library_tab_layout);
+        mSearchView = getActivity().findViewById(R.id.library_interface_search_view);
+        libraryTabLayout = getActivity().findViewById(R.id.library_interface_tab_layout);
 
 
         return rootView;
@@ -104,7 +100,7 @@ public class PlaylistGridFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
 
         getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
+        MenuItem item = menu.findItem(R.id.search_menu_action_search);
         ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
 
         mSearchView.setMenuItem(item);
