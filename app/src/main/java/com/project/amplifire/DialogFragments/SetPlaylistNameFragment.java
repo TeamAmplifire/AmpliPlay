@@ -1,4 +1,4 @@
-package com.project.amplifire.Fragments;
+package com.project.amplifire.DialogFragments;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.References;
+import com.project.amplifire.DialogFragments.PlaylistDialog;
 import com.project.amplifire.R;
 
 /**

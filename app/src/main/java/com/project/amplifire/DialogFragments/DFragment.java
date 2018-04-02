@@ -1,4 +1,4 @@
-package com.project.amplifire.Fragments;
+package com.project.amplifire.DialogFragments;
 
 import android.app.DialogFragment;
 import android.app.FragmentManager;

@@ -1,4 +1,4 @@
-package com.project.amplifire.Fragments;
+package com.project.amplifire.DialogFragments;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
