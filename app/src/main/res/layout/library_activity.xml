@@ -28,6 +28,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorAccent"
                 android:elevation="4dp"
+                android:minHeight="79dp"
                 app:layout_scrollFlags="scroll|enterAlways" />
 
             <com.miguelcatalan.materialsearchview.MaterialSearchView
@@ -47,7 +48,8 @@
             android:elevation="4dp"
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorPrimary">
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextColor="@color/colorOff">
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"

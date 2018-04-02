@@ -90,7 +90,7 @@ public class songListPlaylistActivity extends Activity {
     public void setPlaylistList()
     {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        playlistSongAdt = new PlaylistSongAdapter(mPlaylistSongArrayList);
+        PlaylistSongAdapter playlistSongAdt = new PlaylistSongAdapter(mPlaylistSongArrayList);
         mPlaylistSongView.setLayoutManager(mLinearLayoutManager);
         Collections.sort(mPlaylistSongArrayList, new Comparator<Song>()
         {
@@ -100,11 +100,7 @@ public class songListPlaylistActivity extends Activity {
                 return o1.getMTitle().toLowerCase().compareTo(o2.getMTitle().toLowerCase());
             }
         });
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                mPlaylistSongView.getContext(),
-                mLinearLayoutManager.getOrientation()
-        );
-        mPlaylistSongView.addItemDecoration(dividerItemDecoration);
+
         mPlaylistSongView.setAdapter(playlistSongAdt);
         mFastScroller.setRecyclerView(mPlaylistSongView);
     }

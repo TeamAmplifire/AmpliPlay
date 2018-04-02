@@ -1,5 +1,9 @@
 package com.project.amplifire.Fragments;
 
+import android.content.ContentUris;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,13 +16,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.PlaylistGridViewAdapter;
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.R;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -33,13 +41,14 @@ public class PlaylistGridFragment extends Fragment {
     private FastScroller mFastScroller;
     private MaterialSearchView mSearchView;
     private TabLayout libraryTabLayout;
+    private ImageView albumArt;
 
     public PlaylistGridFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.playlist_songs, container, false);
+        View rootView = inflater.inflate(R.layout.playlist_recycler_view_fragment, container, false);
         rootView.setTag(TAG);
         mPlaylists = new ArrayList<Playlist>();
         mPlaylists = Playlist.getAllPlaylists(getActivity().getContentResolver());
@@ -52,7 +61,6 @@ public class PlaylistGridFragment extends Fragment {
         libraryToolbar.inflateMenu(R.menu.search_menu);
         mSearchView = getActivity().findViewById(R.id.library_interface_search_view);
         libraryTabLayout = getActivity().findViewById(R.id.library_interface_tab_layout);
-
 
         return rootView;
     }
