@@ -46,7 +46,8 @@
         android:id="@+id/song_list_playlist_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:background="@android:color/background_light"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_scrollFlags="scroll|enterAlways" />
 
 </android.support.design.widget.CoordinatorLayout>

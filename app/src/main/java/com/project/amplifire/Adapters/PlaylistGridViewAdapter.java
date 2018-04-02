@@ -58,7 +58,7 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
         public MyViewHolder(View view) {
             super(view);
             titleView = itemView.findViewById(R.id.grid_view_item_playlist_name);
-            thumbnail = itemView.findViewById(R.id.grid_view_item_thumbnail);
+            thumbnail = itemView.findViewById(R.id.grid_view_item_thumbnail00);
             overflowMenu = itemView.findViewById(R.id.grid_view_item_overflow_button);
             mContext = itemView.getContext();
         }

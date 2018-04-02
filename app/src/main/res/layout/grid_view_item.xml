@@ -27,11 +27,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="0dp"
-                android:elevation="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_album_art_template" />
 
             <TextView
@@ -49,7 +44,7 @@
                 android:ellipsize="end"
                 android:textSize="18sp"
                 android:paddingEnd="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/grid_view_item_thumbnail"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
