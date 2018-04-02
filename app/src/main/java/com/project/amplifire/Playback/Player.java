@@ -12,7 +12,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -140,7 +139,7 @@ public class Player extends Activity implements PlaybackInterface {
 //    }
 
     private void shuffle() {
-        btnShuffle = findViewById(R.id.shuffle);
+        btnShuffle = findViewById(R.id.player_interface_shuffle);
         btnShuffle.requestFocus();
         btnShuffle.setImageResource(R.drawable.ic_shuffle_black_40dp);
         btnShuffle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);
@@ -169,7 +168,7 @@ public class Player extends Activity implements PlaybackInterface {
     }
 
     private void previous() {
-        btnPrev = findViewById(R.id.btnPrev);
+        btnPrev = findViewById(R.id.player_interface_button_previous);
         btnPrev.requestFocus();
         btnPrev.setImageResource(R.drawable.ic_skip_previous_black_50dp);
         btnPrev.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +190,7 @@ public class Player extends Activity implements PlaybackInterface {
     }
 
     private void next() {
-        btnNext = findViewById(R.id.btnNext);
+        btnNext = findViewById(R.id.player_interface_button_next);
         btnNext.requestFocus();
         btnNext.setImageResource(R.drawable.ic_skip_next_black_50dp);
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +219,7 @@ public class Player extends Activity implements PlaybackInterface {
     }
 
     private void play() {
-        btnPlay = findViewById(R.id.btnPlay);
+        btnPlay = findViewById(R.id.player_interface_button_play);
         btnPlay.requestFocus();
         btnPlay.setImageResource(R.drawable.ic_pause_circle_filled_black_60dp);
         btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -245,8 +244,8 @@ public class Player extends Activity implements PlaybackInterface {
     }
 
     private void time() {
-        txtCurrentTime = findViewById(R.id.time_current);
-        txtEndTime = findViewById(R.id.player_end_time);
+        txtCurrentTime = findViewById(R.id.player_interface_time_current);
+        txtEndTime = findViewById(R.id.player_interface_player_end_time);
     }
 
     private String stringForTime(int timeMs) {
@@ -287,7 +286,7 @@ public class Player extends Activity implements PlaybackInterface {
     }
 
     private void seekBar() {
-        seekPlayerProgress = findViewById(R.id.media_progress);
+        seekPlayerProgress = findViewById(R.id.player_interface_media_progress);
         seekPlayerProgress.requestFocus();
 
         seekPlayerProgress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -478,13 +477,13 @@ public class Player extends Activity implements PlaybackInterface {
         Bitmap artwork = BitmapFactory.decodeStream(in);
 
         if(currentSong.getMAlbum() != null) {
-            albumN = findViewById(R.id.albumName);
+            albumN = findViewById(R.id.player_interface_album_name);
             albumN.setText(currentSong.getMAlbum());
             albumN.setSelected(true);
         }
-        trackN = findViewById(R.id.trackName);
-        artistN = findViewById(R.id.artistName);
-        AlbumArtView albumImage = findViewById(R.id.image_album_art);
+        trackN = findViewById(R.id.player_interface_track_name);
+        artistN = findViewById(R.id.player_interface_artist_ame);
+        AlbumArtView albumImage = findViewById(R.id.player_interface_image_album_art);
 
         if(artwork != null) {
             //albumImage.setImageBitmap(artwork);
@@ -513,7 +512,7 @@ public class Player extends Activity implements PlaybackInterface {
 
     @Override
     public void repeat() {
-        btnRepeat = findViewById(R.id.repeat);
+        btnRepeat = findViewById(R.id.player_interface_repeat);
         btnRepeat.requestFocus();
         btnRepeat.setImageResource(R.drawable.ic_repeat_black_40dp);
         btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);

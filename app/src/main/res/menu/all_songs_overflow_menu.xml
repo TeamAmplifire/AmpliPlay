@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/play"
+        android:id="@+id/all_songs_overflow_menu_play"
         android:title="@string/play" />
     <item
-        android:id="@+id/enqueue"
+        android:id="@+id/all_songs_overflow_menu_enqueue"
         android:title="@string/enqueue" />
     <item
-        android:id="@+id/add_to_playlist"
+        android:id="@+id/all_songs_overflow_menu_add_to_playlist"
         android:title="@string/add_to_playlist" />
     <item
-        android:id="@+id/apply_ringtone"
+        android:id="@+id/all_songs_overflow_menu_apply_ringtone"
         android:title="@string/apply_ringtone" />
     <item
-        android:id="@+id/info"
+        android:id="@+id/all_songs_overflow_menu_info"
         android:title="@string/song_info" />
     <item
-        android:id="@+id/delete"
+        android:id="@+id/all_songs_overflow_menu_delete"
         android:title="@string/delete" />
 </menu>

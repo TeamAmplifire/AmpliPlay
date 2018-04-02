@@ -57,10 +57,10 @@ public class PlaylistGridFragment extends Fragment {
         setList();
         setHasOptionsMenu(true);
 
-        Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
+        Toolbar libraryToolbar = getActivity().findViewById(R.id.library_interface_libraryToolbar);
         libraryToolbar.inflateMenu(R.menu.search_menu);
-        mSearchView = getActivity().findViewById(R.id.search_view);
-        libraryTabLayout = getActivity().findViewById(R.id.library_tab_layout);
+        mSearchView = getActivity().findViewById(R.id.library_interface_search_view);
+        libraryTabLayout = getActivity().findViewById(R.id.library_interface_tab_layout);
 
         return rootView;
     }
@@ -108,7 +108,7 @@ public class PlaylistGridFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
 
         getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
+        MenuItem item = menu.findItem(R.id.search_menu_action_search);
         ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
         mSearchView.setHint("Search in playlists");
         mSearchView.setMenuItem(item);

@@ -5,37 +5,26 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.VerticalAdapter;
-import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
 
@@ -70,16 +59,16 @@ public class songListFragment extends Fragment
         rootView.setTag(TAG);
         mSongArrayList = new ArrayList<Song>();
         getSongList();
-        mSongView = rootView.findViewById(R.id.song_list);
-        mFastScroller = rootView.findViewById(R.id.fastscroll);
+        mSongView = rootView.findViewById(R.id.song_list_fragment_recycler_view);
+        mFastScroller = rootView.findViewById(R.id.song_list_fragment_fastscroll);
         setList();
         setHasOptionsMenu(true);
 
 
-        Toolbar libraryToolbar = getActivity().findViewById(R.id.libraryToolbar);
+        Toolbar libraryToolbar = getActivity().findViewById(R.id.library_interface_libraryToolbar);
         libraryToolbar.inflateMenu(R.menu.search_menu);
-        mSearchView = getActivity().findViewById(R.id.search_view);
-        libraryTabLayout = getActivity().findViewById(R.id.library_tab_layout);
+        mSearchView = getActivity().findViewById(R.id.library_interface_search_view);
+        libraryTabLayout = getActivity().findViewById(R.id.library_interface_tab_layout);
 
 
         return rootView;
@@ -249,7 +238,7 @@ public class songListFragment extends Fragment
         super.onCreateOptionsMenu(menu, inflater);
 
         getActivity().getMenuInflater().inflate(R.menu.search_menu, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
+        MenuItem item = menu.findItem(R.id.search_menu_action_search);
         ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
 
         mSearchView.setHint("Search in all songs");

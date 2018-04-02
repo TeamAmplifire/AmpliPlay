@@ -31,7 +31,7 @@ public class SetPlaylistNameFragment extends DialogFragment {
         final ContentResolver resolver = getActivity().getContentResolver();
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.set_playlist_name_fragment, null);
-        final EditText playlistName = view.findViewById(R.id.playlist_edit);
+        final EditText playlistName = view.findViewById(R.id.set_playlist_name_fragment_edit);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
         builder.setTitle("Create Playlist").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

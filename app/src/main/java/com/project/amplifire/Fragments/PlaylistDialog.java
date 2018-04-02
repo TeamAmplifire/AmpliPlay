@@ -53,7 +53,7 @@ public class PlaylistDialog extends DialogFragment {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         AddToPLaylistAdapter addToPLaylistAdapter = new AddToPLaylistAdapter(mPlaylists, currentSelectedSong, getActivity());
         Log.d("size", mPlaylists.size()+"");
-        RecyclerView playlistRecyclerView = rootView.findViewById(R.id.playlist_View);
+        RecyclerView playlistRecyclerView = rootView.findViewById(R.id.playlist_dialog_fragment_recycler_view);
 
         playlistRecyclerView.setLayoutManager(mLinearLayoutManager);
         playlistRecyclerView.setAdapter(addToPLaylistAdapter);
@@ -64,7 +64,7 @@ public class PlaylistDialog extends DialogFragment {
 //        );
 //        playlistRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        FloatingActionButton floatingActionButton = rootView.findViewById(R.id.playlist_floating_action);
+        FloatingActionButton floatingActionButton = rootView.findViewById(R.id.playlist_dialog_fragment_floating_action_button);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

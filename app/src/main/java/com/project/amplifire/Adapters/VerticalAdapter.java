@@ -53,11 +53,11 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
 
         public MyViewHolder(View view) {
             super(view);
-            titleView = itemView.findViewById(R.id.song_title);
-            artistView = itemView.findViewById(R.id.song_artist);
-            albumView = itemView.findViewById(R.id.song_album);
-            durationView = itemView.findViewById(R.id.song_duration);
-            songOverflowButton = itemView.findViewById(R.id.songOverflowButton);
+            titleView = itemView.findViewById(R.id.all_songs_list_item_song_title);
+            artistView = itemView.findViewById(R.id.all_songs_list_item_song_artist);
+            albumView = itemView.findViewById(R.id.all_songs_list_item_song_album);
+            durationView = itemView.findViewById(R.id.all_songs_list_item_song_duration);
+            songOverflowButton = itemView.findViewById(R.id.all_songs_list_item_song_overflow_button);
             mContext = itemView.getContext();
 
         }
@@ -135,7 +135,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                         public boolean onMenuItemClick(MenuItem item) {
                             switch(item.getItemId()) {
 
-                                case R.id.play:
+                                case R.id.all_songs_overflow_menu_play:
                                     topElementPosition = tempPosition;
                                     setColor();
                                     holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
@@ -145,7 +145,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     play(mContext, tempPosition);
                                     break;
 
-                                case R.id.delete:
+                                case R.id.all_songs_overflow_menu_delete:
                                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                                     builder.setTitle("Delete");
                                     builder.setMessage("Are you sure you want to delete this song?")
@@ -165,11 +165,11 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     builder.show();
                                     break;
 
-                                case R.id.add_to_playlist:
+                                case R.id.all_songs_overflow_menu_add_to_playlist:
                                     PlaylistDialog playlistDialog = new PlaylistDialog(currentSong);
                                     playlistDialog.show(fm, References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
                                     break;
-                                case R.id.enqueue:
+                                case R.id.all_songs_overflow_menu_enqueue:
                                     if(Player.enqueue == null) {
                                         Player.enqueue = new ArrayList<Song>();
                                     }
@@ -177,10 +177,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     Toast.makeText(v.getContext(), "ENQUEUE", Toast.LENGTH_SHORT).show();
                                     break;
 
-                                case R.id.apply_ringtone:
+                                case R.id.all_songs_overflow_menu_apply_ringtone:
                                     Toast.makeText(v.getContext(), "APPLY RINGTONE", Toast.LENGTH_SHORT).show();
                                     break;
-                                case R.id.info:
+                                case R.id.all_songs_overflow_menu_info:
                                     topElementPosition = tempPosition;
                                     InfoFragment infoFragment = new InfoFragment(currentSong);
                                     infoFragment.show(fm, References.FRAGMENT_TAGS.INFO_FRAGMENT);

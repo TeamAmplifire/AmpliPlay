@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/background_light">
 
 
     <TextView
-        android:id="@+id/editTagsHeader"
+        android:id="@+id/edit_tags_fragment_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -25,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/titleText"
+        android:id="@+id/info_fragment_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -36,12 +35,12 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/edit_tags_fragment_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTagsHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_tags_fragment_header" />
 
     <TextView
-        android:id="@+id/artistText"
+        android:id="@+id/info_fragment__artist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -52,12 +51,12 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/edit_tags_fragment_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment_title" />
 
     <TextView
-        android:id="@+id/albumText"
+        android:id="@+id/info_fragment_album"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -68,13 +67,13 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/edit_tags_fragment_guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artistText" />
+        app:layout_constraintTop_toBottomOf="@+id/info_fragment__artist" />
 
     <android.support.design.widget.TextInputEditText
-        android:id="@+id/file_track_name_edit"
+        android:id="@+id/edit_tags_fragment_file_track_name_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -88,11 +87,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.36"
-        app:layout_constraintStart_toEndOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/editTagsHeader" />
+        app:layout_constraintStart_toEndOf="@+id/edit_tags_fragment_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/edit_tags_fragment_header" />
 
     <android.support.design.widget.TextInputEditText
-        android:id="@+id/file_album_edit"
+        android:id="@+id/edit_tags_fragment_file_album_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -105,11 +104,11 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/file_artist_edit" />
+        app:layout_constraintStart_toStartOf="@+id/edit_tags_fragment_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/edit_tags_fragment_file_artist_edit" />
 
     <android.support.design.widget.TextInputEditText
-        android:id="@+id/file_artist_edit"
+        android:id="@+id/edit_tags_fragment_file_artist_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -122,11 +121,11 @@
         android:textColor="@color/colorText"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/file_track_name_edit" />
+        app:layout_constraintStart_toEndOf="@+id/edit_tags_fragment_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/edit_tags_fragment_file_track_name_edit" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/file_submit_fab"
+        android:id="@+id/edit_tags_fragment_file_submit_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -137,12 +136,12 @@
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file_album_edit"
+        app:layout_constraintTop_toBottomOf="@+id/edit_tags_fragment_file_album_edit"
         app:rippleColor="@color/colorPrimary"
         app:srcCompat="@drawable/ic_check_black_24dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/edit_tags_fragment_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

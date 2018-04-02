@@ -21,8 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.google.android.exoplayer2.metadata.Metadata;
-import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
@@ -79,10 +77,10 @@ public class EditTagsFragment extends DialogFragment {
         final View rootView = inflater.inflate(R.layout.edit_tags_fragment, container);
         final FragmentManager fm = getFragmentManager();
 
-        final EditText titleEditView = rootView.findViewById(R.id.file_track_name_edit);
-        final EditText albumEditView = rootView.findViewById(R.id.file_album_edit);
-        final EditText artistEditView = rootView.findViewById(R.id.file_artist_edit);
-        FloatingActionButton submitButton = rootView.findViewById(R.id.file_submit_fab);
+        final EditText titleEditView = rootView.findViewById(R.id.edit_tags_fragment_file_track_name_edit);
+        final EditText albumEditView = rootView.findViewById(R.id.edit_tags_fragment_file_album_edit);
+        final EditText artistEditView = rootView.findViewById(R.id.edit_tags_fragment_file_artist_edit);
+        FloatingActionButton submitButton = rootView.findViewById(R.id.edit_tags_fragment_file_submit_fab);
 
         String title = currentSong.getMTitle();
         String album = currentSong.getMAlbum();
