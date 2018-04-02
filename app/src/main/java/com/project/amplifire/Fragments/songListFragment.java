@@ -252,6 +252,7 @@ public class songListFragment extends Fragment
         MenuItem item = menu.findItem(R.id.action_search);
         ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
 
+        mSearchView.setHint("Search in all songs");
         mSearchView.setMenuItem(item);
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
@@ -269,18 +270,18 @@ public class songListFragment extends Fragment
         mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-                ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
-                params.height = 0;
-                params.width = libraryTabLayout.getWidth();
-                libraryTabLayout.setLayoutParams(params);
+//                ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
+//                params.height = 0;
+//                params.width = libraryTabLayout.getWidth();
+//                libraryTabLayout.setLayoutParams(params);
             }
 
             @Override
             public void onSearchViewClosed() {
-                ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
-                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                params.width = libraryTabLayout.getWidth();
-                libraryTabLayout.setLayoutParams(params);
+//                ViewGroup.LayoutParams params = libraryTabLayout.getLayoutParams();
+//                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//                params.width = libraryTabLayout.getWidth();
+//                libraryTabLayout.setLayoutParams(params);
 
             }
         });
