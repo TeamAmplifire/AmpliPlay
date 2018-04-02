@@ -65,9 +65,7 @@ public class PlaylistGridFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    public void refreshList() {
         mPlaylists.clear();
         mPlaylists = Playlist.getAllPlaylists(getActivity().getContentResolver());
         setList();

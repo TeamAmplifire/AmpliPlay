@@ -20,6 +20,7 @@ import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.DialogFragments.EditTagsFragment;
+import com.project.amplifire.Fragments.songListFragment;
 import com.project.amplifire.R;
 
 import java.io.File;
@@ -95,7 +96,8 @@ public class InfoFragment extends DialogFragment{
                 newEditTagsFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        VerticalAdapter.mFragment.onResume();
+                        songListFragment newSongListFragment = (songListFragment) VerticalAdapter.mFragment;
+                        newSongListFragment.refreshList();
                     }
                 });
                 newEditTagsFragment.show(fm, References.FRAGMENT_TAGS.EDIT_TAGS_FRAGMENT);
