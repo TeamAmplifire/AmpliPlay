@@ -58,7 +58,7 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
         public MyViewHolder(View view) {
             super(view);
             titleView = itemView.findViewById(R.id.grid_view_item_playlist_name);
-            thumbnail = itemView.findViewById(R.id.grid_view_item_thumbnail00);
+            thumbnail = itemView.findViewById(R.id.grid_view_item_thumbnail_00);
             overflowMenu = itemView.findViewById(R.id.grid_view_item_overflow_button);
             mContext = itemView.getContext();
         }
@@ -77,7 +77,9 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
     public void onBindViewHolder(@NonNull PlaylistGridViewAdapter.MyViewHolder holder, final int position) {
         holder.titleView.setText(mPlaylists.get(position).getPlaylistName());
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
-        if((mPlaylists.get(position).getSongs(mContext.getContentResolver()).size() != 0)){
+
+        if((mPlaylists.get(position).getSongs(mContext.getContentResolver()).size() != 0))
+        {
             Uri uri = ContentUris.withAppendedId(sArtworkUri, mPlaylists.get(position).getSongs(mContext.getContentResolver()).get(0).getMAlbumId());
             InputStream in = null;
             try {
@@ -95,6 +97,8 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
         else{
             holder.thumbnail.setImageResource(R.drawable.ic_album_art_template);
         }
+
+
         holder.overflowMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
