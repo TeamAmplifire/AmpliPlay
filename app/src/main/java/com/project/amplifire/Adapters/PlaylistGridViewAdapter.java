@@ -27,6 +27,7 @@ import com.futuremind.recyclerviewfastscroll.SectionTitleProvider;
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DialogFragments.RenamePlaylistDialog;
+import com.project.amplifire.Fragments.PlaylistGridFragment;
 import com.project.amplifire.Library;
 import com.project.amplifire.Playback.Player;
 import com.project.amplifire.songListPlaylistActivity;
@@ -121,7 +122,8 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                                 renamePlaylistDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                     @Override
                                     public void onDismiss(DialogInterface dialog) {
-                                        mFragment.onResume();
+                                        PlaylistGridFragment newPlaylistGridFragment = (PlaylistGridFragment)mFragment;
+                                        newPlaylistGridFragment.refreshList();
                                     }
                                 });
                                 renamePlaylistDialog.show(fm, References.FRAGMENT_TAGS.RENAME_PLAYLIST_FRAGMENT);

@@ -89,9 +89,7 @@ public class songListFragment extends Fragment
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    public void refreshList() {
         if(!mSongArrayList.isEmpty()){
             mSongArrayList.clear();
         }
