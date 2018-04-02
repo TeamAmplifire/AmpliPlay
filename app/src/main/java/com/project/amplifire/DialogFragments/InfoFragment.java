@@ -1,4 +1,4 @@
-package com.project.amplifire.Fragments;
+package com.project.amplifire.DialogFragments;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
+import com.project.amplifire.DialogFragments.EditTagsFragment;
 import com.project.amplifire.R;
 
 import java.io.File;

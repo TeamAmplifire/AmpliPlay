@@ -26,7 +26,7 @@ import com.bumptech.glide.Glide;
 import com.futuremind.recyclerviewfastscroll.SectionTitleProvider;
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.References;
-import com.project.amplifire.Fragments.RenamePlaylistDialog;
+import com.project.amplifire.DialogFragments.RenamePlaylistDialog;
 import com.project.amplifire.Library;
 import com.project.amplifire.Playback.Player;
 import com.project.amplifire.songListPlaylistActivity;
