@@ -34,7 +34,6 @@ import java.util.Comparator;
 public class PlaylistGridFragment extends Fragment {
 
     private static final String TAG = "PlaylistListFragment";
-    private static final String SAVED_LAYOUT_MANAGER = "layoutmanager";
     private ArrayList<Playlist> mPlaylists;
     private PlaylistGridViewAdapter mPlaylistGridViewAdapter;
     private RecyclerView mPlaylistView;
@@ -141,5 +140,12 @@ public class PlaylistGridFragment extends Fragment {
 
             }
         });
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            refreshList();
+        }
     }
 }

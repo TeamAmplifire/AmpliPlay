@@ -1,6 +1,8 @@
 package com.project.amplifire.DataModels;
 
 
+import android.content.Context;
+
 /**
  * Created by Utsav on 3/13/2018.
  */
@@ -8,6 +10,9 @@ package com.project.amplifire.DataModels;
 
 
 public class References {
+
+    public static Context context;
+
     public interface ACTION {
         public static String MAIN_ACTION = "com.project.amplifire.action.main";
         public static String PREV_ACTION = "com.project.amplifire.action.prev";

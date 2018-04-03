@@ -52,7 +52,7 @@ public class PlaylistDialog extends DialogFragment {
         mPlaylists = Playlist.getAllPlaylists(resolver);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         AddToPLaylistAdapter addToPLaylistAdapter = new AddToPLaylistAdapter(mPlaylists, currentSelectedSong, getActivity());
-        Log.d("size", mPlaylists.size()+"");
+//        Log.d("size", mPlaylists.size()+"");
         RecyclerView playlistRecyclerView = rootView.findViewById(R.id.playlist_dialog_fragment_recycler_view);
 
         playlistRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -71,7 +71,7 @@ public class PlaylistDialog extends DialogFragment {
                 Fragment fragment = fm.findFragmentByTag(References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
                 if(fragment != null)
                     fm.beginTransaction().remove(fragment).commit();
-                SetPlaylistNameFragment newSetPlaylist = new SetPlaylistNameFragment();
+                SetPlaylistNameFragment newSetPlaylist = new SetPlaylistNameFragment(currentSelectedSong);
                 newSetPlaylist.show(fm, References.FRAGMENT_TAGS.CREATE_PLAYLIST_FRAGMENT);
             }
         });

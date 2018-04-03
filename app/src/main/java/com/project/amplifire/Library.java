@@ -15,6 +15,7 @@ import android.text.style.ForegroundColorSpan;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.FragmentAdapter;
+import com.project.amplifire.DataModels.References;
 import com.project.amplifire.Fragments.PlaylistGridFragment;
 import com.project.amplifire.Fragments.songListFragment;
 
@@ -28,6 +29,7 @@ public class Library extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.library_activity);
+        References.context = getApplicationContext();
         ViewPager viewPager = findViewById(R.id.library_interface_view_pager);
         setupViewPager(viewPager);
         viewPager.setCurrentItem(0);

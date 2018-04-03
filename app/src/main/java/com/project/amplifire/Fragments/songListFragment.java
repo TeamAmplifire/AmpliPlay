@@ -272,7 +272,5 @@ public class songListFragment extends Fragment
 
             }
         });
-
-
     }
 }

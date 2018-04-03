@@ -1,5 +1,6 @@
 package com.project.amplifire.DialogFragments;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -11,9 +12,11 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.References;
+import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.DialogFragments.PlaylistDialog;
 import com.project.amplifire.R;
 
@@ -23,9 +26,13 @@ import com.project.amplifire.R;
 
 public class SetPlaylistNameFragment extends DialogFragment {
 
-    public SetPlaylistNameFragment() {
-    }
+    private Song currentSelectedSong;
 
+    public SetPlaylistNameFragment() {}
+    @SuppressLint("ValidFragment")
+    public SetPlaylistNameFragment(Song currentSelectedSong) {
+        this.currentSelectedSong = currentSelectedSong;
+    }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
@@ -44,13 +51,14 @@ public class SetPlaylistNameFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 final FragmentManager fm = getActivity().getFragmentManager();
                 String playlistNameValue = playlistName.getText().toString();
-                Playlist.createPlaylist(resolver, playlistNameValue);
-                String tag = References.FRAGMENT_TAGS.CREATE_PLAYLIST_FRAGMENT;
-                Fragment fragment = fm.findFragmentByTag(tag);
+                long id = Playlist.createPlaylist(resolver, playlistNameValue);
+                Fragment fragment = fm.findFragmentByTag(References.FRAGMENT_TAGS.CREATE_PLAYLIST_FRAGMENT);
                 if(fragment != null)
                     fm.beginTransaction().remove(fragment).commit();
-                PlaylistDialog playlistDialog = new PlaylistDialog();
-                playlistDialog.show(fm, References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
+                Playlist.addToPlaylist(References.context.getContentResolver(), id, currentSelectedSong.getMId());
+                Toast.makeText(References.context, "Added to playlist", Toast.LENGTH_SHORT).show();
+//                PlaylistDialog playlistDialog = new PlaylistDialog(currentSelectedSong);
+//                playlistDialog.show(fm, References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
             }
         })
                 .setCancelable(true);

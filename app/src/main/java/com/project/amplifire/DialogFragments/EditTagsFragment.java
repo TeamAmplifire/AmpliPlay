@@ -100,9 +100,9 @@ public class EditTagsFragment extends DialogFragment {
                 if(fragment != null) {
                     fm.beginTransaction().remove(fragment).commit();
                 }
-                currentSong.setTitle(newTitle);
-                currentSong.setAlbum(newAlbum);
-                currentSong.setArtist(newArtist);
+//                currentSong.setTitle(newTitle);
+//                currentSong.setAlbum(newAlbum);
+//                currentSong.setArtist(newArtist);
                 ContentResolver musicResolver = getActivity().getContentResolver();
                 Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
                 String where = "_ID=?";
