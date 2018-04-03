@@ -1,9 +1,5 @@
 package com.project.amplifire.Fragments;
 
-import android.content.ContentUris;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -18,15 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.PlaylistGridViewAdapter;
 import com.project.amplifire.DataModels.Playlist;
+import com.project.amplifire.DataModels.References;
 import com.project.amplifire.R;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -60,6 +54,7 @@ public class PlaylistGridFragment extends Fragment {
         libraryToolbar.inflateMenu(R.menu.search_menu);
         mSearchView = getActivity().findViewById(R.id.library_interface_search_view);
         libraryTabLayout = getActivity().findViewById(R.id.library_interface_tab_layout);
+        References.sPlaylistGridFragment = this;
 
         return rootView;
     }
@@ -72,7 +67,7 @@ public class PlaylistGridFragment extends Fragment {
 
     private void setList() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        mPlaylistGridViewAdapter = new PlaylistGridViewAdapter(getActivity().getApplicationContext(), mPlaylists, PlaylistGridFragment.this);
+        mPlaylistGridViewAdapter = new PlaylistGridViewAdapter(getActivity().getApplicationContext(), mPlaylists);
         mPlaylistView.setLayoutManager(gridLayoutManager);
         Collections.sort(mPlaylists, new Comparator<Playlist>() {
             @Override
@@ -141,11 +136,11 @@ public class PlaylistGridFragment extends Fragment {
             }
         });
     }
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            refreshList();
-        }
-    }
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            refreshList();
+//        }
+//    }
 }

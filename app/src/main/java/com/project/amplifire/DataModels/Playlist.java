@@ -6,7 +6,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Log;
+
+import com.project.amplifire.Fragments.PlaylistGridFragment;
 
 import java.util.ArrayList;
 
@@ -104,7 +105,7 @@ public class Playlist {
             Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", id);
             resolver.delete(uri, null, null);
         }
-
+        References.sPlaylistGridFragment.refreshList();
         return id;
     }
     public static int addToPlaylist(ContentResolver resolver, long playlistId, long songID)
@@ -136,12 +137,14 @@ public class Playlist {
             resolver.bulkInsert(playlistUri, values);
         }
         from.close();
+        References.sPlaylistGridFragment.refreshList();
         return count;
     }
     public static void deletePlaylist(ContentResolver resolver, long id)
     {
         Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, id);
         resolver.delete(uri, null, null);
+        References.sPlaylistGridFragment.refreshList();
     }
     public static void renamePlaylist(ContentResolver resolver, long id, String newName)
     {
@@ -154,6 +157,8 @@ public class Playlist {
         ContentValues values = new ContentValues(1);
         values.put(MediaStore.Audio.Playlists.NAME, newName);
         resolver.update(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, values, "_ID=?", new String[]{Long.toString(id)});
+        References.sPlaylistGridFragment.refreshList();
+
     }
     public static ArrayList<Song> getRecentlyAdded(ContentResolver resolver){
 

@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
-import com.project.amplifire.DialogFragments.PlaylistDialog;
+import com.project.amplifire.Fragments.PlaylistGridFragment;
 import com.project.amplifire.R;
 
 /**
@@ -55,8 +55,8 @@ public class SetPlaylistNameFragment extends DialogFragment {
                 Fragment fragment = fm.findFragmentByTag(References.FRAGMENT_TAGS.CREATE_PLAYLIST_FRAGMENT);
                 if(fragment != null)
                     fm.beginTransaction().remove(fragment).commit();
-                Playlist.addToPlaylist(References.context.getContentResolver(), id, currentSelectedSong.getMId());
-                Toast.makeText(References.context, "Added to playlist", Toast.LENGTH_SHORT).show();
+                Playlist.addToPlaylist(References.applicationContext.getContentResolver(), id, currentSelectedSong.getMId());
+                Toast.makeText(References.applicationContext, "Added to playlist", Toast.LENGTH_SHORT).show();
 //                PlaylistDialog playlistDialog = new PlaylistDialog(currentSelectedSong);
 //                playlistDialog.show(fm, References.FRAGMENT_TAGS.PLAYLIST_FRAGMENT);
             }

@@ -17,7 +17,7 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.FragmentAdapter;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.Fragments.PlaylistGridFragment;
-import com.project.amplifire.Fragments.songListFragment;
+import com.project.amplifire.Fragments.SongListFragment;
 
 
 public class Library extends AppCompatActivity {
@@ -29,7 +29,7 @@ public class Library extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.library_activity);
-        References.context = getApplicationContext();
+        References.applicationContext = getApplicationContext();
         ViewPager viewPager = findViewById(R.id.library_interface_view_pager);
         setupViewPager(viewPager);
         viewPager.setCurrentItem(0);
@@ -63,7 +63,7 @@ public class Library extends AppCompatActivity {
     public void setupViewPager(ViewPager viewPager) {
 
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
-        adapter.addFragment(new songListFragment(),"Song adapter");
+        adapter.addFragment(new SongListFragment(),"Song adapter");
         adapter.addFragment(new PlaylistGridFragment(), "playlist sons");
         viewPager.setAdapter(adapter);
     }

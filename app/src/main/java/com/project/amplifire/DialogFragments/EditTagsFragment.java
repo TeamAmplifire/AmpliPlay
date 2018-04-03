@@ -41,18 +41,7 @@ import java.io.IOException;
 public class EditTagsFragment extends DialogFragment {
 
     private Song currentSong;
-    private DialogInterface.OnDismissListener onDismissListener;
 
-    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
-        this.onDismissListener = onDismissListener;
-    }
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        if (onDismissListener != null) {
-            onDismissListener.onDismiss(dialog);
-        }
-    }
     public EditTagsFragment() {super();}
 
     @SuppressLint("ValidFragment")
@@ -100,9 +89,9 @@ public class EditTagsFragment extends DialogFragment {
                 if(fragment != null) {
                     fm.beginTransaction().remove(fragment).commit();
                 }
-//                currentSong.setTitle(newTitle);
-//                currentSong.setAlbum(newAlbum);
-//                currentSong.setArtist(newArtist);
+                currentSong.setTitle(newTitle);
+                currentSong.setAlbum(newAlbum);
+                currentSong.setArtist(newArtist);
                 ContentResolver musicResolver = getActivity().getContentResolver();
                 Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
                 String where = "_ID=?";
@@ -142,6 +131,7 @@ public class EditTagsFragment extends DialogFragment {
                                 e.printStackTrace();
                             }
                         }
+                        References.sSongListFragment.refreshList();
                     }
                 });
             }

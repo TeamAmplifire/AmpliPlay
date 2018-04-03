@@ -19,8 +19,8 @@ import android.widget.TextView;
 import com.project.amplifire.Adapters.VerticalAdapter;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
-import com.project.amplifire.DialogFragments.EditTagsFragment;
-import com.project.amplifire.Fragments.songListFragment;
+import com.project.amplifire.Fragments.PlaylistGridFragment;
+import com.project.amplifire.Fragments.SongListFragment;
 import com.project.amplifire.R;
 
 import java.io.File;
@@ -93,13 +93,6 @@ public class InfoFragment extends DialogFragment{
                 if(fragment != null)
                     fm.beginTransaction().remove(fragment).commit();
                 EditTagsFragment newEditTagsFragment = new EditTagsFragment(currentSong);
-                newEditTagsFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        songListFragment newSongListFragment = (songListFragment) VerticalAdapter.mFragment;
-                        newSongListFragment.refreshList();
-                    }
-                });
                 newEditTagsFragment.show(fm, References.FRAGMENT_TAGS.EDIT_TAGS_FRAGMENT);
             }
         });

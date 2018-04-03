@@ -43,12 +43,10 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
     private Context mContext;
     private ArrayList<Playlist> mPlaylists;
     private PopupMenu mPopupMenu;
-    private Fragment mFragment;
 
-    public PlaylistGridViewAdapter(Context context, ArrayList<Playlist> playlists, Fragment fragment) {
+    public PlaylistGridViewAdapter(Context context, ArrayList<Playlist> playlists) {
         mContext = context;
         mPlaylists = playlists;
-        mFragment = fragment;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -123,13 +121,6 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                             case R.id.playlist_grid_menu_rename:
                                 final FragmentManager fm = ((Library)mContext).getFragmentManager();
                                 RenamePlaylistDialog renamePlaylistDialog = new RenamePlaylistDialog(mPlaylists.get(position).getPlaylistID());
-                                renamePlaylistDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                    @Override
-                                    public void onDismiss(DialogInterface dialog) {
-                                        PlaylistGridFragment newPlaylistGridFragment = (PlaylistGridFragment)mFragment;
-                                        newPlaylistGridFragment.refreshList();
-                                    }
-                                });
                                 renamePlaylistDialog.show(fm, References.FRAGMENT_TAGS.RENAME_PLAYLIST_FRAGMENT);
                                 break;
                             case R.id.playlist_grid_menu_delete:

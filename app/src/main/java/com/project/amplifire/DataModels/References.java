@@ -2,6 +2,10 @@ package com.project.amplifire.DataModels;
 
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+
+import com.project.amplifire.Fragments.PlaylistGridFragment;
+import com.project.amplifire.Fragments.SongListFragment;
 
 /**
  * Created by Utsav on 3/13/2018.
@@ -11,7 +15,9 @@ import android.content.Context;
 
 public class References {
 
-    public static Context context;
+    public static Context applicationContext;
+    public static PlaylistGridFragment sPlaylistGridFragment;
+    public static SongListFragment sSongListFragment;
 
     public interface ACTION {
         public static String MAIN_ACTION = "com.project.amplifire.action.main";

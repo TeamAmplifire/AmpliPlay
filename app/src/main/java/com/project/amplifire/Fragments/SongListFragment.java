@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import com.futuremind.recyclerviewfastscroll.FastScroller;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.VerticalAdapter;
+import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.R;
 
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class songListFragment extends Fragment
+public class SongListFragment extends Fragment
 {
     private static final String TAG = "SongListFragment";
     private static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 100;
@@ -44,7 +45,7 @@ public class songListFragment extends Fragment
     private MaterialSearchView mSearchView;
     private TabLayout libraryTabLayout;
 
-    public songListFragment(){}
+    public SongListFragment(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -64,12 +65,11 @@ public class songListFragment extends Fragment
         setList();
         setHasOptionsMenu(true);
 
-
         Toolbar libraryToolbar = getActivity().findViewById(R.id.library_interface_libraryToolbar);
         libraryToolbar.inflateMenu(R.menu.search_menu);
         mSearchView = getActivity().findViewById(R.id.library_interface_search_view);
         libraryTabLayout = getActivity().findViewById(R.id.library_interface_tab_layout);
-
+        References.sSongListFragment = this;
 
         return rootView;
     }
@@ -196,7 +196,7 @@ public class songListFragment extends Fragment
     public void setList()
     {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        songAdt = new VerticalAdapter(mSongArrayList, this);
+        songAdt = new VerticalAdapter(mSongArrayList);
         mSongView.setLayoutManager(mLinearLayoutManager);
         Collections.sort(mSongArrayList, new Comparator<Song>()
         {

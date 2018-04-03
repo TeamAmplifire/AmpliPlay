@@ -20,18 +20,7 @@ import com.project.amplifire.R;
 public class RenamePlaylistDialog extends DialogFragment {
 
     private long playlistId;
-    private DialogInterface.OnDismissListener onDismissListener;
-
-    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
-        this.onDismissListener = onDismissListener;
-    }
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        if (onDismissListener != null) {
-            onDismissListener.onDismiss(dialog);
-        }
-    }
+    
     public RenamePlaylistDialog() {}
 
     @SuppressLint("ValidFragment")

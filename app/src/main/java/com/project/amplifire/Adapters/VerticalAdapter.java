@@ -41,8 +41,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     private Context mContext;
     private ArrayList<MyViewHolder> holders;
     public static int topElementPosition;
-    public static Fragment mFragment;
-
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
@@ -63,10 +61,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         }
     }
 
-    public VerticalAdapter(ArrayList<Song> theSongs, Fragment fragment) {
+    public VerticalAdapter(ArrayList<Song> theSongs) {
         mSongs = theSongs;
         holders = new ArrayList<MyViewHolder>();
-        mFragment = fragment;
     }
     @Override
     public VerticalAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
