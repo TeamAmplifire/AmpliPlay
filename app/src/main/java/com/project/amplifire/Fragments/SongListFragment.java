@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +45,7 @@ public class SongListFragment extends Fragment
     private FastScroller mFastScroller;
     private MaterialSearchView mSearchView;
     private TabLayout libraryTabLayout;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public SongListFragment(){}
 
@@ -62,6 +64,7 @@ public class SongListFragment extends Fragment
         getSongList();
         mSongView = rootView.findViewById(R.id.song_list_fragment_recycler_view);
         mFastScroller = rootView.findViewById(R.id.song_list_fragment_fastscroll);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.song_list_swiperefresh);
         setList();
         setHasOptionsMenu(true);
 
@@ -71,6 +74,12 @@ public class SongListFragment extends Fragment
         libraryTabLayout = getActivity().findViewById(R.id.library_interface_tab_layout);
         References.sSongListFragment = this;
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
         return rootView;
     }
 
@@ -106,7 +115,7 @@ public class SongListFragment extends Fragment
         mSongView.setAdapter(songAdt);
         songAdt.notifyDataSetChanged();
         mSongView.getLayoutManager().scrollToPosition(VerticalAdapter.topElementPosition);
-
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     //    @Override
