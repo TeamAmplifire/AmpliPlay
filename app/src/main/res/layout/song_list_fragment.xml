@@ -19,15 +19,15 @@
 
     <com.futuremind.recyclerviewfastscroll.FastScroller
         android:id="@+id/song_list_fragment_fastscroll"
-        android:layout_width="wrap_content"
+        android:layout_width="85dp"
         android:layout_height="0dp"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:fastscroll__bubbleColor="@color/colorAccent"
-        app:fastscroll__handleColor="@color/colorAccent"
         app:fastscroll__bubbleTextAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+        app:fastscroll__handleColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
