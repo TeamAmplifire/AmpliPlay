@@ -51,13 +51,17 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
-        AlbumArtView thumbnail;
+        AlbumArtView thumbnail[] = new AlbumArtView[4];
         ImageButton overflowMenu;
 
         public MyViewHolder(View view) {
             super(view);
             titleView = itemView.findViewById(R.id.grid_view_item_playlist_name);
-            thumbnail = itemView.findViewById(R.id.grid_view_item_thumbnail_00);
+            thumbnail[0] = itemView.findViewById(R.id.grid_view_item_thumbnail_00);
+            thumbnail[1] = itemView.findViewById(R.id.grid_view_item_thumbnail_01);
+            thumbnail[2] = itemView.findViewById(R.id.grid_view_item_thumbnail_10);
+            thumbnail[3] = itemView.findViewById(R.id.grid_view_item_thumbnail_11);
+
             overflowMenu = itemView.findViewById(R.id.grid_view_item_overflow_button);
             mContext = itemView.getContext();
         }
@@ -76,26 +80,44 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
     public void onBindViewHolder(@NonNull PlaylistGridViewAdapter.MyViewHolder holder, final int position) {
         holder.titleView.setText(mPlaylists.get(position).getPlaylistName());
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
+        int playlistSize = mPlaylists.get(position).getSongs(mContext.getContentResolver()).size();
 
-        if((mPlaylists.get(position).getSongs(mContext.getContentResolver()).size() != 0))
+        if((playlistSize != 0))
         {
-            Uri uri = ContentUris.withAppendedId(sArtworkUri, mPlaylists.get(position).getSongs(mContext.getContentResolver()).get(0).getMAlbumId());
-            InputStream in = null;
-            try {
-                in = mContext.getContentResolver().openInputStream(uri);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            Bitmap artwork = BitmapFactory.decodeStream(in);
-            if (artwork != null) {
-                Glide.with(mContext).load(uri).into(holder.thumbnail);
-            } else {
-                holder.thumbnail.setImageResource(R.drawable.ic_album_art_template);
+            Uri uri = null;
+            int songCount = 0;
+
+            for(int i = 0; i < 4; i++) {
+
+                uri = ContentUris.withAppendedId(sArtworkUri, mPlaylists.get(position).getSongs(mContext.getContentResolver()).get(i%playlistSize).getMAlbumId());
+
+
+//                if(songCount < playlistSize) {
+//                    uri = ContentUris.withAppendedId(sArtworkUri, mPlaylists.get(position).getSongs(mContext.getContentResolver()).get(songCount).getMAlbumId());
+//                    songCount++;
+//                }
+
+                InputStream inStream = null;
+                try {
+                    inStream = mContext.getContentResolver().openInputStream(uri);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                if (inStream != null) {
+                    Glide.with(mContext).load(uri).into(holder.thumbnail[i]);
+                } else {
+                    holder.thumbnail[i].setImageResource(R.drawable.ic_album_art_template);
+                }
             }
         }
-        else{
-            holder.thumbnail.setImageResource(R.drawable.ic_album_art_template);
-        }
+
+//        else{
+//            for (int i = 0; i < 4; i++) {
+//                holder.thumbnail[i].setImageResource(R.drawable.ic_album_art_template);
+//
+//            }
+//        }
 
 
         holder.overflowMenu.setOnClickListener(new View.OnClickListener() {
