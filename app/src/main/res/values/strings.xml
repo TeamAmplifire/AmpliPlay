@@ -21,4 +21,5 @@
     <string name="submit">Submit</string>
     <string name="create">Create</string>
     <string name="remove_from_playlist">Remove from Playlist</string>
+    <string name="create_new_playlist">Create new playlist</string>
 </resources>

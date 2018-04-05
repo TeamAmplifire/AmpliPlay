@@ -32,7 +32,7 @@ public class PlaylistGridFragment extends Fragment {
     private ArrayList<Playlist> mPlaylists;
     private PlaylistGridViewAdapter mPlaylistGridViewAdapter;
     private RecyclerView mPlaylistView;
-    private FastScroller mFastScroller;
+    //private FastScroller mFastScroller;
     private MaterialSearchView mSearchView;
     private TabLayout libraryTabLayout;
     private ImageView albumArt;
@@ -49,7 +49,7 @@ public class PlaylistGridFragment extends Fragment {
         mPlaylists = new ArrayList<Playlist>();
         mPlaylists = Playlist.getAllPlaylists(getActivity().getContentResolver());
         mPlaylistView = rootView.findViewById(R.id.playlist_songs_recycler_view);
-        mFastScroller = rootView.findViewById(R.id.playlist_songs_fastscroller);
+        //mFastScroller = rootView.findViewById(R.id.playlist_songs_fastscroller);
         mSwipeRefreshLayout = rootView.findViewById(R.id.playlist_songs_swiperefresh);
 
         setList();
@@ -88,7 +88,7 @@ public class PlaylistGridFragment extends Fragment {
             }
         });
         mPlaylistView.setAdapter(mPlaylistGridViewAdapter);
-        mFastScroller.setRecyclerView(mPlaylistView);
+        //mFastScroller.setRecyclerView(mPlaylistView);
     }
 
     public void filter(String text) {

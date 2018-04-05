@@ -38,7 +38,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridViewAdapter.MyViewHolder> implements SectionTitleProvider {
+public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridViewAdapter.MyViewHolder>{
 
     private Context mContext;
     private ArrayList<Playlist> mPlaylists;
@@ -84,40 +84,19 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
 
         if((playlistSize != 0))
         {
-            Uri uri = null;
-            int songCount = 0;
+            Uri uri;
 
             for(int i = 0; i < 4; i++) {
-
                 uri = ContentUris.withAppendedId(sArtworkUri, mPlaylists.get(position).getSongs(mContext.getContentResolver()).get(i%playlistSize).getMAlbumId());
-
-
-//                if(songCount < playlistSize) {
-//                    uri = ContentUris.withAppendedId(sArtworkUri, mPlaylists.get(position).getSongs(mContext.getContentResolver()).get(songCount).getMAlbumId());
-//                    songCount++;
-//                }
-
-                InputStream inStream = null;
-                try {
-                    inStream = mContext.getContentResolver().openInputStream(uri);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                if (inStream != null) {
-                    Glide.with(mContext).load(uri).into(holder.thumbnail[i]);
-                } else {
-                    holder.thumbnail[i].setImageResource(R.drawable.ic_album_art_template);
-                }
+                Glide.with(mContext).load(uri).into(holder.thumbnail[i]);
             }
         }
 
-//        else{
-//            for (int i = 0; i < 4; i++) {
-//                holder.thumbnail[i].setImageResource(R.drawable.ic_album_art_template);
-//
-//            }
-//        }
+        else{
+            for (int i = 0; i < 4; i++) {
+                holder.thumbnail[i].setImageResource(R.drawable.ic_album_art_template);
+            }
+        }
 
 
         holder.overflowMenu.setOnClickListener(new View.OnClickListener() {
@@ -186,10 +165,11 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
         return mPlaylists.size();
     }
 
-    @Override
-    public String getSectionTitle(int position) {
-        return null;
-    }
+//    @Override
+//    public String getSectionTitle(int position) {
+//        return null;
+//    }
+
     public void updateList(ArrayList<Playlist> list){
         mPlaylists = list;
         notifyDataSetChanged();

@@ -1,16 +1,20 @@
 package com.project.amplifire.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -71,6 +75,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                 .inflate(R.layout.all_songs_list_item, parent, false);
         return new MyViewHolder(itemView);
     }
+    @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(final VerticalAdapter.MyViewHolder holder, int position)
     {
@@ -88,16 +93,16 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
         holder.itemView.setTag(tempPosition);
         if(currentSong.getMId() == Player.getCurrentSongID())
         {
-            holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-            holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-            holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-            holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
+            holder.artistView.setTextColor(mContext.getResources().getColor(R.color.dark_colorAccent));
+            holder.titleView.setTextColor(mContext.getResources().getColor(R.color.dark_colorAccent));
+            holder.albumView.setTextColor(mContext.getResources().getColor(R.color.dark_colorAccent));
+            holder.durationView.setTextColor(mContext.getResources().getColor(R.color.dark_colorAccent));
         }
         else {
-            holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holder.artistView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holder.titleView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holder.albumView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holder.durationView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
         }
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -262,10 +267,10 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
     }
     private void setColor(){
         for(int i=0; i<holders.size(); i++){
-            holders.get(i).artistView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holders.get(i).titleView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holders.get(i).albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holders.get(i).durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holders.get(i).artistView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holders.get(i).titleView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holders.get(i).albumView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holders.get(i).durationView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
         }
     }
     public static String getFormattedDuration(String duration){

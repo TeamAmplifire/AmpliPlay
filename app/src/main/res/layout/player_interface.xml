@@ -4,7 +4,7 @@
     android:id="@+id/player_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_ampliplay_gradient">
+    android:background="@drawable/ic_ampliplay_gradient_dark">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/player_interface_album_layout"
@@ -24,9 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
-            android:alpha=".54"
             android:cropToPadding="true"
-            android:tint="@color/colorText"
+            android:tint="?android:attr/textColorPrimaryDisableOnly"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/player_interface_album_art_guideline_right"
             app:layout_constraintTop_toBottomOf="@+id/player_interface_image_album_art"
@@ -39,9 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
-            android:alpha=".54"
             android:cropToPadding="true"
-            android:tint="@color/colorText"
+            android:tint="?android:attr/textColorPrimaryDisableOnly"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/player_interface_album-art_guideline_left"
             app:layout_constraintTop_toBottomOf="@+id/player_interface_image_album_art"
@@ -57,11 +55,12 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
-            android:background="@color/colorPrimary"
-            android:cropToPadding="true"
+            android:background="?android:attr/colorBackground"
+            android:cropToPadding="false"
             android:elevation="6dp"
             android:maxWidth="250dp"
             android:minWidth="250dp"
+            android:scaleType="centerCrop"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/player_interface_album_art_guideline_bottom"
             app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +126,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:text="Artist"
-            android:textColor="@color/colorText"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="14sp"
 
             app:layout_constraintBottom_toTopOf="@+id/player_interface_button_play"
@@ -151,32 +150,13 @@
             android:singleLine="true"
 
             android:text="Album"
-            android:textColor="@color/colorText"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="14sp"
 
             app:layout_constraintBottom_toTopOf="@+id/player_interface_artist_ame"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/player_interface_track_name" />
-
-        <ImageButton
-            android:id="@+id/player_interface_button_previous"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/previous_button"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:padding="10dp"
-            android:tint="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="@id/player_interface_controls_layout"
-            app:layout_constraintEnd_toStartOf="@+id/player_interface_button_play"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/player_interface_buttons_guideline_top"
-            app:srcCompat="@drawable/ic_skip_previous_black_50dp" />
 
         <TextView
             android:id="@+id/player_interface_player_end_time"
@@ -185,7 +165,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:text="4:20"
-            android:textColor="@color/colorText"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/player_interface_media_progress" />
 
@@ -196,7 +176,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="0:00"
-            android:textColor="@color/colorText"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/player_interface_media_progress" />
 
@@ -216,7 +196,7 @@
             android:singleLine="true"
 
             android:text="Title"
-            android:textColor="@color/colorText"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="14sp"
 
             android:textStyle="bold"
@@ -233,36 +213,30 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:progressBackgroundTint="?android:attr/textColorPrimaryDisableOnly"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/player_interface_button_next"
+            android:id="@+id/player_interface_button_previous"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
 
             android:layout_marginTop="8dp"
-
+            android:contentDescription="@string/previous_button"
             android:minHeight="0dp"
             android:minWidth="0dp"
             android:padding="10dp"
-            android:tint="@color/colorText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/player_interface_button_play"
+            android:tint="?android:attr/textColorPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/player_interface_controls_layout"
+            app:layout_constraintEnd_toStartOf="@+id/player_interface_button_play"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/player_interface_buttons_guideline_top"
-            app:srcCompat="@drawable/ic_skip_next_black_50dp" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/player_interface_buttons_guideline_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="160dp" />
+            app:srcCompat="@drawable/ic_skip_previous_black_50dp" />
 
         <ImageButton
             android:id="@+id/player_interface_button_play"
@@ -278,12 +252,39 @@
 
             android:padding="8dp"
 
-            android:tint="@color/colorText"
+            android:tint="?android:attr/textColorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/player_interface_button_next"
             app:layout_constraintStart_toEndOf="@+id/player_interface_button_previous"
             app:layout_constraintTop_toTopOf="@+id/player_interface_buttons_guideline_top"
             app:srcCompat="@drawable/ic_pause_circle_filled_black_60dp" />
+
+        <ImageButton
+            android:id="@+id/player_interface_button_next"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+
+            android:layout_marginTop="8dp"
+
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="10dp"
+            android:tint="?android:attr/textColorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/player_interface_button_play"
+            app:layout_constraintTop_toTopOf="@+id/player_interface_buttons_guideline_top"
+            app:srcCompat="@drawable/ic_skip_next_black_50dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/player_interface_buttons_guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="160dp" />
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

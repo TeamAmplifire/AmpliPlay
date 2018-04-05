@@ -8,8 +8,8 @@
         android:id="@+id/library_interface_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        android:background="?android:attr/colorBackground"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/library_interface_appbar"
@@ -21,13 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="6dp"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/library_interface_libraryToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="?android:attr/colorPrimary"
                 android:elevation="4dp"
                 android:minHeight="79dp"
                 app:layout_scrollFlags="scroll|enterAlways" />
@@ -47,12 +47,11 @@
             android:id="@+id/library_interface_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="?attr/colorPrimary"
             android:elevation="4dp"
-            app:tabIndicatorColor="@color/colorPrimary"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="@color/colorOff">
+            app:tabSelectedTextColor="?android:attr/textColorPrimary"
+            app:tabTextColor="?android:attr/textColorPrimaryDisableOnly">
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"

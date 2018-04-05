@@ -142,8 +142,7 @@ public class Player extends Activity implements PlaybackInterface {
         btnShuffle = findViewById(R.id.player_interface_shuffle);
         btnShuffle.requestFocus();
         btnShuffle.setImageResource(R.drawable.ic_shuffle_black_40dp);
-        btnShuffle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);
-        btnShuffle.setAlpha(0.54f);
+        btnShuffle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.dark_colorTextOff), android.graphics.PorterDuff.Mode.SRC_IN);
         btnShuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,13 +152,11 @@ public class Player extends Activity implements PlaybackInterface {
                 switch (shuffle_clickCounter)
                 {
                     case 0:
-                        btnShuffle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);
-                        btnShuffle.setAlpha(0.54f);
+                        btnShuffle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.dark_colorTextOff), android.graphics.PorterDuff.Mode.SRC_IN);
                         mExoplayerEventListener.onShuffleModeEnabledChanged(false);
                         break;
                     case 1:
                         btnShuffle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), android.graphics.PorterDuff.Mode.SRC_IN);
-                        btnShuffle.setAlpha(1.0f);
                         mExoplayerEventListener.onShuffleModeEnabledChanged(true);
                         break;
                 }
@@ -515,8 +512,7 @@ public class Player extends Activity implements PlaybackInterface {
         btnRepeat = findViewById(R.id.player_interface_repeat);
         btnRepeat.requestFocus();
         btnRepeat.setImageResource(R.drawable.ic_repeat_black_40dp);
-        btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);
-        btnRepeat.setAlpha(0.54f);
+        btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.dark_colorTextOff), android.graphics.PorterDuff.Mode.SRC_IN);
         btnRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -526,20 +522,17 @@ public class Player extends Activity implements PlaybackInterface {
                 {
                     case 0:
                         btnRepeat.setImageResource(R.drawable.ic_repeat_black_40dp);
-                        btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorText), android.graphics.PorterDuff.Mode.SRC_IN);
-                        btnRepeat.setAlpha(0.54f);
+                        btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.dark_colorTextOff), android.graphics.PorterDuff.Mode.SRC_IN);
                         mExoplayerEventListener.onRepeatModeChanged(0);
                         break;
                     case 1:
                         btnRepeat.setImageResource(R.drawable.ic_repeat_one_black_40dp);
                         btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), android.graphics.PorterDuff.Mode.SRC_IN);
-                        btnRepeat.setAlpha(1.0f);
                         mExoplayerEventListener.onRepeatModeChanged(1);
                         break;
                     case 2:
                         btnRepeat.setImageResource(R.drawable.ic_repeat_black_40dp);
                         btnRepeat.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), android.graphics.PorterDuff.Mode.SRC_IN);
-                        btnRepeat.setAlpha(1.0f);
                         mExoplayerEventListener.onRepeatModeChanged(2);
                         break;
                 }
