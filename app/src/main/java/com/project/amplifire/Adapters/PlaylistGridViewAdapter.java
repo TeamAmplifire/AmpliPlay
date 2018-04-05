@@ -153,7 +153,7 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                                             public void onClick(DialogInterface dialog, int id)
                                             {
                                                 Playlist.deletePlaylist(mContext.getContentResolver(), mPlaylists.get(position).getPlaylistID());
-                                                mPlaylists.remove(position);
+//                                                mPlaylists.remove(position);
                                                 notifyDataSetChanged();
                                                 Toast.makeText(v.getContext(), "Playlist Deleted", Toast.LENGTH_SHORT).show();
                                             }

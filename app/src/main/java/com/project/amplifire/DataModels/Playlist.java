@@ -47,8 +47,8 @@ public class Playlist {
         return tempPlaylist;
     }
 
-    public Playlist(String xplaylistName, long playlistID) {
-        this.playlistName = xplaylistName;
+    public Playlist(String playlistName, long playlistID) {
+        this.playlistName = playlistName;
         this.playlistID = playlistID;
     }
 
@@ -63,7 +63,6 @@ public class Playlist {
                 int idColumn = cursor.getColumnIndex(MediaStore.Audio.Playlists._ID);
                 long id = cursor.getLong(idColumn);
                 String name = cursor.getString(nameColumn);
-//                Log.d("hhhh", name);
                 Playlist playlist = new Playlist(name, id);
                 mPlaylist.add(playlist);
             }while(cursor.moveToNext());
