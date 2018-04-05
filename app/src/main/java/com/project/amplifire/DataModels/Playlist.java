@@ -174,7 +174,7 @@ public class Playlist {
             do {
                 songID = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
                 addToPlaylist(resolver, playlistID, songID);
-            } while (cursor.moveToNext() && i++ != 25);
+            } while (cursor.moveToNext() && i++ != 50);
         }
     }
     public ArrayList<Song> getSongs(ContentResolver resolver){

@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.futuremind.recyclerviewfastscroll.SectionTitleProvider;
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.References;
+import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.DialogFragments.RenamePlaylistDialog;
 import com.project.amplifire.Library;
 import com.project.amplifire.Playback.Player;
@@ -76,23 +77,13 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
     public void onBindViewHolder(@NonNull PlaylistGridViewAdapter.MyViewHolder holder, final int position) {
         holder.titleView.setText(mPlaylists.get(position).getPlaylistName());
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
-        int playlistSize = mPlaylists.get(position).getSongs(mContext.getContentResolver()).size();
+        final ArrayList<Song> mSongs;
 
-        if((playlistSize != 0))
+        if(((mSongs =  mPlaylists.get(position).getSongs(mContext.getContentResolver())).size() != 0))
         {
-            Uri uri = null;
-            int songCount = 0;
-
+            Uri uri;
             for(int i = 0; i < 4; i++) {
-
-                uri = ContentUris.withAppendedId(sArtworkUri, mPlaylists.get(position).getSongs(mContext.getContentResolver()).get(i%playlistSize).getMAlbumId());
-
-
-//                if(songCount < playlistSize) {
-//                    uri = ContentUris.withAppendedId(sArtworkUri, mPlaylists.get(position).getSongs(mContext.getContentResolver()).get(songCount).getMAlbumId());
-//                    songCount++;
-//                }
-
+                uri = ContentUris.withAppendedId(sArtworkUri,mSongs.get(i).getMAlbumId());
                 InputStream inStream = null;
                 try {
                     inStream = mContext.getContentResolver().openInputStream(uri);
@@ -108,14 +99,6 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
             }
         }
 
-//        else{
-//            for (int i = 0; i < 4; i++) {
-//                holder.thumbnail[i].setImageResource(R.drawable.ic_album_art_template);
-//
-//            }
-//        }
-
-
         holder.overflowMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -130,11 +113,11 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                         switch(item.getItemId())
                         {
                             case R.id.playlist_grid_menu_play:
-                                Player.enqueue = mPlaylists.get(position).getSongs(mContext.getContentResolver());
+                                Player.enqueue = mSongs;
                                 play(mContext, -1);
                                 break;
                             case R.id.playlist_grid_menu_enqueue:
-                                Player.enqueue.addAll(mPlaylists.get(position).getSongs(mContext.getContentResolver()));
+                                Player.enqueue.addAll(mSongs);
                                 break;
                             case R.id.playlist_grid_menu_rename:
                                 final FragmentManager fm = ((Library)mContext).getFragmentManager();
@@ -149,7 +132,6 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                                             public void onClick(DialogInterface dialog, int id)
                                             {
                                                 Playlist.deletePlaylist(mContext.getContentResolver(), mPlaylists.get(position).getPlaylistID());
-//                                                mPlaylists.remove(position);
                                                 notifyDataSetChanged();
                                                 Toast.makeText(v.getContext(), "Playlist Deleted", Toast.LENGTH_SHORT).show();
                                             }

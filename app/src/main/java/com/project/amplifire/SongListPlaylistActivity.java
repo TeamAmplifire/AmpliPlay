@@ -42,12 +42,13 @@ public class SongListPlaylistActivity extends AppCompatActivity {
         CollapsingToolbarLayout playlistToolbar = findViewById(R.id.playlist_collapsing_toolbar);
 
         Playlist playlist = Playlist.getPlaylistByID(getContentResolver(), playlistID);
+        getPlaylistSongList();
         ImageView albumArt = findViewById(R.id.playlist_app_bar_image);
         String title = playlist.getPlaylistName();
 
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
-        if ((playlist.getSongs(getApplicationContext().getContentResolver()).size() != 0)) {
-            Uri uri = ContentUris.withAppendedId(sArtworkUri, playlist.getSongs(getApplicationContext().getContentResolver()).get(0).getMAlbumId());
+        if ((mPlaylistSongArrayList.size() != 0)) {
+            Uri uri = ContentUris.withAppendedId(sArtworkUri, mPlaylistSongArrayList.get(0).getMAlbumId());
             InputStream in = null;
             try {
                 in = getApplicationContext().getContentResolver().openInputStream(uri);
@@ -68,7 +69,6 @@ public class SongListPlaylistActivity extends AppCompatActivity {
         playlistToolbar.setExpandedTitleColor(getResources().getColor(R.color.colorPrimary));
         playlistToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.colorPrimary));
 
-        getPlaylistSongList();
         setPlaylistList();
     }
 
