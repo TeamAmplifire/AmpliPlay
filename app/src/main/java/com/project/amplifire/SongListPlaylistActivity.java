@@ -9,7 +9,9 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.project.amplifire.Adapters.PlaylistSongAdapter;
@@ -19,8 +21,9 @@ import com.project.amplifire.DataModels.Song;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class songListPlaylistActivity extends AppCompatActivity {
+public class SongListPlaylistActivity extends AppCompatActivity {
 
     private static final String SAVED_LAYOUT_MANAGER = "layoutmanager";
     public ArrayList<Song> mPlaylistSongArrayList;

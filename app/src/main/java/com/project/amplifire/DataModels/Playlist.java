@@ -10,9 +10,11 @@ import android.provider.MediaStore;
 import com.project.amplifire.Fragments.PlaylistGridFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Playlist {
 
+    private static final String RECENT_ADDED_PLAYLIST_NAME = "Recently Added";
     private String playlistName;
     private long playlistID;
 
@@ -159,11 +161,11 @@ public class Playlist {
         References.sPlaylistGridFragment.refreshList();
 
     }
-    public static long setRecentlyAdded(ContentResolver resolver){
+    public static void setRecentlyAdded(ContentResolver resolver){
 
         long songID;
         int i = 0;
-        long playlistID = createPlaylist(resolver,"Recently Added");
+        long playlistID = createPlaylist(resolver,RECENT_ADDED_PLAYLIST_NAME);
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor cursor = resolver.query(musicUri, null, null, null, MediaStore.Audio.Media.DATE_ADDED + " DESC");
         if (cursor != null) {
@@ -174,7 +176,6 @@ public class Playlist {
                 addToPlaylist(resolver, playlistID, songID);
             } while (cursor.moveToNext() && i++ != 25);
         }
-        return playlistID;
     }
     public ArrayList<Song> getSongs(ContentResolver resolver){
 
@@ -206,6 +207,9 @@ public class Playlist {
                     songList.add(new Song(thisID, thisAlbumID, thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
                 }
             } while (musicCursor.moveToNext());
+        }
+        if(playlistName.equalsIgnoreCase(RECENT_ADDED_PLAYLIST_NAME)){
+            Collections.reverse(songList);
         }
         return songList;
     }

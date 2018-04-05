@@ -1,13 +1,10 @@
 package com.project.amplifire.Adapters;
 
 import android.app.FragmentManager;
-import android.support.v4.app.Fragment;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -27,10 +24,9 @@ import com.futuremind.recyclerviewfastscroll.SectionTitleProvider;
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.References;
 import com.project.amplifire.DialogFragments.RenamePlaylistDialog;
-import com.project.amplifire.Fragments.PlaylistGridFragment;
 import com.project.amplifire.Library;
 import com.project.amplifire.Playback.Player;
-import com.project.amplifire.songListPlaylistActivity;
+import com.project.amplifire.SongListPlaylistActivity;
 import com.project.amplifire.R;
 import com.project.amplifire.Utilities.AlbumArtView;
 
@@ -174,7 +170,7 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent newIntent = new Intent(mContext, songListPlaylistActivity.class);
+                Intent newIntent = new Intent(mContext, SongListPlaylistActivity.class);
                 newIntent.putExtra("playlistID", mPlaylists.get(position).getPlaylistID());
                 mContext.startActivity(newIntent);
             }

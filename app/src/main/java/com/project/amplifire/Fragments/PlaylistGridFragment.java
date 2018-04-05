@@ -59,6 +59,7 @@ public class PlaylistGridFragment extends Fragment {
         mSearchView = getActivity().findViewById(R.id.library_interface_search_view);
         libraryTabLayout = getActivity().findViewById(R.id.library_interface_tab_layout);
         References.sPlaylistGridFragment = this;
+        Playlist.setRecentlyAdded(getActivity().getContentResolver());
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
