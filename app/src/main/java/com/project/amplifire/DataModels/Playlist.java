@@ -10,9 +10,11 @@ import android.provider.MediaStore;
 import com.project.amplifire.Fragments.PlaylistGridFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Playlist {
 
+    private static final String RECENT_ADDED_PLAYLIST_NAME = "Recently Added";
     private String playlistName;
     private long playlistID;
 
@@ -47,8 +49,8 @@ public class Playlist {
         return tempPlaylist;
     }
 
-    public Playlist(String xplaylistName, long playlistID) {
-        this.playlistName = xplaylistName;
+    public Playlist(String playlistName, long playlistID) {
+        this.playlistName = playlistName;
         this.playlistID = playlistID;
     }
 
@@ -63,7 +65,6 @@ public class Playlist {
                 int idColumn = cursor.getColumnIndex(MediaStore.Audio.Playlists._ID);
                 long id = cursor.getLong(idColumn);
                 String name = cursor.getString(nameColumn);
-//                Log.d("hhhh", name);
                 Playlist playlist = new Playlist(name, id);
                 mPlaylist.add(playlist);
             }while(cursor.moveToNext());
@@ -160,24 +161,21 @@ public class Playlist {
         References.sPlaylistGridFragment.refreshList();
 
     }
-    public static ArrayList<Song> getRecentlyAdded(ContentResolver resolver){
+    public static void setRecentlyAdded(ContentResolver resolver){
 
-        ArrayList<Song> recentSongs = new ArrayList<Song>();
+        long songID;
+        int i = 0;
+        long playlistID = createPlaylist(resolver,RECENT_ADDED_PLAYLIST_NAME);
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor cursor = resolver.query(musicUri, null, null, null, MediaStore.Audio.Media.DATE_ADDED);
+        Cursor cursor = resolver.query(musicUri, null, null, null, MediaStore.Audio.Media.DATE_ADDED + " DESC");
+        if (cursor != null) {
+            cursor.moveToFirst();
 
-        ArrayList<Song> songList = new ArrayList<Song>();
-        do{
-            long thisID = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
-            long thisAlbumID = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
-            String thisTitle = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
-            String thisArtist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-            String thisAlbum = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
-            String thisDuration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
-            String thisFullPath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
-            songList.add(new Song(thisID, thisAlbumID,thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
-        }while(cursor.moveToNext());
-        return recentSongs;
+            do {
+                songID = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
+                addToPlaylist(resolver, playlistID, songID);
+            } while (cursor.moveToNext() && i++ != 50);
+        }
     }
     public ArrayList<Song> getSongs(ContentResolver resolver){
 
@@ -209,6 +207,9 @@ public class Playlist {
                     songList.add(new Song(thisID, thisAlbumID, thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
                 }
             } while (musicCursor.moveToNext());
+        }
+        if(playlistName.equalsIgnoreCase(RECENT_ADDED_PLAYLIST_NAME)){
+            Collections.reverse(songList);
         }
         return songList;
     }

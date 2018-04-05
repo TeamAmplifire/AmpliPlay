@@ -1,13 +1,10 @@
 package com.project.amplifire.Adapters;
 
 import android.app.FragmentManager;
-import android.support.v4.app.Fragment;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -26,11 +23,11 @@ import com.bumptech.glide.Glide;
 import com.futuremind.recyclerviewfastscroll.SectionTitleProvider;
 import com.project.amplifire.DataModels.Playlist;
 import com.project.amplifire.DataModels.References;
+import com.project.amplifire.DataModels.Song;
 import com.project.amplifire.DialogFragments.RenamePlaylistDialog;
-import com.project.amplifire.Fragments.PlaylistGridFragment;
 import com.project.amplifire.Library;
 import com.project.amplifire.Playback.Player;
-import com.project.amplifire.songListPlaylistActivity;
+import com.project.amplifire.SongListPlaylistActivity;
 import com.project.amplifire.R;
 import com.project.amplifire.Utilities.AlbumArtView;
 
@@ -38,7 +35,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridViewAdapter.MyViewHolder>{
+public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridViewAdapter.MyViewHolder> implements SectionTitleProvider {
 
     private Context mContext;
     private ArrayList<Playlist> mPlaylists;
@@ -80,24 +77,27 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
     public void onBindViewHolder(@NonNull PlaylistGridViewAdapter.MyViewHolder holder, final int position) {
         holder.titleView.setText(mPlaylists.get(position).getPlaylistName());
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
-        int playlistSize = mPlaylists.get(position).getSongs(mContext.getContentResolver()).size();
+        final ArrayList<Song> mSongs;
 
-        if((playlistSize != 0))
+        if(((mSongs =  mPlaylists.get(position).getSongs(mContext.getContentResolver())).size() != 0))
         {
             Uri uri;
-
             for(int i = 0; i < 4; i++) {
-                uri = ContentUris.withAppendedId(sArtworkUri, mPlaylists.get(position).getSongs(mContext.getContentResolver()).get(i%playlistSize).getMAlbumId());
-                Glide.with(mContext).load(uri).into(holder.thumbnail[i]);
+                uri = ContentUris.withAppendedId(sArtworkUri,mSongs.get(i).getMAlbumId());
+                InputStream inStream = null;
+                try {
+                    inStream = mContext.getContentResolver().openInputStream(uri);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                if (inStream != null) {
+                    Glide.with(mContext).load(uri).into(holder.thumbnail[i]);
+                } else {
+                    holder.thumbnail[i].setImageResource(R.drawable.ic_album_art_template);
+                }
             }
         }
-
-        else{
-            for (int i = 0; i < 4; i++) {
-                holder.thumbnail[i].setImageResource(R.drawable.ic_album_art_template);
-            }
-        }
-
 
         holder.overflowMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,11 +113,11 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                         switch(item.getItemId())
                         {
                             case R.id.playlist_grid_menu_play:
-                                Player.enqueue = mPlaylists.get(position).getSongs(mContext.getContentResolver());
+                                Player.enqueue = mSongs;
                                 play(mContext, -1);
                                 break;
                             case R.id.playlist_grid_menu_enqueue:
-                                Player.enqueue.addAll(mPlaylists.get(position).getSongs(mContext.getContentResolver()));
+                                Player.enqueue.addAll(mSongs);
                                 break;
                             case R.id.playlist_grid_menu_rename:
                                 final FragmentManager fm = ((Library)mContext).getFragmentManager();
@@ -132,7 +132,6 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                                             public void onClick(DialogInterface dialog, int id)
                                             {
                                                 Playlist.deletePlaylist(mContext.getContentResolver(), mPlaylists.get(position).getPlaylistID());
-                                                mPlaylists.remove(position);
                                                 notifyDataSetChanged();
                                                 Toast.makeText(v.getContext(), "Playlist Deleted", Toast.LENGTH_SHORT).show();
                                             }
@@ -153,7 +152,7 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent newIntent = new Intent(mContext, songListPlaylistActivity.class);
+                Intent newIntent = new Intent(mContext, SongListPlaylistActivity.class);
                 newIntent.putExtra("playlistID", mPlaylists.get(position).getPlaylistID());
                 mContext.startActivity(newIntent);
             }
@@ -165,11 +164,10 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
         return mPlaylists.size();
     }
 
-//    @Override
-//    public String getSectionTitle(int position) {
-//        return null;
-//    }
-
+    @Override
+    public String getSectionTitle(int position) {
+        return null;
+    }
     public void updateList(ArrayList<Playlist> list){
         mPlaylists = list;
         notifyDataSetChanged();

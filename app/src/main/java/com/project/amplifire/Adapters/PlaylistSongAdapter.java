@@ -25,7 +25,7 @@ import com.project.amplifire.DialogFragments.InfoFragment;
 import com.project.amplifire.DialogFragments.PlaylistDialog;
 import com.project.amplifire.Playback.Player;
 import com.project.amplifire.R;
-import com.project.amplifire.songListPlaylistActivity;
+import com.project.amplifire.SongListPlaylistActivity;
 import java.util.ArrayList;
 
 public class PlaylistSongAdapter extends RecyclerView.Adapter<PlaylistSongAdapter.MyViewHolder> implements SectionTitleProvider {
@@ -74,7 +74,7 @@ public class PlaylistSongAdapter extends RecyclerView.Adapter<PlaylistSongAdapte
         }
         final int tempPosition = holder.getAdapterPosition();
         final Song currentSong = mSongs.get(tempPosition);
-        final FragmentManager fm = ((songListPlaylistActivity)mContext).getFragmentManager();
+        final FragmentManager fm = ((SongListPlaylistActivity)mContext).getFragmentManager();
         String songDurationString = getFormattedDuration(currentSong.getMDuration());
         holder.titleView.setText(currentSong.getMTitle());
         holder.artistView.setText(currentSong.getMArtist());

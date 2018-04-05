@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,7 +36,6 @@ public class PlaylistGridFragment extends Fragment {
     //private FastScroller mFastScroller;
     private MaterialSearchView mSearchView;
     private TabLayout libraryTabLayout;
-    private ImageView albumArt;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
@@ -46,7 +46,6 @@ public class PlaylistGridFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.playlist_recycler_view_fragment, container, false);
         rootView.setTag(TAG);
-        mPlaylists = new ArrayList<Playlist>();
         mPlaylists = Playlist.getAllPlaylists(getActivity().getContentResolver());
         mPlaylistView = rootView.findViewById(R.id.playlist_songs_recycler_view);
         //mFastScroller = rootView.findViewById(R.id.playlist_songs_fastscroller);
@@ -60,6 +59,7 @@ public class PlaylistGridFragment extends Fragment {
         mSearchView = getActivity().findViewById(R.id.library_interface_search_view);
         libraryTabLayout = getActivity().findViewById(R.id.library_interface_tab_layout);
         References.sPlaylistGridFragment = this;
+        Playlist.setRecentlyAdded(getActivity().getContentResolver());
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
