@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".songListPlaylistActivity"
+        <activity android:name=".SongListPlaylistActivity"
             android:theme="@style/AmpliFire_Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

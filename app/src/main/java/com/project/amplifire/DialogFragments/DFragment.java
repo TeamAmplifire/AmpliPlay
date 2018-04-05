@@ -73,6 +73,7 @@ public class DFragment extends DialogFragment {
         albumView.setText(mSong.getMAlbum());
         durationView.setText(songDurationString);
         titleView.setText(mSong.getMTitle());
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.AmpliFire_Dark);
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
         Uri uri = ContentUris.withAppendedId(sArtworkUri, mSong.getMAlbumId());
         ContentResolver contentResolver = getActivity().getApplicationContext().getContentResolver();

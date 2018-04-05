@@ -77,25 +77,15 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
     public void onBindViewHolder(@NonNull PlaylistGridViewAdapter.MyViewHolder holder, final int position) {
         holder.titleView.setText(mPlaylists.get(position).getPlaylistName());
         Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
-        final ArrayList<Song> mSongs;
+        final ArrayList<Song> mSongs = mPlaylists.get(position).getSongs(mContext.getContentResolver());
+        int playlistSize = mSongs.size();
 
-        if(((mSongs =  mPlaylists.get(position).getSongs(mContext.getContentResolver())).size() != 0))
+        if(playlistSize  != 0)
         {
             Uri uri;
             for(int i = 0; i < 4; i++) {
-                uri = ContentUris.withAppendedId(sArtworkUri,mSongs.get(i).getMAlbumId());
-                InputStream inStream = null;
-                try {
-                    inStream = mContext.getContentResolver().openInputStream(uri);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                if (inStream != null) {
-                    Glide.with(mContext).load(uri).into(holder.thumbnail[i]);
-                } else {
-                    holder.thumbnail[i].setImageResource(R.drawable.ic_album_art_template);
-                }
+                uri = ContentUris.withAppendedId(sArtworkUri,mSongs.get(i%playlistSize).getMAlbumId());
+                Glide.with(mContext).load(uri).into(holder.thumbnail[i]);
             }
         }
 

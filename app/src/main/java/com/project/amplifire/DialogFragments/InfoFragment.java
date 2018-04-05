@@ -59,6 +59,7 @@ public class InfoFragment extends DialogFragment{
         final View rootView = inflater.inflate(R.layout.info_fragment, container);
         final FragmentManager fm = getFragmentManager();
 
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.AmpliFire_Dark);
         TextView locationView = rootView.findViewById(R.id.info_fragment_file_location);
         //TextView extensionView = rootView.findViewById(R.id.file_extension);
         TextView durationView = rootView.findViewById(R.id.info_fragment_file_duration);

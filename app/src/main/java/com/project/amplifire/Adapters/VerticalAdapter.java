@@ -148,7 +148,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     break;
 
                                 case R.id.all_songs_overflow_menu_delete:
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), R.style.AmpliFire_Dark);
                                     builder.setTitle("Delete");
                                     builder.setMessage("Are you sure you want to delete this song?")
                                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
