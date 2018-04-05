@@ -159,24 +159,22 @@ public class Playlist {
         References.sPlaylistGridFragment.refreshList();
 
     }
-    public static ArrayList<Song> getRecentlyAdded(ContentResolver resolver){
+    public static long setRecentlyAdded(ContentResolver resolver){
 
-        ArrayList<Song> recentSongs = new ArrayList<Song>();
+        long songID;
+        int i = 0;
+        long playlistID = createPlaylist(resolver,"Recently Added");
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor cursor = resolver.query(musicUri, null, null, null, MediaStore.Audio.Media.DATE_ADDED);
+        Cursor cursor = resolver.query(musicUri, null, null, null, MediaStore.Audio.Media.DATE_ADDED + " DESC");
+        if (cursor != null) {
+            cursor.moveToFirst();
 
-        ArrayList<Song> songList = new ArrayList<Song>();
-        do{
-            long thisID = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
-            long thisAlbumID = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
-            String thisTitle = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
-            String thisArtist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-            String thisAlbum = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
-            String thisDuration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
-            String thisFullPath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
-            songList.add(new Song(thisID, thisAlbumID,thisTitle, thisArtist, thisAlbum, thisDuration, thisFullPath));
-        }while(cursor.moveToNext());
-        return recentSongs;
+            do {
+                songID = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
+                addToPlaylist(resolver, playlistID, songID);
+            } while (cursor.moveToNext() && i++ != 25);
+        }
+        return playlistID;
     }
     public ArrayList<Song> getSongs(ContentResolver resolver){
 
