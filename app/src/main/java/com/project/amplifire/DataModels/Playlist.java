@@ -106,7 +106,7 @@ public class Playlist {
             Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", id);
             resolver.delete(uri, null, null);
         }
-        References.sPlaylistGridFragment.refreshList();
+//        References.sPlaylistGridFragment.refreshList();
         return id;
     }
     public static int addToPlaylist(ContentResolver resolver, long playlistId, long songID)
@@ -138,7 +138,7 @@ public class Playlist {
             resolver.bulkInsert(playlistUri, values);
         }
         from.close();
-        References.sPlaylistGridFragment.refreshList();
+//        References.sPlaylistGridFragment.refreshList();
         return count;
     }
     public static void deletePlaylist(ContentResolver resolver, long id)
@@ -165,7 +165,7 @@ public class Playlist {
 
         long songID;
         int i = 0;
-        long playlistID = createPlaylist(resolver,RECENT_ADDED_PLAYLIST_NAME);
+        long playlistID = createPlaylist(resolver,References.RECENT_ADDED_PLAYLIST_NAME);
         Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor cursor = resolver.query(musicUri, null, null, null, MediaStore.Audio.Media.DATE_ADDED + " DESC");
         if (cursor != null) {
@@ -208,7 +208,7 @@ public class Playlist {
                 }
             } while (musicCursor.moveToNext());
         }
-        if(playlistName.equalsIgnoreCase(RECENT_ADDED_PLAYLIST_NAME)){
+        if(playlistName.equalsIgnoreCase(References.RECENT_ADDED_PLAYLIST_NAME)){
             Collections.reverse(songList);
         }
         return songList;

@@ -18,6 +18,7 @@ public class References {
     public static Context applicationContext;
     public static PlaylistGridFragment sPlaylistGridFragment;
     public static SongListFragment sSongListFragment;
+    public static String RECENT_ADDED_PLAYLIST_NAME = "Recently Added";
 
     public interface ACTION {
         public static String MAIN_ACTION = "com.project.amplifire.action.main";

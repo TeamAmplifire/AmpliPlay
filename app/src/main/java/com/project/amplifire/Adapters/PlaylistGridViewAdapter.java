@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -121,9 +122,16 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id)
                                             {
-                                                Playlist.deletePlaylist(mContext.getContentResolver(), mPlaylists.get(position).getPlaylistID());
-                                                notifyDataSetChanged();
-                                                Toast.makeText(v.getContext(), "Playlist Deleted", Toast.LENGTH_SHORT).show();
+
+
+                                                if (!mPlaylists.get(position).getPlaylistName().equalsIgnoreCase(References.RECENT_ADDED_PLAYLIST_NAME)) {
+                                                    Playlist.deletePlaylist(mContext.getContentResolver(), mPlaylists.get(position).getPlaylistID());
+                                                    notifyDataSetChanged();
+                                                    Toast.makeText(v.getContext(), "Playlist Deleted", Toast.LENGTH_SHORT).show();
+                                                }
+                                                else{
+                                                    Toast.makeText(References.applicationContext, "Cannot delete playlist", Toast.LENGTH_SHORT).show();
+                                                }
                                             }
                                         })
                                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

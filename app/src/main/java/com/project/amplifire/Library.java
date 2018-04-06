@@ -3,6 +3,7 @@ package com.project.amplifire;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.project.amplifire.Adapters.FragmentAdapter;
@@ -62,10 +64,23 @@ public class Library extends AppCompatActivity {
     }
     public void setupViewPager(ViewPager viewPager) {
 
-        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SongListFragment(),"Song adapter");
-        adapter.addFragment(new PlaylistGridFragment(), "playlist sons");
+        final FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adapter.addFragment(new SongListFragment(),"Song adapter");
+                adapter.notifyDataSetChanged();
+            }
+        }, 50);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adapter.addFragment(new PlaylistGridFragment(), "playlist songs");
+                adapter.notifyDataSetChanged();
+            }
+        }, 200);
     }
     @Override
     protected void onPause(){
