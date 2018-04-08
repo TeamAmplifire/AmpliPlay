@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.project.amplifire.DataModels.Playlist;
@@ -29,13 +32,33 @@ public class RenamePlaylistDialog extends DialogFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NO_FRAME, R.style.AmpliFire_Dark_Dialog);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            Window window = dialog.getWindow();
+//            WindowManager.LayoutParams windowParams = window.getAttributes();
+//            windowParams.dimAmount = 0.60f;
+//            windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+//            window.setAttributes(windowParams);
+        }
+    }
+
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
         final ContentResolver resolver = getActivity().getContentResolver();
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.set_playlist_name_fragment, null);
         final EditText playlistName = view.findViewById(R.id.set_playlist_name_fragment_edit);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AmpliFire_Dark_Dialog);
         builder.setView(view);
         builder.setTitle("Enter New Name").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

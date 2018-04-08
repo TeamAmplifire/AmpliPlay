@@ -1,6 +1,7 @@
 package com.project.amplifire.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -15,11 +16,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -148,7 +152,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                     break;
 
                                 case R.id.all_songs_overflow_menu_delete:
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), R.style.AmpliFire_Dark);
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), R.style.AmpliFire_Dark_Dialog);
                                     builder.setTitle("Delete");
                                     builder.setMessage("Are you sure you want to delete this song?")
                                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -163,8 +167,9 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyView
                                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {}
                                             });
-                                    builder.create();
-                                    builder.show();
+
+                                    AlertDialog dialog = builder.create();
+                                    dialog.show();
                                     break;
 
                                 case R.id.all_songs_overflow_menu_add_to_playlist:

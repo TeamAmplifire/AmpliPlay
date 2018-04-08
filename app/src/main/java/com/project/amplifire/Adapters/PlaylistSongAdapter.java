@@ -81,6 +81,7 @@ public class PlaylistSongAdapter extends RecyclerView.Adapter<PlaylistSongAdapte
         holder.albumView.setText(currentSong.getMAlbum());
         holder.durationView.setText(songDurationString);
         holder.itemView.setTag(tempPosition);
+
         if(currentSong.getMId() == Player.getCurrentSongID())
         {
             holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
@@ -89,10 +90,10 @@ public class PlaylistSongAdapter extends RecyclerView.Adapter<PlaylistSongAdapte
             holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
         }
         else {
-            holder.artistView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holder.titleView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holder.albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holder.durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holder.artistView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holder.titleView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holder.albumView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holder.durationView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
         }
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -103,6 +104,7 @@ public class PlaylistSongAdapter extends RecyclerView.Adapter<PlaylistSongAdapte
                 return true;
             }
         });
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
@@ -190,10 +192,10 @@ public class PlaylistSongAdapter extends RecyclerView.Adapter<PlaylistSongAdapte
     }
     private void setColor(){
         for(int i=0; i<holders.size(); i++){
-            holders.get(i).artistView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holders.get(i).titleView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holders.get(i).albumView.setTextColor(mContext.getResources().getColor(R.color.colorText));
-            holders.get(i).durationView.setTextColor(mContext.getResources().getColor(R.color.colorText));
+            holders.get(i).artistView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holders.get(i).titleView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holders.get(i).albumView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
+            holders.get(i).durationView.setTextColor(mContext.getResources().getColor(R.color.dark_colorText));
         }
     }
     public static String getFormattedDuration(String duration){

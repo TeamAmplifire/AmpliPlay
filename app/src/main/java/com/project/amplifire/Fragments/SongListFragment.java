@@ -65,6 +65,8 @@ public class SongListFragment extends Fragment
         mSongView = rootView.findViewById(R.id.song_list_fragment_recycler_view);
         mFastScroller = rootView.findViewById(R.id.song_list_fragment_fastscroll);
         mSwipeRefreshLayout = rootView.findViewById(R.id.song_list_swiperefresh);
+
+        mSongView.setHasFixedSize(true);
         setList();
         setHasOptionsMenu(true);
 

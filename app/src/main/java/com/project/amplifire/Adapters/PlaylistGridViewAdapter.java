@@ -116,7 +116,7 @@ public class PlaylistGridViewAdapter extends RecyclerView.Adapter<PlaylistGridVi
                                 renamePlaylistDialog.show(fm, References.FRAGMENT_TAGS.RENAME_PLAYLIST_FRAGMENT);
                                 break;
                             case R.id.playlist_grid_menu_delete:
-                                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), R.style.AmpliFire_Dark_Dialog);
                                 builder.setTitle("Delete");
                                 builder.setMessage("Are you sure you want to delete this Playlist?")
                                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {

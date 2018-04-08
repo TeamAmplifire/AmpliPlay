@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.project.amplifire.DataModels.References;
@@ -55,8 +57,17 @@ public class EditTagsFragment extends DialogFragment {
         Dialog dialog = getDialog();
         if (dialog != null) {
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//            Window window = dialog.getWindow();
+//            WindowManager.LayoutParams windowParams = window.getAttributes();
+//            windowParams.dimAmount = 0.60f;
+//            windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+//            window.setAttributes(windowParams);
         }
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NO_FRAME, R.style.AmpliFire_Dark_Dialog);
     }
 
     @Nullable

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?android:attr/colorBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_tags_fragment_file_album_edit"
@@ -16,7 +21,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:background="?attr/colorPrimaryDark"
+            android:background="@color/dark_colorPrimary"
             android:padding="8dp"
             android:singleLine="true"
             android:text="@string/add_text"
@@ -33,7 +38,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:background="?attr/colorPrimaryDark"
+            android:background="@color/dark_colorPrimary"
             android:padding="8dp"
             android:singleLine="true"
             android:text="@string/add_text"
@@ -50,7 +55,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:background="?attr/colorPrimaryDark"
+            android:background="@color/dark_colorPrimary"
             android:padding="8dp"
             android:singleLine="true"
             android:text="@string/add_text"
@@ -142,7 +147,7 @@
             android:layout_marginTop="16dp"
             android:text="Edit Tags"
             android:textAlignment="center"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/colorAccent"
             android:textSize="18sp"
             android:textStyle="bold"
             android:typeface="normal"

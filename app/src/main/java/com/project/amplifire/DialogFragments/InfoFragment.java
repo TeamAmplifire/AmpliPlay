@@ -14,6 +14,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.project.amplifire.Adapters.VerticalAdapter;
@@ -48,8 +50,19 @@ public class InfoFragment extends DialogFragment{
         Dialog dialog = getDialog();
         if (dialog != null) {
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
+//            Window window = dialog.getWindow();
+//            WindowManager.LayoutParams windowParams = window.getAttributes();
+//            windowParams.dimAmount = 0.60f;
+//            windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+//            window.setAttributes(windowParams);
         }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NO_FRAME, R.style.AmpliFire_Dark_Dialog);
     }
 
     @Nullable
@@ -59,7 +72,6 @@ public class InfoFragment extends DialogFragment{
         final View rootView = inflater.inflate(R.layout.info_fragment, container);
         final FragmentManager fm = getFragmentManager();
 
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.AmpliFire_Dark);
         TextView locationView = rootView.findViewById(R.id.info_fragment_file_location);
         //TextView extensionView = rootView.findViewById(R.id.file_extension);
         TextView durationView = rootView.findViewById(R.id.info_fragment_file_duration);
